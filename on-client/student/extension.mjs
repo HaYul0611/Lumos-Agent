@@ -38,8 +38,13 @@ export function createStudentView() {
         const unverified = ['CONTRACT_MISMATCH', 'ENGINE_RESULT_UNVERIFIED'].includes(error?.code);
         addText(section, 'p', `${subject} ${unverified ? '확인 불가' : '연결 실패'}: ${message}`, 'student-identity-error');
       };
-      const showDeviceStatus = (status) => deviceLabels[status] || '확인 불가';
-      const showSessionStatus = (status) => sessionLabels[status] || '확인 불가';
+      const formatStatus = (status, labels) => {
+        const code = textValue(status) || 'unknown';
+        const label = Object.prototype.hasOwnProperty.call(labels, code) ? labels[code] : '확인 불가';
+        return `${label} (${code})`;
+      };
+      const showDeviceStatus = (status) => formatStatus(status, deviceLabels);
+      const showSessionStatus = (status) => formatStatus(status, sessionLabels);
       const addSection = (title) => {
         const section = document.createElement('section');
         addText(section, 'h3', title, 'student-identity-title');
