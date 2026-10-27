@@ -2,7 +2,7 @@
 setlocal
 cd /d "%~dp0"
 
-set EXTRA_ARGS=--demo
+set EXTRA_ARGS=
 if not "%~1"=="" (
     if /i not "%~1"=="silent" (
         set "EXTRA_ARGS=%*"

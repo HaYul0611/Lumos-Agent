@@ -438,6 +438,38 @@ function setupNav() {
   }
 }
 
+function setupSidebarToggle() {
+  const layout = document.querySelector('.layout');
+  const toggleBtn = $('sidebar-toggle-btn');
+
+  const setCollapsed = (collapsed) => {
+    if (!layout) return;
+    if (collapsed) {
+      layout.classList.add('sidebar-collapsed');
+      toggleBtn?.classList.add('active');
+      toggleBtn?.setAttribute('aria-expanded', 'false');
+      localStorage.setItem('lumos-sidebar-collapsed', 'true');
+    } else {
+      layout.classList.remove('sidebar-collapsed');
+      toggleBtn?.classList.remove('active');
+      toggleBtn?.setAttribute('aria-expanded', 'true');
+      localStorage.setItem('lumos-sidebar-collapsed', 'false');
+    }
+  };
+
+  const isCollapsed = () => layout?.classList.contains('sidebar-collapsed');
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => setCollapsed(!isCollapsed()));
+  }
+
+  if (localStorage.getItem('lumos-sidebar-collapsed') === 'true') {
+    setCollapsed(true);
+  } else {
+    toggleBtn?.setAttribute('aria-expanded', 'true');
+  }
+}
+
 // ---------- 보호 현황 ----------
 
 function renderAiConnection() {
@@ -1330,6 +1362,7 @@ async function loadAll() {
 
 function init() {
   setupNav();
+  setupSidebarToggle();
   $('refresh').addEventListener('click', () => loadAll());
   $('diag-load').addEventListener('click', () => loadDiagnostics());
   $('diag-copy').addEventListener('click', () => copyDiagnostics());

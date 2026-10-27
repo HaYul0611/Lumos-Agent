@@ -3,7 +3,6 @@ title Lumos Agent (Debug Mode)
 cd /d "%~dp0"
 
 set EXTRA_ARGS=%*
-if "%EXTRA_ARGS%"=="" set EXTRA_ARGS=--demo
 
 echo ===================================================
 echo   Lumos Agent - Debug Mode (IT Admin / Developer)

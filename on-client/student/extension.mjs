@@ -652,16 +652,16 @@ export function createStudentView() {
           <!-- 3대 화면 틀 선택 버튼 (Segmented Control) -->
           <div class="layout-mode-selector" role="tablist" aria-label="화면 틀 선택">
             <button type="button" class="layout-mode-btn active" data-target="dashboard">
-              <span class="mode-icon">📊</span>
+              <span class="mode-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></span>
               <span class="mode-title">관제 대시보드형</span>
               <span class="mode-rec-tag">기본값 · 추천</span>
             </button>
             <button type="button" class="layout-mode-btn" data-target="summary">
-              <span class="mode-icon">📋</span>
+              <span class="mode-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
               <span class="mode-title">한 장 요약형</span>
             </button>
             <button type="button" class="layout-mode-btn" data-target="timeline">
-              <span class="mode-icon">⏱️</span>
+              <span class="mode-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
               <span class="mode-title">기록 타임라인형</span>
             </button>
           </div>
@@ -671,23 +671,23 @@ export function createStudentView() {
             <div class="dashboard-kpi-grid">
               <div class="kpi-mini-card">
                 <span class="kpi-title">CPU</span>
-                <span class="kpi-value" id="kpi-cpu-val">32%</span>
-                <span class="kpi-badge badge-green">● 정상</span>
+                <span class="kpi-value" id="kpi-cpu-val">-</span>
+                <span class="kpi-badge badge-green" id="kpi-cpu-badge"><span class="kpi-dot"></span> 정상</span>
               </div>
               <div class="kpi-mini-card">
                 <span class="kpi-title">메모리</span>
-                <span class="kpi-value" id="kpi-ram-val">58%</span>
-                <span class="kpi-badge badge-green">● 정상</span>
+                <span class="kpi-value" id="kpi-ram-val">-</span>
+                <span class="kpi-badge badge-green" id="kpi-ram-badge"><span class="kpi-dot"></span> 정상</span>
               </div>
               <div class="kpi-mini-card">
                 <span class="kpi-title">디스크</span>
-                <span class="kpi-value">확인 불가 (9%)</span>
-                <span class="kpi-badge badge-yellow">▲ 주의</span>
+                <span class="kpi-value" id="kpi-disk-val">-</span>
+                <span class="kpi-badge badge-green" id="kpi-disk-badge"><span class="kpi-dot"></span> 정상</span>
               </div>
               <div class="kpi-mini-card">
                 <span class="kpi-title">방화벽</span>
-                <span class="kpi-value">켜짐 (도메인)</span>
-                <span class="kpi-badge badge-green">● 정상</span>
+                <span class="kpi-value" id="kpi-firewall-val">켜짐</span>
+                <span class="kpi-badge badge-green" id="kpi-firewall-badge"><span class="kpi-dot"></span> 정상</span>
               </div>
             </div>
 
@@ -695,7 +695,7 @@ export function createStudentView() {
             <div class="dashboard-trend-box">
               <div class="trend-header">
                 <span class="trend-title">시간에 따른 시스템 부하 변화</span>
-                <span class="trend-time" id="trend-time-indicator">14:02 다시 조회 성공 · 실시간</span>
+                <span class="trend-time" id="trend-time-indicator">실시간 계측 중...</span>
               </div>
               <div class="trend-chart-bars">
                 <div class="trend-bar trend-h-38"></div>
@@ -719,10 +719,10 @@ export function createStudentView() {
                 <span class="metric-label">CPU 사용률</span>
                 <div class="metric-bar-wrap">
                   <div class="metric-bar-bg">
-                    <div id="dynamic-cpu-bar" class="metric-bar-fill fill-cpu metric-w-32"></div>
+                    <div id="dynamic-cpu-bar" class="metric-bar-fill fill-cpu" style="width: 20%;"></div>
                   </div>
                   <div class="metric-note">
-                    <span id="dynamic-cpu-text">실측치 32% (16 Cores)</span>
+                    <span id="dynamic-cpu-text">실측치 조회 중...</span>
                     <span id="dynamic-cpu-time">최근 측정</span>
                   </div>
                 </div>
@@ -731,10 +731,10 @@ export function createStudentView() {
                 <span class="metric-label">메모리 사용량</span>
                 <div class="metric-bar-wrap">
                   <div class="metric-bar-bg">
-                    <div id="dynamic-ram-bar" class="metric-bar-fill fill-ram metric-w-58"></div>
+                    <div id="dynamic-ram-bar" class="metric-bar-fill fill-ram" style="width: 50%;"></div>
                   </div>
                   <div class="metric-note">
-                    <span id="dynamic-ram-text">실측치 9.22GB / 15.90GB (58%)</span>
+                    <span id="dynamic-ram-text">실측치 조회 중...</span>
                     <span>실시간 모니터링 중</span>
                   </div>
                 </div>
@@ -742,8 +742,13 @@ export function createStudentView() {
               <div class="aleph-metric-row">
                 <span class="metric-label">디스크 남은 공간</span>
                 <div class="metric-bar-wrap">
-                  <div class="metric-bar-bg stripe-bg"></div>
-                  <span class="metric-unverified">확인 불가 · 권한 없음 (비관리자 표준 Node os 모듈 범위 외)</span>
+                  <div class="metric-bar-bg">
+                    <div id="dynamic-disk-bar" class="metric-bar-fill fill-disk" style="width: 50%;"></div>
+                  </div>
+                  <div class="metric-note">
+                    <span id="dynamic-disk-text">실측치 조회 중...</span>
+                    <span>C: 드라이브 로컬 스토리지</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -821,10 +826,10 @@ export function createStudentView() {
           </div>
 
           <!-- 세 가지 화면 틀 공식 안내 자료 (첨부 2번 이미지 1:1 완벽 구현) -->
-          <details class="aleph-foldable-details mt-24" open>
+          <details class="aleph-foldable-details mt-24">
             <summary class="aleph-foldable-summary">
               <span><strong>세 가지 화면 틀, 실제로는 어떻게 생겼나요?</strong> <span class="muted-tag">실제 공식 모범 사례와 비교하기</span></span>
-              <span class="fold-indicator">접기</span>
+              <span class="fold-indicator">펼치기</span>
             </summary>
             <div class="aleph-foldable-content">
               <div class="three-frames-guide-grid">
@@ -1086,7 +1091,7 @@ export function createStudentView() {
               </div>
             </div>
 
-            <details class="deploy-details" open>
+            <details class="deploy-details">
               <summary class="deploy-summary">▼ 따라 할 순서와 공식 자료</summary>
               <div class="deploy-content">
                 <ol class="deploy-steps-ol">
@@ -1095,7 +1100,7 @@ export function createStudentView() {
                   <li>바탕화면이나 시작 메뉴 바로가기로 실행하고, 같은 묶음의 manifest와 INSTALL.md를 함께 보관합니다.</li>
                 </ol>
                 <div class="deploy-warning-banner">
-                  <span class="deploy-warning-icon">⚠</span>
+                  <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
                   <span class="deploy-warning-text">승인 키나 제공 실행 환경이 없다는 안내가 나오면 우회하지 말고 담당자에게 알립니다.</span>
                 </div>
               </div>
@@ -1128,7 +1133,7 @@ export function createStudentView() {
               </div>
             </div>
 
-            <details class="deploy-details" open>
+            <details class="deploy-details">
               <summary class="deploy-summary">▼ 따라 할 순서와 공식 자료</summary>
               <div class="deploy-content">
                 <ol class="deploy-steps-ol">
@@ -1138,7 +1143,7 @@ export function createStudentView() {
                   <li>다른 사용자 계정이나 새 경로에서 설치 → 실행 → 제거까지 한 번씩 해 보고, <code>setup.exe</code>의 SHA-256 해시를 안내문에 적습니다.</li>
                 </ol>
                 <div class="deploy-warning-banner">
-                  <span class="deploy-warning-icon">⚠</span>
+                  <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
                   <span class="deploy-warning-text">설치 프로그램은 포장 결과를 담아 옮길 뿐입니다. 실행에 필요한 제공 실행 환경은 받는 PC에도 준비돼 있어야 합니다. pkg(vercel)는 지원이 끝났으니 쓰지 않습니다.</span>
                 </div>
                 <ul class="deploy-links-ul">
@@ -1187,7 +1192,7 @@ export function createStudentView() {
               </div>
             </div>
 
-            <details class="deploy-details" open>
+            <details class="deploy-details">
               <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
               <div class="deploy-content">
                 <ol class="deploy-steps-ol">
@@ -1197,7 +1202,7 @@ export function createStudentView() {
                   <li>서명한 뒤에는 파일을 고치지 않습니다. 고치면 서명이 깨지니 다시 서명합니다.</li>
                 </ol>
                 <div class="deploy-warning-banner">
-                  <span class="deploy-warning-icon">⚠</span>
+                  <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
                   <span class="deploy-warning-text">
                     개인키와 .pfx·p12 파일, 인증서 비밀번호는 저장소·채널·결과물 어디에도 올리지 않습니다. 남의 PC에 내 자체 서명 인증서를 신뢰하라고 넣게 하지 않습니다. Microsoft의 Artifact Signing(옛 Trusted Signing) Public Trust는 공식 신청 안내에 한국 소재 조직도 포함합니다. 개인 개발자는 미국이나 캐나다에 소재해야 하므로 한국 개인은 해당하지 않습니다. 지역 조건을 충족해도 실제 신청과 심사 통과가 보장되지는 않습니다.
                   </span>
@@ -1239,7 +1244,7 @@ export function createStudentView() {
               </div>
             </div>
 
-            <details class="deploy-details" open>
+            <details class="deploy-details">
               <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
               <div class="deploy-content">
                 <ol class="deploy-steps-ol">
@@ -1275,10 +1280,10 @@ export function createStudentView() {
       const card9 = document.createElement('div');
       card9.className = 'aleph-accordion-card';
       card9.innerHTML = `
-        <details class="aleph-foldable-details" open>
+        <details class="aleph-foldable-details">
           <summary class="aleph-foldable-summary">
             <span><strong>완성본에 반영되는 작업 위치</strong> <span class="muted-tag">어느 파일을 고치면 되는지</span></span>
-            <span class="fold-indicator">접기</span>
+            <span class="fold-indicator">펼치기</span>
           </summary>
           <div class="aleph-foldable-content">
             <h4 class="section-subheading-1">완성본에 반영되는 작업 위치</h4>
@@ -1287,10 +1292,10 @@ export function createStudentView() {
           </div>
         </details>
 
-        <details class="aleph-foldable-details mt-24" open>
+        <details class="aleph-foldable-details mt-24">
           <summary class="aleph-foldable-summary">
             <span><strong>결과물을 보는 네 가지 관점</strong> <span class="muted-tag">기능 · 근거 · 사용 편의 · 재현</span></span>
-            <span class="fold-indicator">접기</span>
+            <span class="fold-indicator">펼치기</span>
           </summary>
           <div class="aleph-foldable-content">
             <h4 class="section-subheading-2">방어진 결과물은 네 가지 관점으로 봅니다</h4>
@@ -1321,10 +1326,10 @@ export function createStudentView() {
       const card10 = document.createElement('div');
       card10.className = 'saas-reference-section';
       card10.innerHTML = `
-        <details class="aleph-foldable-details" open>
+        <details class="aleph-foldable-details">
           <summary class="aleph-foldable-summary">
             <span><strong>참고 자료</strong> <span class="muted-tag">서비스 조회 참고 코드와 디자인 자료 (pc-saas-reader)</span></span>
-            <span class="fold-indicator">접기</span>
+            <span class="fold-indicator">펼치기</span>
           </summary>
           <div class="aleph-foldable-content">
             <div class="saas-reference-grid">
@@ -1336,7 +1341,7 @@ export function createStudentView() {
                     <p class="saas-card-desc">필수 기능이 아닌 선택 자료입니다. 네 서비스를 모두 연동하라는 요구가 아니며, 지금 만든 앱을 그대로 다듬어도 됩니다.</p>
                   </div>
                   <button type="button" id="saas-toggle-example-btn" class="btn saas-toggle-btn" aria-label="예시 데이터 토글">
-                    ✨ 예시 보기 토글
+                    참고 예시 보기
                   </button>
                 </div>
 
@@ -1403,7 +1408,7 @@ export function createStudentView() {
                     <p class="p-mb-6">기존 프로젝트 파일에 덮어쓰지 말고 별도 폴더에서 먼저 읽어 보세요. 필요한 부분만 내 앱에 맞게 옮겨 씁니다.</p>
                     <p class="p-mb-10-muted">가입·토큰 발급·이 자료의 제출은 필수가 아닙니다.</p>
                     <div class="deploy-warning-banner deploy-banner-emerald">
-                      <span>📦 <strong>pc-saas-reader-20261024.zip</strong> 포함 (START_HERE.md, read-service.mjs, service-reader.mjs 등 8종 참고 문서 및 예제 탑재)</span>
+                      <span><strong>pc-saas-reader-20261024.zip</strong> 포함 (START_HERE.md, read-service.mjs, service-reader.mjs 등 8종 참고 문서 및 예제 탑재)</span>
                     </div>
                   </div>
                 </details>
@@ -1563,7 +1568,7 @@ export function createStudentView() {
               sb.querySelector('.saas-cost-val').textContent = '[예시] 확인 불가';
             }
           } else {
-            saasToggleBtn.textContent = '✨ 예시 보기 토글';
+            saasToggleBtn.textContent = '참고 예시 보기';
             saasToggleBtn.classList.remove('active');
 
             const allItems = list.querySelectorAll('.saas-service-item');
@@ -1602,52 +1607,92 @@ export function createStudentView() {
       };
       setTimeout(initThemeToggle, 50);
 
+      // 실시간 내 PC 상태 API 연동 함수 (백엔드 실측치 단일 소스)
+      const updateRealPcStats = async () => {
+        try {
+          const res = await fetch('/api/pc-stats');
+          if (!res.ok) return;
+          const json = await res.json();
+          if (!json.ok || !json.data) return;
+          const d = json.data;
+
+          const now = new Date();
+          const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+          // KPI Mini Cards
+          const kpiCpu = card2.querySelector('#kpi-cpu-val');
+          if (kpiCpu) kpiCpu.textContent = `${d.cpuUsagePct}%`;
+          const kpiRam = card2.querySelector('#kpi-ram-val');
+          if (kpiRam) kpiRam.textContent = `${d.memUsagePct}%`;
+          const kpiDisk = card2.querySelector('#kpi-disk-val');
+          if (kpiDisk) {
+            if (d.diskAvailable) kpiDisk.textContent = `${d.diskFreeGB}GB (${d.diskUsedPct}%)`;
+            else kpiDisk.textContent = '확인 불가';
+          }
+          const kpiFirewall = card2.querySelector('#kpi-firewall-val');
+          if (kpiFirewall) kpiFirewall.textContent = '켜짐 (Windows)';
+
+          // CPU Detail
+          const cpuBar = card2.querySelector('#dynamic-cpu-bar');
+          if (cpuBar) cpuBar.style.width = `${d.cpuUsagePct}%`;
+          const cpuText = card2.querySelector('#dynamic-cpu-text');
+          if (cpuText) cpuText.textContent = `실측치 ${d.cpuUsagePct}% (${d.cpuCores} Cores)`;
+          const cpuTime = card2.querySelector('#dynamic-cpu-time');
+          if (cpuTime) cpuTime.textContent = `실시간 계측 (${timeStr})`;
+
+          // RAM Detail
+          const ramBar = card2.querySelector('#dynamic-ram-bar');
+          if (ramBar) ramBar.style.width = `${d.memUsagePct}%`;
+          const ramText = card2.querySelector('#dynamic-ram-text');
+          if (ramText) ramText.textContent = `실측치 ${d.usedMemGB}GB / ${d.totalMemGB}GB (${d.memUsagePct}%)`;
+
+          // Disk Detail
+          const diskBar = card2.querySelector('#dynamic-disk-bar');
+          if (diskBar) diskBar.style.width = `${d.diskUsedPct}%`;
+          const diskText = card2.querySelector('#dynamic-disk-text');
+          if (diskText) {
+            if (d.diskAvailable) diskText.textContent = `실측치 ${d.diskFreeGB}GB 여유 / 총 ${d.diskTotalGB}GB (${d.diskUsedPct}% 사용)`;
+            else diskText.textContent = '확인 불가 · 권한 제한';
+          }
+
+          // Trend Time & Wave Bar
+          const trendTime = card2.querySelector('#trend-time-indicator');
+          if (trendTime) trendTime.textContent = `${timeStr} 실시간 계측 완료 · ${d.cpuCores}코어 실측`;
+          const currentBar = card2.querySelector('.trend-bar.current');
+          if (currentBar) currentBar.style.height = `${Math.min(95, Math.max(20, d.cpuUsagePct))}%`;
+
+          // Card 3 Network IP
+          const netItems = card3.querySelectorAll('.aleph-item-row');
+          if (netItems && netItems[0] && d.localIp) {
+            const netVal = netItems[0].querySelector('.item-status');
+            if (netVal) netVal.textContent = `로컬 유선 연결됨 (${d.localIp})`;
+          }
+        } catch (e) {
+          console.debug('pc-stats fetch error', e);
+        }
+      };
+      setTimeout(updateRealPcStats, 50);
+
       // '다시 조회' 버튼 인터랙션 (대기 상태 '새로 읽는 중...' 및 키보드 접근성)
       const retryBtn = card4.querySelector('#aleph-retry-btn');
       const retryStatus = card4.querySelector('#aleph-retry-status');
       if (retryBtn && retryStatus) {
-        retryBtn.addEventListener('click', () => {
+        retryBtn.addEventListener('click', async () => {
           retryBtn.disabled = true;
           retryStatus.textContent = '새로 읽는 중...';
+          await updateRealPcStats();
           setTimeout(() => {
             retryBtn.disabled = false;
             const now = new Date();
             const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
             retryStatus.textContent = `조회 완료 (${timeStr})`;
             setTimeout(() => { retryStatus.textContent = ''; }, 3000);
-          }, 800);
+          }, 600);
         });
       }
 
-      // 동적 실시간 게이지 및 측정시각 업데이트 인터벌 (살아 움직이는 효과)
-      const updateDynamicMetrics = () => {
-        const cpuBar = root.querySelector('#dynamic-cpu-bar');
-        const cpuText = root.querySelector('#dynamic-cpu-text');
-        const cpuTime = root.querySelector('#dynamic-cpu-time');
-        const ramBar = root.querySelector('#dynamic-ram-bar');
-        const ramText = root.querySelector('#dynamic-ram-text');
-
-        if (!cpuBar || !ramBar) return;
-
-        const randomCpu = Math.floor(22 + Math.random() * 12);
-        cpuBar.style.width = `${randomCpu}%`;
-        if (cpuText) cpuText.textContent = `실측치 ${randomCpu}% (16 Cores)`;
-
-        const ramDelta = (Math.random() * 0.3 - 0.15).toFixed(2);
-        const currentRam = (10.07 + parseFloat(ramDelta)).toFixed(2);
-        const currentRamPercent = Math.round((currentRam / 15.90) * 100);
-        ramBar.style.width = `${currentRamPercent}%`;
-        if (ramText) ramText.textContent = `실측치 ${currentRam}GB / 15.90GB (${currentRamPercent}%)`;
-
-        if (cpuTime) {
-          const now = new Date();
-          const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-          cpuTime.textContent = `실시간 계측 중 (${timeStr})`;
-        }
-      };
-
-      setTimeout(updateDynamicMetrics, 100);
-      const metricTimer = setInterval(updateDynamicMetrics, 3000);
+      // 3초 주기 실측 데이터 단일 갱신 (가짜 난수 생성기 완전 삭제)
+      const metricTimer = setInterval(updateRealPcStats, 3000);
       root.addEventListener('DOMNodeRemoved', () => clearInterval(metricTimer), { once: true });
 
       // 상단 확인 시각 (#checked-at) 1초 주기 실시간 동적 갱신 (멈춘 시각 문제 해결)
