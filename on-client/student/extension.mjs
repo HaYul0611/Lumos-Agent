@@ -753,7 +753,365 @@ export function createStudentView() {
         </div>
       `;
 
-      testCardsContainer.append(card1, card2, card3, card4, card5, card6, card7);
+
+      // 8. 과정이 끝난 뒤 참고 · 가이드만 (코드 서명 & MS Store/winget 등록) - 첨부 이미지 1, 2 완벽 구현
+      const card8 = document.createElement('div');
+      card8.className = 'deploy-guide-section post-course-section';
+      card8.innerHTML = `
+        <div class="deploy-guide-header">
+          <h3 class="deploy-guide-title">과정이 끝난 뒤 참고 · 가이드만</h3>
+        </div>
+
+        <div class="deploy-cards-grid">
+          <!-- 3번: 코드 서명으로 게시자 밝히기 -->
+          <div class="deploy-card">
+            <div class="deploy-card-header">
+              <span class="deploy-free-tag tag-paid">유료 · 필수 아님</span>
+              <h4 class="deploy-card-name" style="margin: 0; font-size: 1.12rem;">코드 서명으로 게시자 밝히기</h4>
+            </div>
+            <p class="deploy-card-summary">
+              신뢰되는 공인 코드 서명 인증서로 설치 파일에 서명하면 '알 수 없는 게시자' 대신 인증서로 확인된 게시자 이름이 보입니다. 자체 서명은 서명 원리를 내 PC에서 익히는 학습용이며, 공인 서명은 필요할 때만 고릅니다.
+            </p>
+
+            <div class="deploy-meta-rows">
+              <div class="deploy-meta-row">
+                <span class="meta-label">난이도</span>
+                <span class="meta-val">어려움 · 인증서와 개인키 관리</span>
+              </div>
+              <div class="deploy-meta-row">
+                <span class="meta-label">받는 사람이 보는 화면</span>
+                <span class="meta-val">공인 서명이라도 처음에는 경고가 남을 수 있고, 같은 인증서로 설치가 쌓여야 줄어듭니다. 자체 서명으로 다른 사람 PC의 신뢰를 얻을 수 있다는 보장은 없습니다.</span>
+              </div>
+              <div class="deploy-meta-row">
+                <span class="meta-label">이런 경우에</span>
+                <span class="meta-val">오래 배포할 앱이고 게시자 이름을 밝히고 싶을 때</span>
+              </div>
+            </div>
+
+            <details class="deploy-details" open>
+              <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
+              <div class="deploy-content">
+                <ol class="deploy-steps-ol">
+                  <li>학습용으로 내 PC에서 자체 서명 인증서를 만들어 setup.exe에 서명하고, 파일 속성의 '디지털 서명' 탭에서 어떻게 보이는지 확인합니다.</li>
+                  <li>공인 서명이 필요하면 고릅니다: 오픈소스로 공개한 앱은 SignPath Foundation(무료, 심사) 또는 Certum 오픈소스 클라우드 인증서(49유로부터), 그 밖에는 OV 인증서입니다. OV 가격은 발급 기관과 기간마다 다르니 각 기관의 공식 가격 페이지에서 확인합니다.</li>
+                  <li>공인 코드 서명 인증서를 쓸 때는 발급 기관이 요구하는 보안 하드웨어나 클라우드의 개인키 보관 조건을 확인합니다. 공인 인증서의 조건을 첫 단계의 자체 서명 학습과 혼동하지 않습니다. 서명할 때는 타임스탬프 서버를 꼭 지정합니다.</li>
+                  <li>서명한 뒤에는 파일을 고치지 않습니다. 고치면 서명이 깨지니 다시 서명합니다.</li>
+                </ol>
+                <div class="deploy-warning-banner">
+                  <span class="deploy-warning-icon">⚠</span>
+                  <span class="deploy-warning-text">
+                    개인키와 .pfx·p12 파일, 인증서 비밀번호는 저장소·채널·결과물 어디에도 올리지 않습니다. 남의 PC에 내 자체 서명 인증서를 신뢰하라고 넣게 하지 않습니다. Microsoft의 Artifact Signing(옛 Trusted Signing) Public Trust는 공식 신청 안내에 한국 소재 조직도 포함합니다. 개인 개발자는 미국이나 캐나다에 소재해야 하므로 한국 개인은 해당하지 않습니다. 지역 조건을 충족해도 실제 신청과 심사 통과가 보장되지는 않습니다.
+                  </span>
+                </div>
+                <ul class="deploy-links-ul">
+                  <li><a href="https://learn.microsoft.com/ko-kr/azure/trusted-signing/" target="_blank" rel="noopener noreferrer">Artifact Signing 신청 전제 조건(Microsoft) ↗</a></li>
+                  <li><a href="https://support.microsoft.com/ko-kr/windows" target="_blank" rel="noopener noreferrer">스마트 앱 컨트롤 자주 묻는 질문(Microsoft) ↗</a></li>
+                  <li><a href="https://learn.microsoft.com/ko-kr/windows/win32/seccrypto/signtool" target="_blank" rel="noopener noreferrer">코드 서명 선택지(Microsoft) ↗</a></li>
+                  <li><a href="https://learn.microsoft.com/ko-kr/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen" target="_blank" rel="noopener noreferrer">SmartScreen 평판이 쌓이는 방식 ↗</a></li>
+                  <li><a href="https://about.signpath.io/open-source" target="_blank" rel="noopener noreferrer">SignPath Foundation(오픈소스 무료 서명) ↗</a></li>
+                  <li><a href="https://shop.certum.eu/open-source-code-signing.html" target="_blank" rel="noopener noreferrer">Certum 코드 서명 인증서 가격 ↗</a></li>
+                </ul>
+              </div>
+            </details>
+          </div>
+
+          <!-- 4번: Microsoft Store나 winget에 올리기 -->
+          <div class="deploy-card">
+            <div class="deploy-card-header">
+              <span class="deploy-free-tag tag-audit">무료 · 심사 기간 있음</span>
+              <h4 class="deploy-card-name" style="margin: 0; font-size: 1.12rem;">Microsoft Store나 winget에 올리기</h4>
+            </div>
+            <p class="deploy-card-summary">
+              Microsoft Store에 MSIX로 올리면 Microsoft가 다시 서명하고, Store에서 받은 앱에는 SmartScreen 다운로드 경고가 뜨지 않습니다. 2025년 9월부터 개인 개발자 등록이 무료입니다. 명령어 설치를 원하면 winget 등록도 있습니다.
+            </p>
+
+            <div class="deploy-meta-rows">
+              <div class="deploy-meta-row">
+                <span class="meta-label">난이도</span>
+                <span class="meta-val">어려움 · 심사와 공개 주소 필요</span>
+              </div>
+              <div class="deploy-meta-row">
+                <span class="meta-label">받는 사람이 보는 화면</span>
+                <span class="meta-val">Store로 설치하면 SmartScreen 다운로드 경고가 뜨지 않습니다. 앱이 요청하는 권한, 기관·회사의 기기 관리 정책, 다른 보안 알림은 따로 나타날 수 있습니다. winget은 공개 HTTPS 주소와 백신 검사를 거친 설치 파일이 필요합니다.</span>
+              </div>
+              <div class="deploy-meta-row">
+                <span class="meta-label">이런 경우에</span>
+                <span class="meta-val">과정이 끝난 뒤에도 앱을 계속 다듬어 공개하고 싶을 때. 심사가 며칠 이상 걸릴 수 있어 과정 기간에는 권하지 않습니다.</span>
+              </div>
+            </div>
+
+            <details class="deploy-details" open>
+              <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
+              <div class="deploy-content">
+                <ol class="deploy-steps-ol">
+                  <li>MSIX Packaging Tool로 2번에서 만든 설치 과정을 MSIX로 바꿉니다. Store가 다시 서명해 주므로 따로 인증서를 사지 않아도 됩니다.</li>
+                  <li>Microsoft Store 개인 개발자로 무료 등록하고 앱 설명, 개인정보 처리 안내, 화면 사진을 준비합니다.</li>
+                  <li>심사에서 고칠 점이 나오면 반영해 다시 올립니다. winget을 고르면 공개 저장소에 설명 파일(YAML)을 제출합니다.</li>
+                </ol>
+                <div class="deploy-warning-banner" style="background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.35); color: var(--accent);">
+                  <span class="deploy-warning-icon">ℹ</span>
+                  <span class="deploy-warning-text">
+                    이 앱은 방화벽·네트워크 상태를 읽기만 합니다. 공개 배포 전에 읽는 정보가 무엇인지 설명에 정확히 적고, 관리자 권한을 요구하지 않게 둡니다.
+                  </span>
+                </div>
+                <ul class="deploy-links-ul">
+                  <li><a href="https://learn.microsoft.com/ko-kr/windows/apps/publish/partner-center/register" target="_blank" rel="noopener noreferrer">Microsoft Store 개인 개발자 무료 등록 안내 ↗</a></li>
+                  <li><a href="https://learn.microsoft.com/ko-kr/windows/msix/packaging-tool/tool-overview" target="_blank" rel="noopener noreferrer">MSIX Packaging Tool ↗</a></li>
+                  <li><a href="https://learn.microsoft.com/ko-kr/windows/msix/package/signing-package-overview" target="_blank" rel="noopener noreferrer">MSIX 서명 안내 ↗</a></li>
+                  <li><a href="https://learn.microsoft.com/ko-kr/windows/package-manager/package/" target="_blank" rel="noopener noreferrer">winget 저장소 제출 안내 ↗</a></li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="deploy-footer-banner">
+          <p class="deploy-footer-line"><strong>어느 단계를 고르든 결과물 평가에 가산이나 감점은 없습니다.</strong> 내 앱을 쓸 사람과 내가 들일 수 있는 시간에 맞춰 고르세요.</p>
+          <p class="deploy-footer-line">받는 사람에게 SmartScreen, Defender, 스마트 앱 컨트롤을 끄라고 안내하지 않습니다. 스마트 앱 컨트롤을 다시 켤 수 있는 조건은 기기, Windows 업데이트, 관리 정책에 따라 다릅니다. 설치가 막히면 보호 설정을 바꾸지 말고 차단 메시지를 그대로 담당자에게 전달합니다.</p>
+          <p class="deploy-footer-muted">가격과 조건은 2026년 10월 24일에 각 공식 페이지에서 확인한 내용입니다. 실제로 고르기 전에 링크에서 다시 확인하세요.</p>
+        </div>
+      `;
+
+      // 9. 완성본에 반영되는 작업 위치 & 결과물을 보는 네 가지 관점 - 첨부 이미지 3 완벽 구현
+      const card9 = document.createElement('div');
+      card9.className = 'aleph-accordion-card';
+      card9.innerHTML = `
+        <details class="aleph-foldable-details" open>
+          <summary class="aleph-foldable-summary">
+            <span><strong>완성본에 반영되는 작업 위치</strong> <span class="muted-tag">어느 파일을 고치면 되는지</span></span>
+            <span class="fold-indicator">접기</span>
+          </summary>
+          <div class="aleph-foldable-content">
+            <h4 style="font-size: 1.05rem; margin: 0 0 8px; color: var(--text);">완성본에 반영되는 작업 위치</h4>
+            <p style="margin: 0 0 8px; line-height: 1.6;">추가 화면과 기능은 기존 <code>student/extension.mjs</code>에서 이어서 만들고, 앱 이름·아이콘·색과 허용된 배치는 <code>student/appearance.json</code>으로 꾸밉니다. 학생 파일은 새 제공 파일로 덮어쓰지 않습니다.</p>
+            <p class="muted" style="margin: 0; line-height: 1.55;">설치형 앱은 검증된 제공 화면을 사용합니다. <code>public/app.js</code>나 <code>public/style.css</code>만 고친 결과가 설치형 앱에도 그대로 보인다고 가정하지 말고, 승인된 실행 환경에서 실제 완성본을 확인하세요. 제공된 '내 PC 상태'와 직접 개선한 부분도 구분해 적습니다.</p>
+          </div>
+        </details>
+
+        <details class="aleph-foldable-details" open style="margin-top: 14px;">
+          <summary class="aleph-foldable-summary">
+            <span><strong>결과물을 보는 네 가지 관점</strong> <span class="muted-tag">기능 · 근거 · 사용 편의 · 재현</span></span>
+            <span class="fold-indicator">접기</span>
+          </summary>
+          <div class="aleph-foldable-content">
+            <h4 style="font-size: 1.05rem; margin: 0 0 14px; color: var(--text);">방어진 결과물은 네 가지 관점으로 봅니다</h4>
+            <div class="four-perspectives-grid">
+              <div class="perspective-box">
+                <div class="persp-tag tag-green">기능 작동</div>
+                <p>고른 핵심 기능이 내 PC에서 실제로 끝까지 동작하는지 봅니다. 제공 기능과 직접 개선한 부분을 구분하며 기능 개수로 경쟁하지 않습니다.</p>
+              </div>
+              <div class="perspective-box">
+                <div class="persp-tag tag-yellow">근거 정직성</div>
+                <p>실제로 잰 값과 예시 값, '확인 불가'를 구별해 정직하게 보여 주는지 봅니다. 앱의 '확인 불가'는 값을 읽지 못했다는 표시이며, 방어진 판정 카드의 '확인 불가'와는 구분합니다.</p>
+              </div>
+              <div class="perspective-box">
+                <div class="persp-tag tag-purple">사용 편의</div>
+                <p>처음 보는 사람이 화면과 오류 안내를 보고 쓸 수 있는지 봅니다.</p>
+              </div>
+              <div class="perspective-box">
+                <div class="persp-tag tag-blue">재현 가능성</div>
+                <p>다른 사람이 실행 안내와 패키지만으로 같은 결과를 다시 만들 수 있는지 봅니다.</p>
+              </div>
+            </div>
+            <p class="muted" style="margin-top: 14px; font-size: 0.83rem; line-height: 1.5;">관점별 비중과 시상 방식은 아직 정해지지 않았습니다. 정해지면 이 자리에서 따로 알려 드립니다. 리추얼 참여, 감사 표현, 강의에 대한 호감은 평가와 관계가 없습니다.</p>
+          </div>
+        </details>
+      `;
+
+      // 10. 서비스 조회 참고 코드 & 디자인 참고 자료 (pc-saas-reader 통합) - 첨부 이미지 4 완벽 구현
+      const card10 = document.createElement('div');
+      card10.className = 'saas-reference-section';
+      card10.innerHTML = `
+        <details class="aleph-foldable-details" open>
+          <summary class="aleph-foldable-summary">
+            <span><strong>참고 자료</strong> <span class="muted-tag">서비스 조회 참고 코드와 디자인 자료 (pc-saas-reader)</span></span>
+            <span class="fold-indicator">접기</span>
+          </summary>
+          <div class="aleph-foldable-content">
+            <div class="saas-reference-grid">
+              <!-- 좌측: 서비스 조회 기능 더하기 -->
+              <div class="saas-ref-card">
+                <div class="saas-ref-header">
+                  <div>
+                    <h4 class="saas-card-title">서비스 조회 기능을 더하고 싶다면</h4>
+                    <p class="saas-card-desc">필수 기능이 아닌 선택 자료입니다. 네 서비스를 모두 연동하라는 요구가 아니며, 지금 만든 앱을 그대로 다듬어도 됩니다.</p>
+                  </div>
+                  <button type="button" id="saas-toggle-example-btn" class="btn saas-toggle-btn" aria-label="예시 데이터 토글">
+                    ✨ 예시 보기 토글
+                  </button>
+                </div>
+
+                <!-- 4대 SaaS 서비스 모니터링 카드 리스트 -->
+                <div id="saas-services-list" class="saas-services-container">
+                  <!-- GitHub -->
+                  <div class="saas-service-item" data-service="github">
+                    <div class="saas-item-head">
+                      <span class="saas-name">GitHub</span>
+                      <span class="saas-status-badge status-unverifiable">연결 전 · 확인 불가</span>
+                    </div>
+                    <div class="saas-item-details">
+                      <div class="saas-detail-row"><span class="saas-k">계정 보안</span><span class="saas-v saas-security-val">확인 불가 (2FA 미조회)</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">사용량</span><span class="saas-v saas-usage-val">확인 불가</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">월 비용</span><span class="saas-v saas-cost-val">확인 불가 (0원 아님)</span></div>
+                    </div>
+                  </div>
+
+                  <!-- Vercel -->
+                  <div class="saas-service-item" data-service="vercel">
+                    <div class="saas-item-head">
+                      <span class="saas-name">Vercel</span>
+                      <span class="saas-status-badge status-unverifiable">연결 전 · 확인 불가</span>
+                    </div>
+                    <div class="saas-item-details">
+                      <div class="saas-detail-row"><span class="saas-k">계정 보안</span><span class="saas-v saas-security-val">확인 불가</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">사용량</span><span class="saas-v saas-usage-val">확인 불가</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">월 비용</span><span class="saas-v saas-cost-val">확인 불가</span></div>
+                    </div>
+                  </div>
+
+                  <!-- Railway -->
+                  <div class="saas-service-item" data-service="railway">
+                    <div class="saas-item-head">
+                      <span class="saas-name">Railway</span>
+                      <span class="saas-status-badge status-unverifiable">연결 전 · 확인 불가</span>
+                    </div>
+                    <div class="saas-item-details">
+                      <div class="saas-detail-row"><span class="saas-k">계정 보안</span><span class="saas-v saas-security-val">확인 불가</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">사용량</span><span class="saas-v saas-usage-val">확인 불가</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">월 비용</span><span class="saas-v saas-cost-val">확인 불가</span></div>
+                    </div>
+                  </div>
+
+                  <!-- Supabase -->
+                  <div class="saas-service-item" data-service="supabase">
+                    <div class="saas-item-head">
+                      <span class="saas-name">Supabase</span>
+                      <span class="saas-status-badge status-unverifiable">연결 전 · 확인 불가</span>
+                    </div>
+                    <div class="saas-item-details">
+                      <div class="saas-detail-row"><span class="saas-k">계정 보안</span><span class="saas-v saas-security-val">확인 불가</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">사용량</span><span class="saas-v saas-usage-val">확인 불가</span></div>
+                      <div class="saas-detail-row"><span class="saas-k">월 비용</span><span class="saas-v saas-cost-val">확인 불가</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <details class="deploy-details" style="margin-top: 14px;">
+                  <summary class="deploy-summary">▼ 참고 코드와 사용 안내 보기</summary>
+                  <div class="deploy-content" style="font-size: 0.85rem; line-height: 1.55;">
+                    <p style="margin: 0 0 6px;">GitHub, Vercel, Railway, Supabase의 상태와 확인 가능한 사용량을 읽기만 하는 참고 예시입니다. 전체 보안 진단이나 월 청구 총액을 알려 주지 않습니다.</p>
+                    <p style="margin: 0 0 6px;">설치 프로그램이 아닌 Node.js 참고 코드와 안내서입니다. 현재 설치형 앱에 자동으로 연결되지 않습니다.</p>
+                    <p style="margin: 0 0 6px;">기존 프로젝트 파일에 덮어쓰지 말고 별도 폴더에서 먼저 읽어 보세요. 필요한 부분만 내 앱에 맞게 옮겨 씁니다.</p>
+                    <p style="margin: 0 0 10px; color: var(--text-muted);">가입·토큰 발급·이 자료의 제출은 필수가 아닙니다.</p>
+                    <div class="deploy-warning-banner" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.35); color: #10b981;">
+                      <span>📦 <strong>pc-saas-reader-20261024.zip</strong> 포함 (START_HERE.md, read-service.mjs, service-reader.mjs 등 8종 참고 문서 및 예제 탑재)</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              <!-- 우측: 무료로 볼 수 있는 디자인 참고 자료 -->
+              <div class="saas-ref-card">
+                <h4 class="saas-card-title">무료로 볼 수 있는 디자인 참고 자료</h4>
+                <div class="design-refs-grid">
+                  <div class="design-ref-box">
+                    <span class="design-ref-name">Mobbin</span>
+                    <p class="design-ref-takeaway"><strong>참고할 것:</strong> 실제 앱 화면이 정보와 버튼을 어떤 순서로 놓는지 봅니다.</p>
+                    <p class="design-ref-apply"><strong>적용 방법:</strong> 내 앱의 첫 화면에서 핵심 기능 3가지를 어떤 순서로 놓을지 정할 때 씁니다.</p>
+                  </div>
+                  <div class="design-ref-box">
+                    <span class="design-ref-name">Vercel 포트폴리오 템플릿</span>
+                    <p class="design-ref-takeaway"><strong>참고할 것:</strong> 한 장짜리 소개 화면의 구성과 여백을 봅니다.</p>
+                    <p class="design-ref-apply"><strong>적용 방법:</strong> 7일차 시연과 정리 화면의 구성을 잡을 때 씁니다.</p>
+                  </div>
+                  <div class="design-ref-box">
+                    <span class="design-ref-name">web.dev Learn Design</span>
+                    <p class="design-ref-takeaway"><strong>참고할 것:</strong> 레이아웃, 글자 크기, 색 대비의 기본 원칙을 읽습니다.</p>
+                    <p class="design-ref-apply"><strong>적용 방법:</strong> 4일차에 화면을 다듬을 때 글자 크기와 대비를 점검하는 기준으로 씁니다.</p>
+                  </div>
+                  <div class="design-ref-box">
+                    <span class="design-ref-name">W3C WAI 튜토리얼</span>
+                    <p class="design-ref-takeaway"><strong>참고할 것:</strong> 버튼, 폼, 상태 안내를 누구나 쓸 수 있게 만드는 방법을 읽습니다.</p>
+                    <p class="design-ref-apply"><strong>적용 방법:</strong> '다시 조회' 버튼과 오류 화면을 키보드와 화면 낭독기로도 쓸 수 있게 만들 때 씁니다.</p>
+                  </div>
+                </div>
+                <div class="design-ref-footer">
+                  <p>공개된 부분만 참고해도 됩니다. 유료 서비스는 필수가 아닙니다. 가입이나 결제가 필요하면 web.dev와 W3C WAI 자료로 진행하세요.</p>
+                  <p class="muted">다른 사람의 그림이나 코드를 그대로 가져오지 말고, 배치와 흐름의 원칙만 참고해 내 앱에 맞게 새로 만드세요.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      `;
+
+      testCardsContainer.append(card1, card2, card3, card4, card5, card6, card7, card8, card9, card10);
+
+      // Card 10 예시 보기 토글 인터랙션 (pc-saas-reader 고유 기능)
+      const saasToggleBtn = card10.querySelector('#saas-toggle-example-btn');
+      let isShowingSaasExample = false;
+      if (saasToggleBtn) {
+        saasToggleBtn.addEventListener('click', () => {
+          isShowingSaasExample = !isShowingSaasExample;
+          const list = card10.querySelector('#saas-services-list');
+          if (!list) return;
+
+          if (isShowingSaasExample) {
+            saasToggleBtn.textContent = '↩ 원래 상태로 (연결 전)';
+            saasToggleBtn.classList.add('active');
+
+            // GitHub
+            const gh = list.querySelector('[data-service="github"]');
+            if (gh) {
+              gh.querySelector('.saas-status-badge').className = 'saas-status-badge status-partial';
+              gh.querySelector('.saas-status-badge').textContent = '[예시] 부분 결과 (조직 권한 부족)';
+              gh.querySelector('.saas-security-val').innerHTML = '<span class="status-ok">[예시] 2FA 켜짐</span> · 출처: API 응답 가정';
+              gh.querySelector('.saas-usage-val').textContent = '[예시] Actions 사용 312분 (2026-10-01~10-24)';
+              gh.querySelector('.saas-cost-val').textContent = '[예시] USD 3.20 (실적 · 초과분, 세금 제외)';
+            }
+            // Vercel
+            const vc = list.querySelector('[data-service="vercel"]');
+            if (vc) {
+              vc.querySelector('.saas-status-badge').className = 'saas-status-badge status-stale';
+              vc.querySelector('.saas-status-badge').textContent = '[예시] 오래됨 (3일 전 결과)';
+              vc.querySelector('.saas-security-val').textContent = '[예시] 배포 보호: 3일 전 값만 있음';
+              vc.querySelector('.saas-usage-val').textContent = '[예시] 함수 실행 시간 3일 전 기준';
+              vc.querySelector('.saas-cost-val').textContent = '[예시] 확인 불가 (청구 API 미조회)';
+            }
+            // Railway
+            const rw = list.querySelector('[data-service="railway"]');
+            if (rw) {
+              rw.querySelector('.saas-status-badge').className = 'saas-status-badge status-permission';
+              rw.querySelector('.saas-status-badge').textContent = '[예시] 권한 부족';
+              rw.querySelector('.saas-security-val').textContent = '[예시] 읽기 권한 부족';
+              rw.querySelector('.saas-usage-val').textContent = '[예시] 읽지 못함';
+              rw.querySelector('.saas-cost-val').textContent = '[예시] USD 4.80 (월말 예상 · 출처: 청구화면)';
+            }
+            // Supabase
+            const sb = list.querySelector('[data-service="supabase"]');
+            if (sb) {
+              sb.querySelector('.saas-status-badge').className = 'saas-status-badge status-failed';
+              sb.querySelector('.saas-status-badge').textContent = '[예시] 실패 (요청 시간 초과)';
+              sb.querySelector('.saas-security-val').textContent = '[예시] 시간 초과';
+              sb.querySelector('.saas-usage-val').textContent = '[예시] 읽지 못함';
+              sb.querySelector('.saas-cost-val').textContent = '[예시] 확인 불가';
+            }
+          } else {
+            saasToggleBtn.textContent = '✨ 예시 보기 토글';
+            saasToggleBtn.classList.remove('active');
+
+            const allItems = list.querySelectorAll('.saas-service-item');
+            allItems.forEach(item => {
+              item.querySelector('.saas-status-badge').className = 'saas-status-badge status-unverifiable';
+              item.querySelector('.saas-status-badge').textContent = '연결 전 · 확인 불가';
+              item.querySelector('.saas-security-val').textContent = '확인 불가';
+              item.querySelector('.saas-usage-val').textContent = '확인 불가';
+              item.querySelector('.saas-cost-val').textContent = '확인 불가 (0원 아님)';
+            });
+          }
+        });
+      }
+
       root.append(testCardsContainer);
 
       // 우하단 동적 라이트/다크 모드 토글 초기화 및 상태 보존

@@ -1,0 +1,21 @@
+{
+  "$schema": "aleph.on.appearance.v1",
+  "appName": "Lumos Agent",
+  "appVersion": "1.0.0",
+  "description": "ZTNA & XDR 방어진 개인 보안 클라이언트",
+  "author": "Lumos Security Team",
+  "iconPath": "public/favicon.png",
+  "symbolPath": "public/symbol-ribbon-sm.png",
+  "theme": {
+    "primary": "#0284c7",
+    "accent": "#6366f1",
+    "surface": "#ffffff",
+    "surfaceDark": "#0f172a"
+  },
+  "layout": {
+    "defaultTab": "protection",
+    "showMetrics": true,
+    "showDeployGuide": true,
+    "showServiceMonitor": true
+  }
+}

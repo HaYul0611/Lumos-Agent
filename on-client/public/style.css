@@ -1258,3 +1258,365 @@ li.event:hover {
   border-radius: var(--radius);
   min-height: 60px;
 }
+
+
+/* ============================================================
+   과정 마무리 및 참고 자료 전용 스타일 (Cards 8, 9, 10)
+   ============================================================ */
+.tag-paid {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+.tag-audit {
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.15);
+  border: 1px solid rgba(2, 132, 199, 0.4);
+}
+:root[data-theme="dark"] .tag-audit {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.deploy-footer-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-top: 20px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.deploy-footer-line {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-weight: 500;
+}
+.deploy-footer-muted {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* 9. 아코디언 카드 (네 가지 관점 & 작업 위치) */
+.aleph-accordion-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  margin-top: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.aleph-foldable-details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.aleph-foldable-summary {
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--surface-elevated);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  list-style: none;
+  transition: background-color 0.2s ease;
+}
+.aleph-foldable-summary::-webkit-details-marker {
+  display: none;
+}
+.aleph-foldable-summary:hover {
+  background: var(--border);
+}
+.muted-tag {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-left: 8px;
+}
+.fold-indicator {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+}
+.aleph-foldable-content {
+  padding: 18px 20px;
+}
+.four-perspectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+.perspective-box {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s ease;
+}
+.perspective-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+.perspective-box p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+.persp-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  width: fit-content;
+}
+.tag-green {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+.tag-yellow {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+.tag-purple {
+  background: rgba(139, 92, 246, 0.15);
+  color: #8b5cf6;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+}
+.tag-blue {
+  background: rgba(56, 189, 248, 0.15);
+  color: #0284c7;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+:root[data-theme="dark"] .tag-blue {
+  color: #38bdf8;
+}
+
+/* 10. 서비스 조회 참고 코드 & 디자인 참고 자료 섹션 */
+.saas-reference-section {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  margin-top: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.saas-reference-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1000px) {
+  .saas-reference-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.saas-ref-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.saas-ref-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.saas-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+.saas-card-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.saas-toggle-btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.saas-toggle-btn:hover {
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+.saas-toggle-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+.saas-services-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+@media (max-width: 600px) {
+  .saas-services-container {
+    grid-template-columns: 1fr;
+  }
+}
+.saas-service-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease;
+}
+.saas-service-item:hover {
+  border-color: var(--border-glow);
+}
+.saas-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+.saas-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.saas-status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.status-unverifiable {
+  background: var(--unknown-soft);
+  color: var(--unknown);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+.status-partial {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+.status-stale {
+  background: rgba(148, 163, 184, 0.2);
+  color: #64748b;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+.status-permission {
+  background: var(--deny-soft);
+  color: var(--deny);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.status-failed {
+  background: var(--deny-soft);
+  color: var(--deny);
+  font-weight: 800;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+.status-ok {
+  color: #10b981;
+  font-weight: 700;
+}
+.saas-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.8rem;
+}
+.saas-detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1.4;
+}
+.saas-k {
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.saas-v {
+  color: var(--text);
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.design-refs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 600px) {
+  .design-refs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.design-ref-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.design-ref-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.design-ref-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+.design-ref-takeaway, .design-ref-apply {
+  margin: 0;
+  line-height: 1.45;
+  color: var(--text);
+}
+.design-ref-footer {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+}
