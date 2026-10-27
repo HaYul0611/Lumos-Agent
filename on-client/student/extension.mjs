@@ -532,7 +532,126 @@ export function createStudentView() {
 
       return root;
     },
-    renderVulnerabilities() { return '학생 구현 대기: 정확한 설치 버전·OSV 출처·조회 시각·부분 결과·조회 실패를 구분하세요.'; },
+    renderVulnerabilities({ status, mode, data, error } = {}) {
+      const root = document.createElement('section');
+      root.className = 'student-vulnerabilities';
+      const addText = (parent, tag, text, className) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        node.textContent = text;
+        parent.append(node);
+        return node;
+      };
+      const overallLabels = {
+        complete: '모두 조회',
+        partial: '일부 조회 실패',
+        not_checked: '아직 조회 안 함',
+        not_configured: '조회 준비 미완료',
+        unverifiable: 'lock 파일 확인 불가',
+      };
+      const packageLabels = {
+        known_vulnerabilities: '알려진 항목 있음',
+        none_found: '알려진 항목 없음',
+        unverifiable: '조회 확인 불가',
+      };
+      const textValue = (value, fallback = '확인 불가') =>
+        typeof value === 'string' && value.length > 0 ? value : fallback;
+
+      addText(root, 'h3', '설치 패키지 취약점 조회 결과', 'student-vulnerabilities-title');
+
+      if (status === 'idle') {
+        addText(root, 'p', '조회 전 (idle)', 'student-vulnerabilities-idle');
+        return root;
+      }
+      if (status === 'loading') {
+        addText(root, 'p', '조회 중 (loading)', 'student-vulnerabilities-loading');
+        return root;
+      }
+      if (status === 'error') {
+        const message = textValue(error?.message, '오류 메시지를 확인할 수 없습니다.');
+        addText(root, 'p', `조회 실패 (error): ${message}`, 'student-vulnerabilities-error');
+        addText(root, 'p', '조회 실패는 취약점 없음이라는 뜻이 아닙니다. 이전 결과는 현재 조회 결과로 표시하지 않습니다.', 'student-vulnerabilities-error-note');
+        return root;
+      }
+      if (status !== 'ok' || !data || typeof data !== 'object' || Array.isArray(data)) {
+        addText(root, 'p', '조회 결과 확인 불가 (unverifiable). 취약점이 없다는 뜻이 아닙니다.', 'student-vulnerabilities-unverified');
+        return root;
+      }
+
+      const scanStatus = typeof data.status === 'string' && Object.hasOwn(overallLabels, data.status)
+        ? data.status
+        : 'unverifiable';
+      const scanLabel = overallLabels[scanStatus];
+      addText(root, 'p', `${scanLabel} (${scanStatus})`, `student-vulnerabilities-scan-${scanStatus}`);
+
+      if (data.lockfileVersion !== undefined && data.lockfileVersion !== null) {
+        addText(root, 'p', `설치 목록 원천: package-lock.json · lockfileVersion: ${String(data.lockfileVersion)}`, 'student-vulnerabilities-lockfile-version');
+      }
+      if (data.lockfileHash !== undefined && data.lockfileHash !== null) {
+        addText(root, 'p', `lockfileHash: ${textValue(data.lockfileHash)}`, 'student-vulnerabilities-lockfile-hash');
+      }
+      if (data.checkedAt !== undefined && data.checkedAt !== null) {
+        addText(root, 'p', `전체 조회 시각: ${textValue(data.checkedAt)}`, 'student-vulnerabilities-checked-at');
+      }
+      if (scanStatus === 'not_configured') {
+        addText(root, 'p', '조회 대상 프로젝트 설정이 없어 조회하지 않았습니다.', 'student-vulnerabilities-not-configured');
+      } else if (scanStatus === 'not_checked') {
+        addText(root, 'p', '승인된 공개 조회 대상이 없어 아직 OSV 조회를 하지 않았습니다.', 'student-vulnerabilities-not-checked');
+      } else if (scanStatus === 'unverifiable') {
+        addText(root, 'p', '설치 목록 또는 조회 범위를 확인할 수 없습니다. 취약점이 없다는 뜻이 아닙니다.', 'student-vulnerabilities-unverified-note');
+      }
+
+      if (!Array.isArray(data.packages)) {
+        addText(root, 'p', '패키지 조회 목록을 확인할 수 없습니다.', 'student-vulnerabilities-packages-unverified');
+        return root;
+      }
+      if (data.packages.length === 0) {
+        if (scanStatus === 'complete') {
+          addText(root, 'p', '조회 범위에서 표시할 패키지 결과가 없습니다.', 'student-vulnerabilities-empty');
+        }
+        return root;
+      }
+
+      const table = document.createElement('table');
+      const head = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      for (const label of ['패키지', '정확한 설치 버전', '패키지 조회 상태', '출처', '패키지 확인 시각', '취약점 ID', '수정 시각']) {
+        addText(headerRow, 'th', label);
+      }
+      head.append(headerRow);
+      table.append(head);
+      const body = document.createElement('tbody');
+      for (const pkg of data.packages) {
+        const findings = Array.isArray(pkg?.vulnerabilities) ? pkg.vulnerabilities : [];
+        const rows = findings.length > 0 ? findings : [null];
+        for (const finding of rows) {
+          const row = document.createElement('tr');
+          row.setAttribute('data-student-package-name', textValue(pkg?.name, ''));
+          row.setAttribute('data-student-package-version', textValue(pkg?.version, ''));
+          addText(row, 'td', textValue(pkg?.name));
+          addText(row, 'td', textValue(pkg?.version));
+          const packageStatus = typeof pkg?.status === 'string' && Object.hasOwn(packageLabels, pkg.status)
+            ? pkg.status
+            : 'unverifiable';
+          let statusText = `${packageLabels[packageStatus]} (${packageStatus})`;
+          if (packageStatus === 'unverifiable' && findings.length > 0) {
+            statusText = `일부 확인·전체 조회 확인 불가 (${packageStatus})`;
+          }
+          addText(row, 'td', statusText);
+          addText(row, 'td', textValue(pkg?.source));
+          addText(row, 'td', textValue(pkg?.checkedAt));
+          addText(row, 'td', finding ? textValue(finding.id) : '');
+          addText(row, 'td', finding ? textValue(finding.modified) : '');
+          body.append(row);
+        }
+        if (pkg?.status === 'none_found') {
+          addText(root, 'p', `${textValue(pkg?.name)} ${textValue(pkg?.version)}: 조회 범위에서 알려진 항목이 없습니다. 이는 패키지나 앱 전체가 안전하다는 보장이 아닙니다.`, 'student-vulnerabilities-none-found-note');
+        }
+      }
+      table.append(body);
+      root.append(table);
+      return root;
+    },
     renderAiConnection({ status, mode, data, error, checkedAt } = {}) {
       const root = document.createElement('section');
       const addText = (parent, tag, text, className) => {
