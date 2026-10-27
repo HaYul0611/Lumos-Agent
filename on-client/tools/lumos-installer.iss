@@ -27,7 +27,8 @@ OutputBaseFilename=Lumos-Agent-setup
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern
-UninstallDisplayIcon={app}\public\favicon.png
+SetupIconFile=..\app.ico
+UninstallDisplayIcon={app}\app.ico
 
 [Languages]
 Name: "korean"; MessagesFile: "compiler:Languages\Korean.isl"
@@ -41,9 +42,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: ".git\*,node_modules\*,dist\*,tools\dist\*,*.iss,*.tmp"
 
 [Icons]
-Name: "{autoprograms}\{#MyAppName}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
+Name: "{autoprograms}\{#MyAppName}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"
 Name: "{autoprograms}\{#MyAppName}\{#MyAppName} 제거"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon; IconFilename: "{app}\app.ico"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: shellexec postinstall nowait skipifsilent
