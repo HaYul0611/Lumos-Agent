@@ -184,7 +184,10 @@ flowchart LR
 | `renderAction` | `executing` / `pending` | 각각 `서버에 조치를 전달 중(executing)입니다. 결과가 아직 확인되지 않았으며 효과 확인이 아닙니다.`, `서버가 요청을 접수해 처리 중(pending)입니다. 접수 응답(ACK)은 조치 효과가 아니며 처리 결과가 아직 확인되지 않았습니다.`를 표시합니다. |
 | `renderAction` | `succeeded`, `observation.effectApplied !== true` | 제목 상태는 `결과 불명 (unknown)`입니다. `효과 확인 정보가 없어 결과 불명(unknown)입니다. succeeded 상태만으로 효과를 확인할 수 없어 성공으로 처리하지 않습니다.`와 `원래 처리 상태: succeeded (효과가 확인되었다는 뜻이 아닙니다).`를 보조 문구로 표시합니다. |
 | `renderAction` | `error` / `unknown` | `error`는 `요청이 처리되지 않았습니다(error). 조치 효과가 발생했다고 볼 수 없습니다.`와 안전한 오류 코드·메시지를 표시합니다. `unknown`은 결과 불명이며 효과가 없거나 성공했다고 판단하지 않고 결과 재조회를 안내합니다. |
-| `renderVulnerabilities` | 현재 파일에서 함수 확인 | 현재 `student/extension.mjs`의 `createStudentView()` 반환 객체에는 `renderVulnerabilities`가 없습니다. 따라서 이 파일에서 `status === 'error'`, `none_found`, 패키지별 일부 오류에 대응하는 학생 함수의 출력 문구를 확인할 수 없습니다. 해당 상태 문구를 이 함수의 실제 출력이라고 문서화하지 않았습니다. |
+| `renderVulnerabilities` | `idle` / `loading` / `error` | `조회 전 (idle)`, `조회 중 (loading)`, 또는 `조회 실패 (error): ${message}`를 표시합니다. 오류 메시지가 없으면 `오류 메시지를 확인할 수 없습니다.`를 사용하고, 조회 실패가 취약점 없음이 아니며 이전 결과를 현재 결과로 표시하지 않는다고 안내합니다. |
+| `renderVulnerabilities` | `ok` 전체 조회 상태 | `complete`, `partial`, `not_checked`, `not_configured`, `unverifiable`을 각각 `모두 조회`, `일부 조회 실패`, `아직 조회 안 함`, `조회 준비 미완료`, `lock 파일 확인 불가`와 원래 코드로 표시합니다. 전달된 경우에만 lockfileVersion·lockfileHash·전체 조회 시각을 표시합니다. |
+| `renderVulnerabilities` | 패키지·취약점 | 패키지별 이름·전달된 정확한 버전·상태·출처·확인 시각과 취약점의 ID·modified를 표시하고 행에 `data-student-package-name`, `data-student-package-version`을 지정합니다. `known_vulnerabilities`, `none_found`, `unverifiable`은 각각 `알려진 항목 있음`, `알려진 항목 없음`, `조회 확인 불가`로 표시합니다. `unverifiable`인데 이미 전달된 취약점이 있으면 그 항목을 보존해 `일부 확인·전체 조회 확인 불가`라고 표시합니다. `none_found`는 조회 범위에서 알려진 항목이 없다는 뜻이며 전체가 안전하다는 보장이 아니라고 안내합니다. |
+| `renderVulnerabilities` | 함수 부재 여부 | 현재 `student/extension.mjs`에는 `renderVulnerabilities` 함수가 있습니다. 위 출력 계약은 파일의 현재 구현에서 읽은 내용이며, 실제 조회 결과·화면을 실행해 확인했다는 뜻은 아닙니다. |
 
 `renderAiConnection`의 현재 코드에 있는 오류 코드별 안내는 다음과 같습니다. 이는 화면 함수가 표시하는 문구이며, 별도의 운영자 원인 확인을 대신하지 않습니다.
 
@@ -201,7 +204,7 @@ flowchart LR
 | `MODEL_NOT_CONFIGURED`, `ON_AI_MODEL_LIST_EMPTY` | `사용할 수 있는 모델이 없거나 설정되지 않았습니다. 담당자에게 모델 허용 설정을 확인해 달라고 요청하세요.` |
 | 그 밖의 코드 | `AI 연결 점검에 실패했거나 결과를 확인할 수 없습니다. 담당자에게 계정 권한과 연결 상태를 확인해 달라고 요청하세요.` |
 
-**대조 시 확인된 차이:** 요청에 제시된 예시 문구와 현재 파일의 실제 문구는 일부 다릅니다. 예를 들어 `renderDecision`의 idle 문구는 `앱을 골라 접속을 요청하세요`가 아니라 위 표의 `업무 앱을 선택한 뒤 접근을 요청하세요.`이고, 빈 기록 문구에는 마침표가 있습니다. 또한 현재 파일에는 `renderVulnerabilities`가 없습니다. 이 설명서는 제공된 예시를 실제 코드 출력인 것처럼 바꾸지 않고, 현재 파일에서 확인되는 문구와 부재를 그대로 기록합니다.
+**대조 시 확인된 차이:** 요청에 제시된 예시 문구와 현재 파일의 실제 문구는 일부 다릅니다. 예를 들어 `renderDecision`의 idle 문구는 `앱을 골라 접속을 요청하세요`가 아니라 위 표의 `업무 앱을 선택한 뒤 접근을 요청하세요.`이고, 빈 기록 문구에는 마침표가 있습니다. 또한 현재 파일에는 `renderVulnerabilities`가 있습니다. 이 설명서는 제공된 예시를 실제 코드 출력인 것처럼 바꾸지 않고, 현재 파일에서 확인되는 문구를 기록합니다.
 
 ALEPH가 제공하는 도구의 오류 중 위에 원인·조치가 적히지 않은 것은 원인을 추측하지 않습니다. **화면 문구에서 키·토큰·비밀번호·개인정보를 가린 뒤, 그 문구와 시각, 반 이름을 과제 운영 SKT 담당자에게 보내 주세요. 키·토큰·비밀번호 값은 대화창에 붙여 넣지 마세요.**
 
