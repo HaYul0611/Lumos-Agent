@@ -3160,8 +3160,8 @@ dl.kv dd {
 .student-events-filters {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important;
-  padding: 16px 20px !important;
+  gap: 14px !important;
+  padding: 14px 20px !important;
   background: var(--surface-elevated) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-lg) !important;
@@ -3173,33 +3173,63 @@ dl.kv dd {
 .student-events-filters label {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 10px !important;
   font-size: 0.88rem !important;
   font-weight: 700 !important;
   color: var(--text) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 4px 6px 4px 14px !important;
+  box-shadow: var(--shadow-xs) !important;
+  transition: all 0.2s ease !important;
+}
+
+.student-events-filters label:hover {
+  border-color: var(--border-strong) !important;
 }
 
 .student-events-filters select {
-  padding: 7px 14px !important;
-  border-radius: var(--radius) !important;
-  border: 1px solid var(--border-strong) !important;
-  background: var(--surface) !important;
-  color: var(--text) !important;
-  font-size: 0.88rem !important;
-  font-weight: 600 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-color: var(--surface-elevated) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 12px 12px !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 6px 34px 6px 14px !important;
+  font-family: inherit !important;
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
   cursor: pointer !important;
+  outline: none !important;
   transition: all 0.2s ease !important;
-  box-shadow: var(--shadow-xs) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+:root[data-theme="dark"] .student-events-filters select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23818cf8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") !important;
 }
 
 .student-events-filters select:hover {
+  background-color: var(--accent-soft) !important;
   border-color: var(--accent) !important;
 }
 
 .student-events-filters select:focus {
-  outline: none !important;
   border-color: var(--accent) !important;
   box-shadow: var(--focus) !important;
+}
+
+.student-events-filters select option {
+  background: var(--surface-card) !important;
+  color: var(--text) !important;
+  font-weight: 600 !important;
+  padding: 10px 14px !important;
 }
 
 .student-events-count {
@@ -3208,6 +3238,14 @@ dl.kv dd {
   color: var(--accent) !important;
   margin: 12px 0 8px !important;
   letter-spacing: -0.01em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.student-events-count::before {
+  content: "📊";
+  font-size: 0.9rem;
 }
 
 .student-events-list ul {
