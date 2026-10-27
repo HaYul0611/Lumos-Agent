@@ -42,9 +42,16 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: ".git\*,node_modules\*,dist\*,tools\dist\*,*.iss,*.tmp"
 
 [Icons]
-Name: "{autoprograms}\{#MyAppName}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"
+; 1. 기본 실행 (일반 사용자용 - 검은 창 없는 백그라운드 실행)
+Name: "{autoprograms}\{#MyAppName}\{#MyAppName}"; Filename: "{sys}\wscript.exe"; Parameters: """{app}\Lumos-Agent.vbs"""; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"
+; 2. IT 관리자/엔지니어용 디버그 모드 (실시간 콘솔 로그 확인)
+Name: "{autoprograms}\{#MyAppName}\{#MyAppName} (디버그 모드)"; Filename: "{app}\Lumos-Agent-debug.bat"; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"
+; 3. 서비스 종료
+Name: "{autoprograms}\{#MyAppName}\{#MyAppName} 종료"; Filename: "{app}\Lumos-Agent-stop.bat"; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"
+; 4. 제거 프로그램
 Name: "{autoprograms}\{#MyAppName}\{#MyAppName} 제거"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon; IconFilename: "{app}\app.ico"
+; 5. 바탕화면 바로가기 (일반 사용자용 - 검은 창 없이 브라우저 바로 실행)
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{sys}\wscript.exe"; Parameters: """{app}\Lumos-Agent.vbs"""; WorkingDir: "{app}"; Tasks: desktopicon; IconFilename: "{app}\app.ico"
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: shellexec postinstall nowait skipifsilent
+Filename: "{sys}\wscript.exe"; Parameters: """{app}\Lumos-Agent.vbs"""; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall nowait skipifsilent
