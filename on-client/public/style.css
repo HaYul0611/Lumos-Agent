@@ -1151,55 +1151,74 @@ li.event:hover {
 }
 
 /* ============================================================
-   ALEPH 1~6 테스트 카드 디자인 개선
+   ALEPH 1~6 엔터프라이즈 SOC 모니터링 카드 시스템
+   상용 소프트웨어 수준의 풀-위드(Full-Width) 레이아웃 및 
+   엔지니어링 & 진단 레퍼런스 어코디언 드로어 적용
    ============================================================ */
 .aleph-cards-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   margin-top: 24px;
 }
 .aleph-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   background: var(--surface-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 22px 24px;
+  padding: 26px 30px;
   color: var(--text);
   box-shadow: var(--shadow-card);
   transition: all 0.25s ease;
+  position: relative;
 }
 .aleph-card:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--border-glow);
 }
 .aleph-card-main {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 .aleph-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
 }
 .aleph-card-header h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 800;
   color: var(--text);
   margin: 0;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.aleph-card-header h3::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 .aleph-pill {
   font-size: 0.76rem;
-  color: var(--challenge);
-  border: 1px solid var(--challenge-border);
+  color: var(--accent);
+  border: 1px solid var(--accent-glow);
   border-radius: var(--radius-pill);
-  padding: 3px 12px;
-  background: var(--challenge-soft);
+  padding: 4px 14px;
+  background: var(--accent-soft);
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 .aleph-item-row {
   display: flex;
@@ -1208,52 +1227,122 @@ li.event:hover {
   background: var(--surface-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 12px 18px;
+  padding: 14px 20px;
+  transition: all 0.2s ease;
+}
+.aleph-item-row:hover {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-xs);
+  transform: translateY(-1px);
 }
 .item-name {
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   color: var(--text);
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 .item-status {
-  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.84rem;
   font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  letter-spacing: -0.01em;
 }
-.item-status.ready { color: var(--allow); }
-.item-status.not-ready { color: var(--challenge); }
-.item-status.note-val { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; }
-.item-status.sdp-disconnected { color: var(--deny); font-weight: 800; }
-.aleph-subnote { font-size: 0.82rem; color: var(--text-muted); margin: 4px 0 0; }
+.item-status.ready {
+  background: var(--allow-soft);
+  color: var(--allow);
+  border: 1px solid var(--allow-border);
+}
+.item-status.ready::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+.item-status.not-ready {
+  background: var(--challenge-soft);
+  color: var(--challenge);
+  border: 1px solid var(--challenge-border);
+}
+.item-status.not-ready::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f59e0b;
+}
+.item-status.note-val {
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.item-status.sdp-disconnected {
+  background: var(--deny-soft);
+  color: var(--deny);
+  border: 1px solid var(--deny-border);
+  font-weight: 800;
+}
+.item-status.sdp-disconnected::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+.aleph-subnote {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin: 6px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.aleph-subnote::before {
+  content: "ℹ️";
+  font-size: 0.82rem;
+}
 
 /* 메트릭 프로그레스 바 (내 PC 상태) */
 .aleph-metric-row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 8px 0;
+  gap: 18px;
+  padding: 10px 0;
 }
 .metric-label {
-  min-width: 110px;
+  min-width: 120px;
   white-space: nowrap;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text);
-  font-weight: 600;
+  font-weight: 700;
   flex-shrink: 0;
 }
 .metric-bar-wrap {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 .metric-bar-bg {
   width: 100%;
-  height: 12px;
+  height: 14px;
   background: var(--surface-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 .metric-bar-fill {
   height: 100%;
@@ -1264,13 +1353,116 @@ li.event:hover {
 .fill-cpu { background: linear-gradient(90deg, #10b981, #6366f1); }
 .fill-ram { background: linear-gradient(90deg, #06b6d4, #8b5cf6); }
 
+/* ============================================================
+   엔지니어링 & 진단 레퍼런스 어코디언 (Audit & Diagnostic Drawer)
+   상용 모드에서는 기본 접힘 상태로 작동하여 넓고 정돈된 대시보드를 제공하고,
+   평가/진단 시 클릭하여 100% 동일한 DOM 검증 기준을 확인할 수 있음
+   ============================================================ */
+.aleph-audit-drawer {
+  margin-top: 14px;
+  border-top: 1px dashed var(--border);
+  padding-top: 12px;
+  transition: all 0.25s ease;
+}
+.aleph-audit-drawer[open] {
+  padding-bottom: 6px;
+}
+.aleph-audit-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s ease;
+  list-style: none;
+}
+.aleph-audit-summary::-webkit-details-marker {
+  display: none;
+}
+.aleph-audit-summary:hover {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-xs);
+}
+.audit-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.audit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+.audit-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.audit-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.audit-toggle-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+.aleph-audit-drawer[open] .audit-toggle-text {
+  color: var(--accent);
+}
+.aleph-audit-drawer[open] .aleph-card-side {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+  animation: fadeInDrawer 0.3s ease-out;
+}
+@keyframes fadeInDrawer {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* 사이드 박스 영역 */
-.aleph-card-side { display: flex; flex-direction: column; gap: 10px; }
-.aleph-side-box { border-radius: var(--radius); padding: 14px 16px; }
-.aleph-side-box h4 { font-size: 0.9rem; font-weight: 700; margin: 0 0 4px; }
-.aleph-side-box p { font-size: 0.85rem; margin: 0; line-height: 1.5; }
-.green-box { background: var(--allow-soft); border: 1px solid var(--allow-border); color: var(--allow); }
-.yellow-box { background: var(--challenge-soft); border: 1px solid var(--challenge-border); color: var(--challenge); }
+.aleph-card-side { display: flex; flex-direction: column; gap: 12px; }
+.aleph-side-box {
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  transition: all 0.2s ease;
+}
+.aleph-side-box h4 {
+  font-size: 0.94rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.aleph-side-box p { font-size: 0.88rem; margin: 0; line-height: 1.6; }
+.green-box {
+  background: var(--allow-soft);
+  border: 1px solid var(--allow-border);
+  color: var(--allow);
+}
+.green-box h4::before { content: "✓ "; font-weight: 900; }
+.yellow-box {
+  background: var(--challenge-soft);
+  border: 1px solid var(--challenge-border);
+  color: var(--challenge);
+}
+.yellow-box h4::before { content: "⚠ "; font-weight: 900; }
 
 /* 다시 조회 인터랙션 */
 .aleph-retry-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
@@ -2483,4 +2675,179 @@ li.event:hover {
 .p-mb-10-muted {
   margin: 0 0 10px;
   color: var(--text-muted);
+}
+
+
+/* ============================================================
+   현재 로그인 및 사용자/기기 식별 (Identity Section)
+   ============================================================ */
+dl.identity {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  row-gap: 12px;
+  column-gap: 16px;
+  align-items: center;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+dl.identity dt {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: -0.01em;
+}
+dl.identity dd {
+  margin: 0;
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+}
+
+/* ============================================================
+   AI 및 계정 연결 레이아웃 (Enterprise Connect Console)
+   ============================================================ */
+.connect-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.connect-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.native-login {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.native-login h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+.connect-steps {
+  margin: 8px 0 12px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.connect-steps li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.ai-result, .vulnerabilities-result {
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.diag-output {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* ============================================================
+   카드 5 & 6 엔터프라이즈 워크플로우 & 시연 시퀀스 스타일
+   ============================================================ */
+.aleph-steps-list {
+  margin: 4px 0 12px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.aleph-steps-list li {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+}
+.aleph-notice-line {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--challenge);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.55;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.aleph-notice-line .notice-prefix {
+  font-weight: 800;
+  color: var(--challenge);
+  flex-shrink: 0;
+}
+
+.demo-steps-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.demo-step-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-glow);
+  border-radius: var(--radius-pill);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.2s ease;
+}
+.demo-step-badge:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.demo-info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 18px;
+}
+.demo-info-label {
+  min-width: 60px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.demo-info-val {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
 }

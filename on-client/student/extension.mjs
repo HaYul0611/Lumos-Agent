@@ -449,16 +449,28 @@ export function createStudentView() {
           </div>
           <p class="aleph-subnote">다듬을 순서: 기록 보기 → 내 PC 상태 → 위험 알림</p>
         </div>
-        <div class="aleph-card-side">
-          <div class="aleph-side-box green-box">
-            <h4>스스로 확인할 결과</h4>
-            <p>앱이 기존 폴더에서 실행되고, 핵심 기능 3가지와 각 기능이 지금 되는지 안 되는지가 한 장에 정리되어 있습니다.</p>
+        <details class="aleph-audit-drawer">
+          <summary class="aleph-audit-summary">
+            <div class="audit-summary-left">
+              <span class="audit-badge">
+                <svg class="audit-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                엔지니어링 &amp; 진단 레퍼런스
+              </span>
+              <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
+            </div>
+            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+          </summary>
+          <div class="aleph-card-side">
+            <div class="aleph-side-box green-box">
+              <h4>스스로 확인할 결과</h4>
+              <p>앱이 기존 폴더에서 실행되고, 핵심 기능 3가지와 각 기능이 지금 되는지 안 되는지가 한 장에 정리되어 있습니다.</p>
+            </div>
+            <div class="aleph-side-box yellow-box">
+              <h4>막혔을 때</h4>
+              <p>실행이 안 되면 새 폴더를 만들지 말고, 오류 문구 전체를 그대로 복사해 AI에게 보여 주세요. 22단계 안내의 실행 명령을 다시 따라 해 보는 것이 먼저입니다.</p>
+            </div>
           </div>
-          <div class="aleph-side-box yellow-box">
-            <h4>막혔을 때</h4>
-            <p>실행이 안 되면 새 폴더를 만들지 말고, 오류 문구 전체를 그대로 복사해 AI에게 보여 주세요. 22단계 안내의 실행 명령을 다시 따라 해 보는 것이 먼저입니다.</p>
-          </div>
-        </div>
+        </details>
       `;
 
       // 2. 내 앱 화면 틀 (3대 화면 틀 실시간 전환 시스템 - 관제 대시보드형 기본)
@@ -720,16 +732,28 @@ export function createStudentView() {
           </div>
           <p class="aleph-subnote">PC 조회 결과와 SDP 연결 상태를 따로 보여 줍니다.</p>
         </div>
-        <div class="aleph-card-side">
-          <div class="aleph-side-box green-box">
-            <h4>스스로 확인할 결과</h4>
-            <p>실제 값 또는 '확인 불가'가 보이고, Windows 경고·오류 건수는 침해 판정이 아니라고 적혀 있으며, SDP 연결 여부가 PC 조회 결과와 따로 적혀 있습니다.</p>
+        <details class="aleph-audit-drawer">
+          <summary class="aleph-audit-summary">
+            <div class="audit-summary-left">
+              <span class="audit-badge">
+                <svg class="audit-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                엔지니어링 &amp; 진단 레퍼런스
+              </span>
+              <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
+            </div>
+            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+          </summary>
+          <div class="aleph-card-side">
+            <div class="aleph-side-box green-box">
+              <h4>스스로 확인할 결과</h4>
+              <p>실제 값 또는 '확인 불가'가 보이고, Windows 경고·오류 건수는 침해 판정이 아니라고 적혀 있으며, SDP 연결 여부가 PC 조회 결과와 따로 적혀 있습니다.</p>
+            </div>
+            <div class="aleph-side-box yellow-box">
+              <h4>막혔을 때</h4>
+              <p>방화벽이나 보안 설정을 바꾸자는 제안이 나오면 거절하고, 읽기 전용 방법을 다시 요청하세요. 관리자 보안 설정은 자동으로 바꾸지 않습니다.</p>
+            </div>
           </div>
-          <div class="aleph-side-box yellow-box">
-            <h4>막혔을 때</h4>
-            <p>방화벽이나 보안 설정을 바꾸자는 제안이 나오면 거절하고, 읽기 전용 방법을 다시 요청하세요. 관리자 보안 설정은 자동으로 바꾸지 않습니다.</p>
-          </div>
-        </div>
+        </details>
       `;
 
       // 4. 내 앱 (다시 조회 버튼 + 새로 읽는 중 대기 + 실패 항목 안내 박스) - 3번째 첨부 이미지 1:1 완벽 구현
@@ -750,16 +774,28 @@ export function createStudentView() {
             <p class="error-action">권한을 확인한 뒤 다시 조회를 눌러 주세요.</p>
           </div>
         </div>
-        <div class="aleph-card-side">
-          <div class="aleph-side-box green-box">
-            <h4>스스로 확인할 결과</h4>
-            <p>'다시 조회'를 누르면 조회가 다시 실행되고, 성공한 항목의 잰 시각을 확인할 수 있습니다. 조회 실패를 재현했을 때는 실패한 항목과 다음 행동을 알리는 오류 화면이 보입니다.</p>
+        <details class="aleph-audit-drawer">
+          <summary class="aleph-audit-summary">
+            <div class="audit-summary-left">
+              <span class="audit-badge">
+                <svg class="audit-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                엔지니어링 &amp; 진단 레퍼런스
+              </span>
+              <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
+            </div>
+            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+          </summary>
+          <div class="aleph-card-side">
+            <div class="aleph-side-box green-box">
+              <h4>스스로 확인할 결과</h4>
+              <p>'다시 조회'를 누르면 조회가 다시 실행되고, 성공한 항목의 잰 시각을 확인할 수 있습니다. 조회 실패를 재현했을 때는 실패한 항목과 다음 행동을 알리는 오류 화면이 보입니다.</p>
+            </div>
+            <div class="aleph-side-box yellow-box">
+              <h4>막혔을 때</h4>
+              <p>디자인을 고치다 기능이 멈추면, 마지막으로 잘 되던 상태와 지금 바뀐 파일을 AI에게 비교해 달라고 하세요.</p>
+            </div>
           </div>
-          <div class="aleph-side-box yellow-box">
-            <h4>막혔을 때</h4>
-            <p>디자인을 고치다 기능이 멈추면, 마지막으로 잘 되던 상태와 지금 바뀐 파일을 AI에게 비교해 달라고 하세요.</p>
-          </div>
-        </div>
+        </details>
       `;
 
       // 5. 실행 안내 한 장 카드 (새 환경 실행 안내 및 막힌 곳 조치 내역)
@@ -780,16 +816,28 @@ export function createStudentView() {
             <span class="notice-prefix">막힌 곳:</span> 둘째 줄에서 Node 버전이 달라 멈춤 → 필요한 버전을 안내에 적음
           </div>
         </div>
-        <div class="aleph-card-side">
-          <div class="aleph-side-box green-box">
-            <h4>스스로 확인할 결과</h4>
-            <p>다른 사람이 내 도움 없이 안내만 보고 앱을 실행했고, 막혔던 곳이 안내나 코드에 반영되어 있습니다.</p>
+        <details class="aleph-audit-drawer">
+          <summary class="aleph-audit-summary">
+            <div class="audit-summary-left">
+              <span class="audit-badge">
+                <svg class="audit-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                엔지니어링 &amp; 진단 레퍼런스
+              </span>
+              <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
+            </div>
+            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+          </summary>
+          <div class="aleph-card-side">
+            <div class="aleph-side-box green-box">
+              <h4>스스로 확인할 결과</h4>
+              <p>다른 사람이 내 도움 없이 안내만 보고 앱을 실행했고, 막혔던 곳이 안내나 코드에 반영되어 있습니다.</p>
+            </div>
+            <div class="aleph-side-box yellow-box">
+              <h4>막혔을 때</h4>
+              <p>도와줄 사람이 없으면, 내 PC의 다른 사용자 계정이나 다른 폴더에서 안내만 보고 직접 따라 해 보세요. 기존 폴더는 그대로 둡니다.</p>
+            </div>
           </div>
-          <div class="aleph-side-box yellow-box">
-            <h4>막혔을 때</h4>
-            <p>도와줄 사람이 없으면, 내 PC의 다른 사용자 계정이나 다른 폴더에서 안내만 보고 직접 따라 해 보세요. 기존 폴더는 그대로 둡니다.</p>
-          </div>
-        </div>
+        </details>
       `;
 
       // 6. 시연 순서 카드 (완성본 핵심 3기능 시연 순서, 한계, 근거)
@@ -815,16 +863,28 @@ export function createStudentView() {
             <span class="demo-info-val">화면 캡처 · 실행 기록 · 패키지 경로</span>
           </div>
         </div>
-        <div class="aleph-card-side">
-          <div class="aleph-side-box green-box">
-            <h4>스스로 확인할 결과</h4>
-            <p>시연 순서대로 처음부터 끝까지 실행되고, 한계와 근거가 실제 화면과 맞습니다.</p>
+        <details class="aleph-audit-drawer">
+          <summary class="aleph-audit-summary">
+            <div class="audit-summary-left">
+              <span class="audit-badge">
+                <svg class="audit-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                엔지니어링 &amp; 진단 레퍼런스
+              </span>
+              <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
+            </div>
+            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+          </summary>
+          <div class="aleph-card-side">
+            <div class="aleph-side-box green-box">
+              <h4>스스로 확인할 결과</h4>
+              <p>시연 순서대로 처음부터 끝까지 실행되고, 한계와 근거가 실제 화면과 맞습니다.</p>
+            </div>
+            <div class="aleph-side-box yellow-box">
+              <h4>막혔을 때</h4>
+              <p>시연 중 막히는 기능은 숨기지 말고 한계에 적으세요. 되는 것만 정확히 보여 주는 편이 낫습니다.</p>
+            </div>
           </div>
-          <div class="aleph-side-box yellow-box">
-            <h4>막혔을 때</h4>
-            <p>시연 중 막히는 기능은 숨기지 말고 한계에 적으세요. 되는 것만 정확히 보여 주는 편이 낫습니다.</p>
-          </div>
-        </div>
+        </details>
       `;
 
       // 7. 내 앱을 어떻게 설치하게 할까요 (과정 포장 묶음 & Inno Setup 2종 가이드) - 첨부 이미지 1:1 완벽 구현
