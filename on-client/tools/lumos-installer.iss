@@ -29,6 +29,8 @@ SolidCompression=yes
 WizardStyle=modern
 SetupIconFile=..\app.ico
 UninstallDisplayIcon={app}\app.ico
+CloseApplications=yes
+RestartApplications=no
 
 [Languages]
 Name: "korean"; MessagesFile: "compiler:Languages\Korean.isl"
@@ -36,6 +38,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "startupicon"; Description: "Windows 부팅 시 Lumos Agent 백그라운드 자동 실행 (추천)"; GroupDescription: "시스템 시작 설정:"
 
 [Files]
 ; 앱 실행 소스 파일 복사 (버전 관리/임시 폴더 제외)
@@ -52,6 +55,8 @@ Name: "{autoprograms}\{#MyAppName}\{#MyAppName} 종료"; Filename: "{app}\Lumos-
 Name: "{autoprograms}\{#MyAppName}\{#MyAppName} 제거"; Filename: "{uninstallexe}"
 ; 5. 바탕화면 바로가기 (일반 사용자용 - 검은 창 없이 브라우저 바로 실행)
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{sys}\wscript.exe"; Parameters: """{app}\Lumos-Agent.vbs"""; WorkingDir: "{app}"; Tasks: desktopicon; IconFilename: "{app}\app.ico"
+; 6. 윈도우 시작 시 자동 실행 바로가기 (부팅 시 무소음 백그라운드 상주)
+Name: "{userstartup}\{#MyAppName}"; Filename: "{sys}\wscript.exe"; Parameters: """{app}\Lumos-Agent.vbs"""; WorkingDir: "{app}"; Tasks: startupicon; IconFilename: "{app}\app.ico"
 
 [Run]
 Filename: "{sys}\wscript.exe"; Parameters: """{app}\Lumos-Agent.vbs"""; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall nowait skipifsilent
