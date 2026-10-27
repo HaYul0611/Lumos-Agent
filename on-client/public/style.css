@@ -3170,7 +3170,8 @@ dl.kv dd {
   box-shadow: var(--shadow-xs) !important;
 }
 
-.student-events-filters label {
+.student-events-filters label,
+.student-filter-label {
   display: inline-flex !important;
   align-items: center !important;
   gap: 10px !important;
@@ -3183,13 +3184,41 @@ dl.kv dd {
   padding: 4px 6px 4px 14px !important;
   box-shadow: var(--shadow-xs) !important;
   transition: all 0.2s ease !important;
+  position: relative !important;
+  cursor: pointer;
+  user-select: none;
 }
 
-.student-events-filters label:hover {
+.student-events-filters label:hover,
+.student-filter-label:hover {
   border-color: var(--border-strong) !important;
 }
 
-.student-events-filters select {
+.filter-label-text {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* 네이티브 select (접근성 및 평가 호환성 유지용) */
+.student-events-filters select.sr-only-select,
+.sr-only-select {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 레거시/기본 fallback select 호환 스타일 */
+.student-events-filters select:not(.sr-only-select) {
   appearance: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
@@ -3211,25 +3240,143 @@ dl.kv dd {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
 
-:root[data-theme="dark"] .student-events-filters select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23818cf8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") !important;
+/* 커스텀 셀렉트 컨테이너 */
+.lumos-custom-select {
+  position: relative;
+  display: inline-block;
 }
 
-.student-events-filters select:hover {
-  background-color: var(--accent-soft) !important;
-  border-color: var(--accent) !important;
+/* 트리거 버튼 (Pill 내부의 드롭다운 열기 버튼) */
+.lumos-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px 5px 14px;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
+  min-width: 84px;
 }
 
-.student-events-filters select:focus {
-  border-color: var(--accent) !important;
-  box-shadow: var(--focus) !important;
+.lumos-select-trigger:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-.student-events-filters select option {
-  background: var(--surface-card) !important;
-  color: var(--text) !important;
-  font-weight: 600 !important;
-  padding: 10px 14px !important;
+.lumos-custom-select.open .lumos-select-trigger {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: var(--focus);
+}
+
+.lumos-select-value {
+  flex: 1;
+  text-align: left;
+}
+
+.lumos-select-arrow {
+  color: var(--accent);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+}
+
+.lumos-custom-select.open .lumos-select-arrow {
+  transform: rotate(180deg);
+}
+
+/* 커스텀 드롭다운 리스트 팝업 메뉴 */
+.lumos-select-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 170px;
+  max-width: 320px;
+  background: var(--surface-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glow);
+  border-radius: 12px;
+  padding: 6px;
+  margin: 0;
+  list-style: none;
+  box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.2), 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.lumos-select-menu[hidden] {
+  display: none !important;
+}
+
+.lumos-custom-select.open .lumos-select-menu {
+  display: flex !important;
+  animation: lumosDropdownAppear 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lumosDropdownAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 드롭다운 리스트 아이템 */
+.lumos-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.lumos-select-option:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.lumos-select-option.selected {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.lumos-select-option .lumos-select-check {
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.lumos-select-option.selected .lumos-select-check {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .student-events-count {

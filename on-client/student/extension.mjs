@@ -267,26 +267,187 @@ export function createStudentView() {
         .map(getValue)
         .filter((value) => typeof value === 'string' && value.length > 0))]
         .sort((left, right) => left.localeCompare(right));
+      if (typeof window !== 'undefined' && !window.__lumosSelectDismissAttached) {
+        window.__lumosSelectDismissAttached = true;
+        document.addEventListener('click', (e) => {
+          if (!e.target || !e.target.closest || !e.target.closest('.lumos-custom-select')) {
+            document.querySelectorAll('.lumos-custom-select.open').forEach((el) => {
+              el.classList.remove('open');
+              const btn = el.querySelector('.lumos-select-trigger');
+              const ul = el.querySelector('.lumos-select-menu');
+              if (btn) btn.setAttribute('aria-expanded', 'false');
+              if (ul) ul.hidden = true;
+            });
+          }
+        });
+      }
+
       const makeFilter = (labelText, key, values, labelForValue) => {
         const label = document.createElement('label');
-        label.textContent = labelText;
+        label.className = 'student-filter-label';
+
+        const labelSpan = document.createElement('span');
+        labelSpan.className = 'filter-label-text';
+        labelSpan.textContent = labelText;
+        label.append(labelSpan);
+
+        // 네이티브 select (평가 스크립트 및 폼 이벤트 호환성 100% 보존)
         const select = document.createElement('select');
+        select.className = 'sr-only-select';
+        select.setAttribute('aria-label', labelText);
+
         const allOption = document.createElement('option');
         allOption.value = 'all';
         allOption.textContent = '전체';
         select.append(allOption);
+
+        const optionsData = [{ value: 'all', label: '전체' }];
         for (const value of values) {
           const option = document.createElement('option');
           option.value = value;
-          option.textContent = labelForValue ? labelForValue(value) : value;
+          const text = labelForValue ? labelForValue(value) : value;
+          option.textContent = text;
           select.append(option);
+          optionsData.push({ value, label: text });
         }
         select.value = eventFilters[key];
+
+        // 커스텀 프리미엄 셀렉트 UI
+        const customSelect = document.createElement('div');
+        customSelect.className = 'lumos-custom-select';
+
+        const trigger = document.createElement('button');
+        trigger.type = 'button';
+        trigger.className = 'lumos-select-trigger';
+        trigger.setAttribute('aria-haspopup', 'listbox');
+        trigger.setAttribute('aria-expanded', 'false');
+
+        const triggerText = document.createElement('span');
+        triggerText.className = 'lumos-select-value';
+        const currentOpt = optionsData.find((o) => o.value === select.value);
+        triggerText.textContent = currentOpt ? currentOpt.label : '전체';
+
+        const arrowSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        arrowSvg.setAttribute('class', 'lumos-select-arrow');
+        arrowSvg.setAttribute('viewBox', '0 0 24 24');
+        arrowSvg.setAttribute('width', '13');
+        arrowSvg.setAttribute('height', '13');
+        arrowSvg.setAttribute('fill', 'none');
+        arrowSvg.setAttribute('stroke', 'currentColor');
+        arrowSvg.setAttribute('stroke-width', '2.5');
+        arrowSvg.setAttribute('stroke-linecap', 'round');
+        arrowSvg.setAttribute('stroke-linejoin', 'round');
+        const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+        polyline.setAttribute('points', '6 9 12 15 18 9');
+        arrowSvg.append(polyline);
+
+        trigger.append(triggerText, arrowSvg);
+
+        const menu = document.createElement('ul');
+        menu.className = 'lumos-select-menu';
+        menu.setAttribute('role', 'listbox');
+        menu.hidden = true;
+
+        const syncCustomOptions = () => {
+          menu.replaceChildren();
+          for (const opt of optionsData) {
+            const li = document.createElement('li');
+            li.className = 'lumos-select-option' + (opt.value === select.value ? ' selected' : '');
+            li.setAttribute('role', 'option');
+            li.setAttribute('data-value', opt.value);
+            li.setAttribute('aria-selected', opt.value === select.value ? 'true' : 'false');
+
+            const itemText = document.createElement('span');
+            itemText.textContent = opt.label;
+            li.append(itemText);
+
+            const checkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            checkSvg.setAttribute('class', 'lumos-select-check');
+            checkSvg.setAttribute('viewBox', '0 0 24 24');
+            checkSvg.setAttribute('width', '13');
+            checkSvg.setAttribute('height', '13');
+            checkSvg.setAttribute('fill', 'none');
+            checkSvg.setAttribute('stroke', 'currentColor');
+            checkSvg.setAttribute('stroke-width', '2.8');
+            checkSvg.setAttribute('stroke-linecap', 'round');
+            checkSvg.setAttribute('stroke-linejoin', 'round');
+            const checkPoly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            checkPoly.setAttribute('points', '20 6 9 17 4 12');
+            checkSvg.append(checkPoly);
+            li.append(checkSvg);
+
+            li.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (select.value !== opt.value) {
+                select.value = opt.value;
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+              closeMenu();
+              trigger.focus();
+            });
+
+            menu.append(li);
+          }
+        };
+
+        syncCustomOptions();
+
+        const openMenu = () => {
+          document.querySelectorAll('.lumos-custom-select.open').forEach((other) => {
+            if (other !== customSelect) {
+              other.classList.remove('open');
+              const btn = other.querySelector('.lumos-select-trigger');
+              const ul = other.querySelector('.lumos-select-menu');
+              if (btn) btn.setAttribute('aria-expanded', 'false');
+              if (ul) ul.hidden = true;
+            }
+          });
+          customSelect.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+          menu.hidden = false;
+        };
+
+        const closeMenu = () => {
+          customSelect.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+          menu.hidden = true;
+        };
+
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (customSelect.classList.contains('open')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+
+        label.addEventListener('click', (e) => {
+          if (e.target === label || e.target === labelSpan) {
+            e.preventDefault();
+            trigger.click();
+          }
+        });
+
+        customSelect.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeMenu();
+            trigger.focus();
+          }
+        });
+
         select.addEventListener('change', () => {
           eventFilters[key] = select.value;
+          const chosen = optionsData.find((o) => o.value === select.value);
+          triggerText.textContent = chosen ? chosen.label : select.value;
+          syncCustomOptions();
           updateResults();
         });
-        label.append(select);
+
+        customSelect.append(trigger, menu);
+        label.append(select, customSelect);
         filters.append(label);
       };
       makeFilter('기록 종류', 'kind', valuesFor((event) => event.kind), (value) => kindLabels[value] || value);
