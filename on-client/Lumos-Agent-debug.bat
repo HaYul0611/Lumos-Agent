@@ -2,6 +2,9 @@
 title Lumos Agent (Debug Mode)
 cd /d "%~dp0"
 
+set EXTRA_ARGS=%*
+if "%EXTRA_ARGS%"=="" set EXTRA_ARGS=--demo
+
 echo ===================================================
 echo   Lumos Agent - Debug Mode (IT Admin / Developer)
 echo ===================================================
@@ -27,5 +30,5 @@ start "" "http://127.0.0.1:5189/"
 echo.
 echo Starting server with live logs (Press Ctrl+C to stop)...
 echo ---------------------------------------------------
-node src\server.mjs
+node src\server.mjs %EXTRA_ARGS%
 pause

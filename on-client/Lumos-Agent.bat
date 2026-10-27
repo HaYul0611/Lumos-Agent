@@ -2,6 +2,9 @@
 setlocal
 cd /d "%~dp0"
 
+set EXTRA_ARGS=%*
+if "%EXTRA_ARGS%"=="" set EXTRA_ARGS=--demo
+
 if /i "%~1"=="silent" goto :run_silent
 
 :run_foreground
@@ -12,7 +15,7 @@ echo ===================================================
 echo [1/2] Checking Lumos Agent server status...
 netstat -ano | findstr ":5189 " | findstr "LISTENING" >nul 2>&1
 if %ERRORLEVEL% equ 0 (
-    echo Lumos Agent server is already running on port 5189.
+    echo Lumos Agent server is active on port 5189.
     echo [2/2] Opening default browser...
     explorer "http://127.0.0.1:5189/"
     echo.
@@ -21,8 +24,8 @@ if %ERRORLEVEL% equ 0 (
     exit /b 0
 )
 
-echo [2/2] Starting server and opening default browser...
-start /b "" node src\server.mjs
+echo [2/2] Starting Lumos Agent server and opening default browser...
+start /b "" node src\server.mjs %EXTRA_ARGS%
 timeout /t 2 >nul 2>&1
 explorer "http://127.0.0.1:5189/"
 exit /b 0
@@ -33,7 +36,7 @@ if %ERRORLEVEL% equ 0 (
     explorer "http://127.0.0.1:5189/"
     exit /b 0
 )
-start /b "" node src\server.mjs
+start /b "" node src\server.mjs %EXTRA_ARGS%
 timeout /t 2 >nul 2>&1
 explorer "http://127.0.0.1:5189/"
 exit /b 0
