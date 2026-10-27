@@ -465,15 +465,15 @@ export function createStudentView() {
       const card2 = document.createElement('div');
       card2.className = 'aleph-card aleph-layout-switcher-card';
       card2.innerHTML = `
-        <div class="aleph-card-main" style="grid-column: 1 / -1;">
+        <div class="aleph-card-main col-span-full">
           <div class="aleph-card-header">
             <div>
-              <h3 style="font-size: 1.25rem;">내 앱 화면 틀 · 상태 모니터링</h3>
-              <p class="layout-switcher-desc" style="margin: 4px 0 0; font-size: 0.88rem; color: var(--text-muted);">
+              <h3 class="text-125">내 앱 화면 틀 · 상태 모니터링</h3>
+              <p class="layout-switcher-desc layout-switcher-subdesc">
                 원하는 화면 틀을 선택하면 <strong>실시간 시스템 상태가 즉시 해당 뷰로 전환</strong>됩니다. 기본값은 <strong>관제 대시보드형</strong>입니다.
               </p>
             </div>
-            <span class="aleph-pill" style="align-self: flex-start;">3대 화면 틀 실시간 전환</span>
+            <span class="aleph-pill self-flex-start">3대 화면 틀 실시간 전환</span>
           </div>
 
           <!-- 3대 화면 틀 선택 버튼 (Segmented Control) -->
@@ -525,18 +525,18 @@ export function createStudentView() {
                 <span class="trend-time" id="trend-time-indicator">14:02 다시 조회 성공 · 실시간</span>
               </div>
               <div class="trend-chart-bars">
-                <div class="trend-bar" style="height: 38%;"></div>
-                <div class="trend-bar" style="height: 45%;"></div>
-                <div class="trend-bar" style="height: 32%;"></div>
-                <div class="trend-bar" style="height: 52%;"></div>
-                <div class="trend-bar" style="height: 48%;"></div>
-                <div class="trend-bar" style="height: 60%;"></div>
-                <div class="trend-bar" style="height: 42%;"></div>
-                <div class="trend-bar" style="height: 35%;"></div>
-                <div class="trend-bar" style="height: 58%;"></div>
-                <div class="trend-bar" style="height: 50%;"></div>
-                <div class="trend-bar" style="height: 44%;"></div>
-                <div class="trend-bar current" style="height: 32%;"></div>
+                <div class="trend-bar trend-h-38"></div>
+                <div class="trend-bar trend-h-45"></div>
+                <div class="trend-bar trend-h-32"></div>
+                <div class="trend-bar trend-h-52"></div>
+                <div class="trend-bar trend-h-48"></div>
+                <div class="trend-bar trend-h-60"></div>
+                <div class="trend-bar trend-h-42"></div>
+                <div class="trend-bar trend-h-35"></div>
+                <div class="trend-bar trend-h-58"></div>
+                <div class="trend-bar trend-h-50"></div>
+                <div class="trend-bar trend-h-44"></div>
+                <div class="trend-bar current trend-h-32"></div>
               </div>
             </div>
 
@@ -546,7 +546,7 @@ export function createStudentView() {
                 <span class="metric-label">CPU 사용률</span>
                 <div class="metric-bar-wrap">
                   <div class="metric-bar-bg">
-                    <div id="dynamic-cpu-bar" class="metric-bar-fill fill-cpu" style="width: 32%;"></div>
+                    <div id="dynamic-cpu-bar" class="metric-bar-fill fill-cpu metric-w-32"></div>
                   </div>
                   <div class="metric-note">
                     <span id="dynamic-cpu-text">실측치 32% (16 Cores)</span>
@@ -558,7 +558,7 @@ export function createStudentView() {
                 <span class="metric-label">메모리 사용량</span>
                 <div class="metric-bar-wrap">
                   <div class="metric-bar-bg">
-                    <div id="dynamic-ram-bar" class="metric-bar-fill fill-ram" style="width: 58%;"></div>
+                    <div id="dynamic-ram-bar" class="metric-bar-fill fill-ram metric-w-58"></div>
                   </div>
                   <div class="metric-note">
                     <span id="dynamic-ram-text">실측치 9.22GB / 15.90GB (58%)</span>
@@ -577,7 +577,7 @@ export function createStudentView() {
           </div>
 
           <!-- 2) 한 장 요약형 패널 -->
-          <div class="layout-panel panel-summary" data-panel="summary" style="display: none;">
+          <div class="layout-panel panel-summary panel-hidden" data-panel="summary">
             <p class="summary-lead-text">
               항목마다 '정상·주의·확인 불가'를 한 줄씩 큰 글씨로 보여 줍니다. 그래프 없이 지금 상태만 빠르게 확인합니다.
             </p>
@@ -614,7 +614,7 @@ export function createStudentView() {
           </div>
 
           <!-- 3) 기록 타임라인형 패널 -->
-          <div class="layout-panel panel-timeline" data-panel="timeline" style="display: none;">
+          <div class="layout-panel panel-timeline panel-hidden" data-panel="timeline">
             <div class="timeline-ctrl-bar">
               <span class="timeline-hint">조회할 때마다 시각과 결과를 한 줄씩 위로 쌓고, 필터별로 걸러 봅니다.</span>
               <div class="timeline-filters">
@@ -648,7 +648,7 @@ export function createStudentView() {
           </div>
 
           <!-- 세 가지 화면 틀 공식 안내 자료 (첨부 2번 이미지 1:1 완벽 구현) -->
-          <details class="aleph-foldable-details" open style="margin-top: 24px;">
+          <details class="aleph-foldable-details mt-24" open>
             <summary class="aleph-foldable-summary">
               <span><strong>세 가지 화면 틀, 실제로는 어떻게 생겼나요?</strong> <span class="muted-tag">실제 공식 모범 사례와 비교하기</span></span>
               <span class="fold-indicator">접기</span>
@@ -685,7 +685,7 @@ export function createStudentView() {
                   </ul>
                 </div>
               </div>
-              <p class="muted" style="margin-top: 16px; font-size: 0.84rem; line-height: 1.55;">
+              <p class="muted text-muted-16">
                 참고 화면의 그림이나 코드를 그대로 가져오지 말고, 무엇을 어디에 두는지만 참고해 내 앱에 맞게 새로 만드세요. 공식 자료 주소와 내용은 2026년 10월 25일에 확인했습니다.
               </p>
             </div>
@@ -945,7 +945,7 @@ export function createStudentView() {
           <div class="deploy-card">
             <div class="deploy-card-header">
               <span class="deploy-free-tag tag-paid">유료 · 필수 아님</span>
-              <h4 class="deploy-card-name" style="margin: 0; font-size: 1.12rem;">코드 서명으로 게시자 밝히기</h4>
+              <h4 class="deploy-card-name deploy-card-heading">코드 서명으로 게시자 밝히기</h4>
             </div>
             <p class="deploy-card-summary">
               신뢰되는 공인 코드 서명 인증서로 설치 파일에 서명하면 '알 수 없는 게시자' 대신 인증서로 확인된 게시자 이름이 보입니다. 자체 서명은 서명 원리를 내 PC에서 익히는 학습용이며, 공인 서명은 필요할 때만 고릅니다.
@@ -997,7 +997,7 @@ export function createStudentView() {
           <div class="deploy-card">
             <div class="deploy-card-header">
               <span class="deploy-free-tag tag-audit">무료 · 심사 기간 있음</span>
-              <h4 class="deploy-card-name" style="margin: 0; font-size: 1.12rem;">Microsoft Store나 winget에 올리기</h4>
+              <h4 class="deploy-card-name deploy-card-heading">Microsoft Store나 winget에 올리기</h4>
             </div>
             <p class="deploy-card-summary">
               Microsoft Store에 MSIX로 올리면 Microsoft가 다시 서명하고, Store에서 받은 앱에는 SmartScreen 다운로드 경고가 뜨지 않습니다. 2025년 9월부터 개인 개발자 등록이 무료입니다. 명령어 설치를 원하면 winget 등록도 있습니다.
@@ -1026,7 +1026,7 @@ export function createStudentView() {
                   <li>Microsoft Store 개인 개발자로 무료 등록하고 앱 설명, 개인정보 처리 안내, 화면 사진을 준비합니다.</li>
                   <li>심사에서 고칠 점이 나오면 반영해 다시 올립니다. winget을 고르면 공개 저장소에 설명 파일(YAML)을 제출합니다.</li>
                 </ol>
-                <div class="deploy-warning-banner" style="background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.35); color: var(--accent);">
+                <div class="deploy-warning-banner deploy-banner-accent">
                   <span class="deploy-warning-icon">ℹ</span>
                   <span class="deploy-warning-text">
                     이 앱은 방화벽·네트워크 상태를 읽기만 합니다. 공개 배포 전에 읽는 정보가 무엇인지 설명에 정확히 적고, 관리자 권한을 요구하지 않게 둡니다.
@@ -1060,19 +1060,19 @@ export function createStudentView() {
             <span class="fold-indicator">접기</span>
           </summary>
           <div class="aleph-foldable-content">
-            <h4 style="font-size: 1.05rem; margin: 0 0 8px; color: var(--text);">완성본에 반영되는 작업 위치</h4>
-            <p style="margin: 0 0 8px; line-height: 1.6;">추가 화면과 기능은 기존 <code>student/extension.mjs</code>에서 이어서 만들고, 앱 이름·아이콘·색과 허용된 배치는 <code>student/appearance.json</code>으로 꾸밉니다. 학생 파일은 새 제공 파일로 덮어쓰지 않습니다.</p>
-            <p class="muted" style="margin: 0; line-height: 1.55;">설치형 앱은 검증된 제공 화면을 사용합니다. <code>public/app.js</code>나 <code>public/style.css</code>만 고친 결과가 설치형 앱에도 그대로 보인다고 가정하지 말고, 승인된 실행 환경에서 실제 완성본을 확인하세요. 제공된 '내 PC 상태'와 직접 개선한 부분도 구분해 적습니다.</p>
+            <h4 class="section-subheading-1">완성본에 반영되는 작업 위치</h4>
+            <p class="section-subdesc-1">추가 화면과 기능은 기존 <code>student/extension.mjs</code>에서 이어서 만들고, 앱 이름·아이콘·색과 허용된 배치는 <code>student/appearance.json</code>으로 꾸밉니다. 학생 파일은 새 제공 파일로 덮어쓰지 않습니다.</p>
+            <p class="muted section-subdesc-2">설치형 앱은 검증된 제공 화면을 사용합니다. <code>public/app.js</code>나 <code>public/style.css</code>만 고친 결과가 설치형 앱에도 그대로 보인다고 가정하지 말고, 승인된 실행 환경에서 실제 완성본을 확인하세요. 제공된 '내 PC 상태'와 직접 개선한 부분도 구분해 적습니다.</p>
           </div>
         </details>
 
-        <details class="aleph-foldable-details" open style="margin-top: 24px;">
+        <details class="aleph-foldable-details mt-24" open>
           <summary class="aleph-foldable-summary">
             <span><strong>결과물을 보는 네 가지 관점</strong> <span class="muted-tag">기능 · 근거 · 사용 편의 · 재현</span></span>
             <span class="fold-indicator">접기</span>
           </summary>
           <div class="aleph-foldable-content">
-            <h4 style="font-size: 1.05rem; margin: 0 0 14px; color: var(--text);">방어진 결과물은 네 가지 관점으로 봅니다</h4>
+            <h4 class="section-subheading-2">방어진 결과물은 네 가지 관점으로 봅니다</h4>
             <div class="four-perspectives-grid">
               <div class="perspective-box">
                 <div class="persp-tag tag-green">기능 작동</div>
@@ -1091,7 +1091,7 @@ export function createStudentView() {
                 <p>다른 사람이 실행 안내와 패키지만으로 같은 결과를 다시 만들 수 있는지 봅니다.</p>
               </div>
             </div>
-            <p class="muted" style="margin-top: 14px; font-size: 0.83rem; line-height: 1.5;">관점별 비중과 시상 방식은 아직 정해지지 않았습니다. 정해지면 이 자리에서 따로 알려 드립니다. 리추얼 참여, 감사 표현, 강의에 대한 호감은 평가와 관계가 없습니다.</p>
+            <p class="muted section-muted-14">관점별 비중과 시상 방식은 아직 정해지지 않았습니다. 정해지면 이 자리에서 따로 알려 드립니다. 리추얼 참여, 감사 표현, 강의에 대한 호감은 평가와 관계가 없습니다.</p>
           </div>
         </details>
       `;
@@ -1174,14 +1174,14 @@ export function createStudentView() {
                   </div>
                 </div>
 
-                <details class="deploy-details" style="margin-top: 14px;">
+                <details class="deploy-details mt-14">
                   <summary class="deploy-summary">▼ 참고 코드와 사용 안내 보기</summary>
-                  <div class="deploy-content" style="font-size: 0.85rem; line-height: 1.55;">
-                    <p style="margin: 0 0 6px;">GitHub, Vercel, Railway, Supabase의 상태와 확인 가능한 사용량을 읽기만 하는 참고 예시입니다. 전체 보안 진단이나 월 청구 총액을 알려 주지 않습니다.</p>
-                    <p style="margin: 0 0 6px;">설치 프로그램이 아닌 Node.js 참고 코드와 안내서입니다. 현재 설치형 앱에 자동으로 연결되지 않습니다.</p>
-                    <p style="margin: 0 0 6px;">기존 프로젝트 파일에 덮어쓰지 말고 별도 폴더에서 먼저 읽어 보세요. 필요한 부분만 내 앱에 맞게 옮겨 씁니다.</p>
-                    <p style="margin: 0 0 10px; color: var(--text-muted);">가입·토큰 발급·이 자료의 제출은 필수가 아닙니다.</p>
-                    <div class="deploy-warning-banner" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.35); color: #10b981;">
+                  <div class="deploy-content deploy-content-desc">
+                    <p class="p-mb-6">GitHub, Vercel, Railway, Supabase의 상태와 확인 가능한 사용량을 읽기만 하는 참고 예시입니다. 전체 보안 진단이나 월 청구 총액을 알려 주지 않습니다.</p>
+                    <p class="p-mb-6">설치 프로그램이 아닌 Node.js 참고 코드와 안내서입니다. 현재 설치형 앱에 자동으로 연결되지 않습니다.</p>
+                    <p class="p-mb-6">기존 프로젝트 파일에 덮어쓰지 말고 별도 폴더에서 먼저 읽어 보세요. 필요한 부분만 내 앱에 맞게 옮겨 씁니다.</p>
+                    <p class="p-mb-10-muted">가입·토큰 발급·이 자료의 제출은 필수가 아닙니다.</p>
+                    <div class="deploy-warning-banner deploy-banner-emerald">
                       <span>📦 <strong>pc-saas-reader-20261024.zip</strong> 포함 (START_HERE.md, read-service.mjs, service-reader.mjs 등 8종 참고 문서 및 예제 탑재)</span>
                     </div>
                   </div>
@@ -1241,10 +1241,10 @@ export function createStudentView() {
 
             panels.forEach(p => {
               if (p.getAttribute('data-panel') === target) {
-                p.style.display = 'block';
+                p.classList.remove('panel-hidden');
                 p.classList.add('active');
               } else {
-                p.style.display = 'none';
+                p.classList.add('panel-hidden');
                 p.classList.remove('active');
               }
             });
@@ -1263,13 +1263,13 @@ export function createStudentView() {
             timelineItems.forEach(item => {
               const itemType = item.getAttribute('data-type');
               if (filter === 'all') {
-                item.style.display = 'flex';
+                item.classList.remove('item-hidden'); item.classList.add('item-flex');
               } else if (filter === 'warn' && itemType === 'warn') {
-                item.style.display = 'flex';
+                item.classList.remove('item-hidden'); item.classList.add('item-flex');
               } else if (filter === 'unknown' && itemType === 'unknown') {
-                item.style.display = 'flex';
+                item.classList.remove('item-hidden'); item.classList.add('item-flex');
               } else {
-                item.style.display = 'none';
+                item.classList.remove('item-flex'); item.classList.add('item-hidden');
               }
             });
           });

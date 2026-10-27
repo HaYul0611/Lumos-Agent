@@ -2383,3 +2383,104 @@ li.event:hover {
   margin-right: 6px;
 }
 .frame-guide-links a:hover { text-decoration: underline; }
+
+/* ===================================================
+   CSP-Safe Utility Classes (Replacing Inline Styles)
+=================================================== */
+.row-explain-cancel {
+  margin-top: 10px;
+}
+.col-span-full {
+  grid-column: 1 / -1;
+}
+.text-125 {
+  font-size: 1.25rem;
+}
+.layout-switcher-subdesc {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+.self-flex-start {
+  align-self: flex-start;
+}
+.trend-h-38 { height: 38%; }
+.trend-h-45 { height: 45%; }
+.trend-h-32 { height: 32%; }
+.trend-h-52 { height: 52%; }
+.trend-h-48 { height: 48%; }
+.trend-h-60 { height: 60%; }
+.trend-h-42 { height: 42%; }
+.trend-h-35 { height: 35%; }
+.trend-h-58 { height: 58%; }
+.trend-h-50 { height: 50%; }
+.trend-h-44 { height: 44%; }
+
+.metric-w-32 { width: 32%; }
+.metric-w-58 { width: 58%; }
+
+.panel-hidden {
+  display: none !important;
+}
+.item-hidden {
+  display: none !important;
+}
+.item-flex {
+  display: flex !important;
+}
+
+.mt-14 { margin-top: 14px; }
+.mt-24 { margin-top: 24px; }
+.text-muted-16 {
+  margin-top: 16px;
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+.deploy-card-heading {
+  margin: 0;
+  font-size: 1.12rem;
+}
+.deploy-banner-accent {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.35);
+  color: var(--accent);
+}
+.deploy-banner-emerald {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #10b981;
+}
+.section-subheading-1 {
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+.section-subdesc-1 {
+  margin: 0 0 8px;
+  line-height: 1.6;
+}
+.section-subdesc-2 {
+  margin: 0;
+  line-height: 1.55;
+}
+.section-subheading-2 {
+  font-size: 1.05rem;
+  margin: 0 0 14px;
+  color: var(--text);
+}
+.section-muted-14 {
+  margin-top: 14px;
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+.deploy-content-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+.p-mb-6 {
+  margin: 0 0 6px;
+}
+.p-mb-10-muted {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+}
