@@ -2010,3 +2010,376 @@ li.event:hover {
   line-height: 1.6;
 }
 .design-ref-footer p { margin: 0; }
+
+
+/* ============================================================
+   3대 화면 틀 (관제 대시보드형 / 한 장 요약형 / 기록 타임라인형) UI
+   ============================================================ */
+.aleph-layout-switcher-card {
+  border-left: 4px solid var(--accent) !important;
+  padding: 26px 28px !important;
+}
+
+/* 화면 틀 선택 바 (Segmented Control) */
+.layout-mode-selector {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: var(--radius-lg);
+  margin: 18px 0 22px;
+}
+@media (max-width: 800px) {
+  .layout-mode-selector { grid-template-columns: 1fr; }
+}
+
+.layout-mode-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: inherit;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.layout-mode-btn:hover {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+.layout-mode-btn.active {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.12);
+}
+:root[data-theme="dark"] .layout-mode-btn.active {
+  background: var(--surface-card);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+.mode-icon { font-size: 1.15rem; }
+.mode-rec-tag {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+/* 1) 관제 대시보드형 (Dashboard View) */
+.dashboard-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+@media (max-width: 768px) {
+  .dashboard-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.kpi-mini-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.kpi-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-glow);
+}
+.kpi-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.kpi-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+}
+.kpi-badge {
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+}
+.badge-green {
+  background: var(--allow-soft);
+  color: var(--allow);
+  border: 1px solid var(--allow-border);
+}
+.badge-yellow {
+  background: var(--challenge-soft);
+  color: var(--challenge);
+  border: 1px solid var(--challenge-border);
+}
+
+.dashboard-trend-box {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+.trend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.trend-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.trend-time {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.trend-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 64px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+.trend-bar {
+  flex: 1;
+  background: linear-gradient(180deg, #6366f1 0%, #06b6d4 100%);
+  border-radius: 4px 4px 0 0;
+  opacity: 0.75;
+  transition: height 0.5s ease, opacity 0.2s ease;
+}
+.trend-bar:hover { opacity: 1; }
+.trend-bar.current {
+  background: linear-gradient(180deg, #38bdf8 0%, #4f46e5 100%);
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+/* 2) 한 장 요약형 (Summary View) */
+.summary-lead-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+.summary-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.summary-status-row {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.summary-status-row:hover {
+  transform: translateX(3px);
+  border-color: var(--border-glow);
+}
+.status-pill {
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.pill-ok {
+  background: var(--allow-soft);
+  color: var(--allow);
+  border: 1px solid var(--allow-border);
+}
+.pill-warn {
+  background: var(--challenge-soft);
+  color: var(--challenge);
+  border: 1px solid var(--challenge-border);
+}
+.pill-unknown {
+  background: var(--unknown-soft);
+  color: var(--unknown);
+  border: 1px solid var(--border);
+}
+.summary-row-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.summary-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.summary-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* 3) 기록 타임라인형 (Timeline View) */
+.timeline-ctrl-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.timeline-hint {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+.timeline-filters {
+  display: flex;
+  gap: 6px;
+}
+.timeline-filter-btn {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 5px 14px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.timeline-filter-btn:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+.timeline-filter-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.timeline-item {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: transform 0.2s ease;
+}
+.timeline-item:hover {
+  transform: translateX(2px);
+  border-color: var(--border-glow);
+}
+.timeline-time {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 48px;
+}
+.timeline-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.badge-gray {
+  background: var(--unknown-soft);
+  color: var(--unknown);
+  border: 1px solid var(--border);
+}
+.timeline-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* 세 가지 화면 틀 참고 자료 가이드 카드 (Image 2) */
+.three-frames-guide-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.frame-guide-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.frame-guide-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0;
+}
+.frame-guide-tip {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0;
+}
+.frame-guide-tip code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.frame-guide-links {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.frame-guide-links li {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.frame-guide-links a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  margin-right: 6px;
+}
+.frame-guide-links a:hover { text-decoration: underline; }

@@ -461,57 +461,235 @@ export function createStudentView() {
         </div>
       `;
 
-      // 2. 내 PC 상태 카드
+      // 2. 내 앱 화면 틀 (3대 화면 틀 실시간 전환 시스템 - 관제 대시보드형 기본)
       const card2 = document.createElement('div');
-      card2.className = 'aleph-card';
+      card2.className = 'aleph-card aleph-layout-switcher-card';
       card2.innerHTML = `
-        <div class="aleph-card-main">
+        <div class="aleph-card-main" style="grid-column: 1 / -1;">
           <div class="aleph-card-header">
-            <h3>내 PC 상태</h3>
-            <span class="aleph-pill">예시 화면 · 설명용 값</span>
+            <div>
+              <h3 style="font-size: 1.25rem;">내 앱 화면 틀 · 상태 모니터링</h3>
+              <p class="layout-switcher-desc" style="margin: 4px 0 0; font-size: 0.88rem; color: var(--text-muted);">
+                원하는 화면 틀을 선택하면 <strong>실시간 시스템 상태가 즉시 해당 뷰로 전환</strong>됩니다. 기본값은 <strong>관제 대시보드형</strong>입니다.
+              </p>
+            </div>
+            <span class="aleph-pill" style="align-self: flex-start;">3대 화면 틀 실시간 전환</span>
           </div>
-          <div class="aleph-metric-row">
-            <span class="metric-label">CPU 사용률</span>
-            <div class="metric-bar-wrap">
-              <div class="metric-bar-bg">
-                <div id="dynamic-cpu-bar" class="metric-bar-fill fill-cpu" style="width: 24%;"></div>
+
+          <!-- 3대 화면 틀 선택 버튼 (Segmented Control) -->
+          <div class="layout-mode-selector" role="tablist" aria-label="화면 틀 선택">
+            <button type="button" class="layout-mode-btn active" data-target="dashboard">
+              <span class="mode-icon">📊</span>
+              <span class="mode-title">관제 대시보드형</span>
+              <span class="mode-rec-tag">기본값 · 추천</span>
+            </button>
+            <button type="button" class="layout-mode-btn" data-target="summary">
+              <span class="mode-icon">📋</span>
+              <span class="mode-title">한 장 요약형</span>
+            </button>
+            <button type="button" class="layout-mode-btn" data-target="timeline">
+              <span class="mode-icon">⏱️</span>
+              <span class="mode-title">기록 타임라인형</span>
+            </button>
+          </div>
+
+          <!-- 1) 관제 대시보드형 패널 (기본 활성화) -->
+          <div class="layout-panel panel-dashboard active" data-panel="dashboard">
+            <div class="dashboard-kpi-grid">
+              <div class="kpi-mini-card">
+                <span class="kpi-title">CPU</span>
+                <span class="kpi-value" id="kpi-cpu-val">32%</span>
+                <span class="kpi-badge badge-green">● 정상</span>
               </div>
-              <div class="metric-note">
-                <span id="dynamic-cpu-text">실측치 24% (16 Cores)</span>
-                <span id="dynamic-cpu-time">최근 측정</span>
+              <div class="kpi-mini-card">
+                <span class="kpi-title">메모리</span>
+                <span class="kpi-value" id="kpi-ram-val">58%</span>
+                <span class="kpi-badge badge-green">● 정상</span>
+              </div>
+              <div class="kpi-mini-card">
+                <span class="kpi-title">디스크</span>
+                <span class="kpi-value">확인 불가 (9%)</span>
+                <span class="kpi-badge badge-yellow">▲ 주의</span>
+              </div>
+              <div class="kpi-mini-card">
+                <span class="kpi-title">방화벽</span>
+                <span class="kpi-value">켜짐 (도메인)</span>
+                <span class="kpi-badge badge-green">● 정상</span>
+              </div>
+            </div>
+
+            <!-- 시계열 트렌드 변화 그래프 (Wave / Bar Chart) -->
+            <div class="dashboard-trend-box">
+              <div class="trend-header">
+                <span class="trend-title">시간에 따른 시스템 부하 변화</span>
+                <span class="trend-time" id="trend-time-indicator">14:02 다시 조회 성공 · 실시간</span>
+              </div>
+              <div class="trend-chart-bars">
+                <div class="trend-bar" style="height: 38%;"></div>
+                <div class="trend-bar" style="height: 45%;"></div>
+                <div class="trend-bar" style="height: 32%;"></div>
+                <div class="trend-bar" style="height: 52%;"></div>
+                <div class="trend-bar" style="height: 48%;"></div>
+                <div class="trend-bar" style="height: 60%;"></div>
+                <div class="trend-bar" style="height: 42%;"></div>
+                <div class="trend-bar" style="height: 35%;"></div>
+                <div class="trend-bar" style="height: 58%;"></div>
+                <div class="trend-bar" style="height: 50%;"></div>
+                <div class="trend-bar" style="height: 44%;"></div>
+                <div class="trend-bar current" style="height: 32%;"></div>
+              </div>
+            </div>
+
+            <!-- 상세 프로그레스 바 영역 (실시간 바 연동 유지) -->
+            <div class="dashboard-metrics-detail">
+              <div class="aleph-metric-row">
+                <span class="metric-label">CPU 사용률</span>
+                <div class="metric-bar-wrap">
+                  <div class="metric-bar-bg">
+                    <div id="dynamic-cpu-bar" class="metric-bar-fill fill-cpu" style="width: 32%;"></div>
+                  </div>
+                  <div class="metric-note">
+                    <span id="dynamic-cpu-text">실측치 32% (16 Cores)</span>
+                    <span id="dynamic-cpu-time">최근 측정</span>
+                  </div>
+                </div>
+              </div>
+              <div class="aleph-metric-row">
+                <span class="metric-label">메모리 사용량</span>
+                <div class="metric-bar-wrap">
+                  <div class="metric-bar-bg">
+                    <div id="dynamic-ram-bar" class="metric-bar-fill fill-ram" style="width: 58%;"></div>
+                  </div>
+                  <div class="metric-note">
+                    <span id="dynamic-ram-text">실측치 9.22GB / 15.90GB (58%)</span>
+                    <span>실시간 모니터링 중</span>
+                  </div>
+                </div>
+              </div>
+              <div class="aleph-metric-row">
+                <span class="metric-label">디스크 남은 공간</span>
+                <div class="metric-bar-wrap">
+                  <div class="metric-bar-bg stripe-bg"></div>
+                  <span class="metric-unverified">확인 불가 · 권한 없음 (비관리자 표준 Node os 모듈 범위 외)</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="aleph-metric-row">
-            <span class="metric-label">메모리 사용량</span>
-            <div class="metric-bar-wrap">
-              <div class="metric-bar-bg">
-                <div id="dynamic-ram-bar" class="metric-bar-fill fill-ram" style="width: 63%;"></div>
+
+          <!-- 2) 한 장 요약형 패널 -->
+          <div class="layout-panel panel-summary" data-panel="summary" style="display: none;">
+            <p class="summary-lead-text">
+              항목마다 '정상·주의·확인 불가'를 한 줄씩 큰 글씨로 보여 줍니다. 그래프 없이 지금 상태만 빠르게 확인합니다.
+            </p>
+            <div class="summary-rows-container">
+              <div class="summary-status-row">
+                <span class="status-pill pill-ok">● 정상</span>
+                <div class="summary-row-body">
+                  <span class="summary-name">CPU 사용률</span>
+                  <span class="summary-desc">현재 부하 32% (16 코어 정상 분산 처리 중)</span>
+                </div>
               </div>
-              <div class="metric-note">
-                <span id="dynamic-ram-text">실측치 10.07GB / 15.90GB (63%)</span>
-                <span>실시간 모니터링 중</span>
+              <div class="summary-status-row">
+                <span class="status-pill pill-ok">● 정상</span>
+                <div class="summary-row-body">
+                  <span class="summary-name">메모리 사용량</span>
+                  <span class="summary-desc">58% 점유 (안정적 가용 메모리 6.68GB 확보)</span>
+                </div>
+              </div>
+              <div class="summary-status-row">
+                <span class="status-pill pill-warn">▲ 주의</span>
+                <div class="summary-row-body">
+                  <span class="summary-name">디스크 남은 공간 9%</span>
+                  <span class="summary-desc">디스크 여유 공간이 10% 미만입니다. 임시 파일 정리를 권장합니다.</span>
+                </div>
+              </div>
+              <div class="summary-status-row">
+                <span class="status-pill pill-unknown">? 확인 불가</span>
+                <div class="summary-row-body">
+                  <span class="summary-name">이벤트 기록 · 권한 없음</span>
+                  <span class="summary-desc">비관리자 사용자 권한으로 실행 중이므로 시스템 내부 보안 로그 접근이 제한됩니다.</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="aleph-metric-row">
-            <span class="metric-label">디스크 남은 공간</span>
-            <div class="metric-bar-wrap">
-              <div class="metric-bar-bg stripe-bg"></div>
-              <span class="metric-unverified">확인 불가 · 권한 없음 (비관리자 표준 Node os 모듈 범위 외)</span>
+
+          <!-- 3) 기록 타임라인형 패널 -->
+          <div class="layout-panel panel-timeline" data-panel="timeline" style="display: none;">
+            <div class="timeline-ctrl-bar">
+              <span class="timeline-hint">조회할 때마다 시각과 결과를 한 줄씩 위로 쌓고, 필터별로 걸러 봅니다.</span>
+              <div class="timeline-filters">
+                <button type="button" class="timeline-filter-btn active" data-filter="all">전체</button>
+                <button type="button" class="timeline-filter-btn" data-filter="warn">주의</button>
+                <button type="button" class="timeline-filter-btn" data-filter="unknown">확인 불가</button>
+              </div>
+            </div>
+            <div class="timeline-list">
+              <div class="timeline-item" data-type="warn">
+                <span class="timeline-time">14:05</span>
+                <span class="timeline-badge badge-yellow">▲ 주의</span>
+                <span class="timeline-text">디스크 남은 공간 9% (임계치 도달 경고)</span>
+              </div>
+              <div class="timeline-item" data-type="ok">
+                <span class="timeline-time">14:02</span>
+                <span class="timeline-badge badge-green">● 정상</span>
+                <span class="timeline-text">다시 조회 성공 · CPU 32%, 메모리 58%</span>
+              </div>
+              <div class="timeline-item" data-type="unknown">
+                <span class="timeline-time">13:40</span>
+                <span class="timeline-badge badge-gray">? 확인 불가</span>
+                <span class="timeline-text">이벤트 기록을 읽지 못함 (권한 없음)</span>
+              </div>
+              <div class="timeline-item" data-type="ok">
+                <span class="timeline-time">13:15</span>
+                <span class="timeline-badge badge-green">● 정상</span>
+                <span class="timeline-text">Lumos Agent 보호 세션 정상 초기화 완료</span>
+              </div>
             </div>
           </div>
-          <p class="aleph-subnote">값마다 잰 시각과 단위를 옆에 붙입니다.</p>
-        </div>
-        <div class="aleph-card-side">
-          <div class="aleph-side-box green-box">
-            <h4>스스로 확인할 결과</h4>
-            <p>가까운 시각에 같은 단위로 작업 관리자와 앱의 값을 비교하고, 값의 출처와 잰 시각을 확인합니다. 값이 다르면 측정 시점과 집계 범위를 먼저 확인합니다.</p>
-          </div>
-          <div class="aleph-side-box yellow-box">
-            <h4>막혔을 때</h4>
-            <p>값이 일정하다는 이유만으로 예시 값이라고 판단하지 않습니다. AI에게 '이 값이 어디서 읽혀 오는지 코드 위치와 실제 조회 경로를 보여 줘'라고 물어보세요. 읽지 못한 항목이 정상값으로 대체되지 않는지도 확인합니다.</p>
-          </div>
+
+          <!-- 세 가지 화면 틀 공식 안내 자료 (첨부 2번 이미지 1:1 완벽 구현) -->
+          <details class="aleph-foldable-details" open style="margin-top: 24px;">
+            <summary class="aleph-foldable-summary">
+              <span><strong>세 가지 화면 틀, 실제로는 어떻게 생겼나요?</strong> <span class="muted-tag">실제 공식 모범 사례와 비교하기</span></span>
+              <span class="fold-indicator">접기</span>
+            </summary>
+            <div class="aleph-foldable-content">
+              <div class="three-frames-guide-grid">
+                <!-- 관제 대시보드형 -->
+                <div class="frame-guide-card">
+                  <h4 class="frame-guide-title">관제 대시보드형</h4>
+                  <p class="frame-guide-tip"><strong>내 PC에서 바로 보기:</strong> 키보드에서 <code>Ctrl + Shift + Esc</code>를 눌러 작업 관리자를 열고 '성능' 탭을 보세요. 왼쪽에 항목별 요약, 오른쪽에 시간에 따른 그래프가 있는 화면이 바로 이 틀입니다.</p>
+                  <ul class="frame-guide-links">
+                    <li><a href="https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/" target="_blank" rel="noopener noreferrer">Grafana 대시보드 모범 사례 ↗</a> <span>한 화면이 질문 하나에 답하게 묶고, CPU처럼 단위를 맞춰 그래프를 읽기 쉽게 하는 방법을 봅니다.</span></li>
+                  </ul>
+                </div>
+
+                <!-- 한 장 요약형 -->
+                <div class="frame-guide-card">
+                  <h4 class="frame-guide-title">한 장 요약형</h4>
+                  <p class="frame-guide-tip"><strong>내 PC에서 바로 보기:</strong> 시작 메뉴에서 'Windows 보안'을 열어 보세요. 바이러스, 방화벽 같은 영역마다 초록 체크, 노란 느낌표, 빨간 X로 상태를 한 줄씩 보여 주는 첫 화면이 이 틀입니다.</p>
+                  <ul class="frame-guide-links">
+                    <li><a href="https://support.microsoft.com/ko-kr/windows" target="_blank" rel="noopener noreferrer">Windows 보안 앱 개요 (Microsoft, 한국어) ↗</a> <span>초록·노랑·빨강 표시가 각각 무엇을 뜻하는지 정리한 방식을 봅니다.</span></li>
+                    <li><a href="https://www.githubstatus.com/" target="_blank" rel="noopener noreferrer">GitHub 서비스 상태 페이지 ↗</a> <span>서비스 항목마다 상태를 한 줄씩 적고 맨 위에 전체 요약을 둔 실제 화면을 봅니다.</span></li>
+                    <li><a href="https://carbondesignsystem.com/patterns/status-display/" target="_blank" rel="noopener noreferrer">Carbon 디자인 시스템 ↗</a> <span>상태 표시 색상만으로 구분하지 말고 기호와 글자를 함께 쓰는 원칙을 확인합니다.</span></li>
+                  </ul>
+                </div>
+
+                <!-- 기록 타임라인형 -->
+                <div class="frame-guide-card">
+                  <h4 class="frame-guide-title">기록 타임라인형</h4>
+                  <p class="frame-guide-tip"><strong>내 PC에서 바로 보기:</strong> 'Windows 보안'에서 '보호 기록'을 열어 보세요. 일어난 일을 카드로 차례차례 쌓아 두고 눌러서 자세히 보는 화면이 이 틀입니다.</p>
+                  <ul class="frame-guide-links">
+                    <li><a href="https://support.microsoft.com/ko-kr/windows" target="_blank" rel="noopener noreferrer">Windows 보안 앱의 보호 기록 (Microsoft, 한국어) ↗</a> <span>사건을 카드로 쌓고 심각도에 따라 색을 달리하는 방식을 봅니다.</span></li>
+                    <li><a href="https://www.githubstatus.com/history" target="_blank" rel="noopener noreferrer">GitHub 서비스 상태 페이지의 지난 장애 기록 (Past Incidents) ↗</a> <span>날짜별로 기록을 쌓는 실제 예를 봅니다.</span></li>
+                  </ul>
+                </div>
+              </div>
+              <p class="muted" style="margin-top: 16px; font-size: 0.84rem; line-height: 1.55;">
+                참고 화면의 그림이나 코드를 그대로 가져오지 말고, 무엇을 어디에 두는지만 참고해 내 앱에 맞게 새로 만드세요. 공식 자료 주소와 내용은 2026년 10월 25일에 확인했습니다.
+              </p>
+            </div>
+          </details>
         </div>
       `;
 
@@ -1046,6 +1224,59 @@ export function createStudentView() {
       `;
 
       testCardsContainer.append(card1, card2, card3, card4, card5, card6, card7, card8, card9, card10);
+
+      // 3대 화면 틀 실시간 전환 인터랙션 초기화
+      const initLayoutModeSwitcher = () => {
+        const switcher = card2.querySelector('.layout-mode-selector');
+        if (!switcher) return;
+
+        const buttons = switcher.querySelectorAll('.layout-mode-btn');
+        const panels = card2.querySelectorAll('.layout-panel');
+
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-target');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            panels.forEach(p => {
+              if (p.getAttribute('data-panel') === target) {
+                p.style.display = 'block';
+                p.classList.add('active');
+              } else {
+                p.style.display = 'none';
+                p.classList.remove('active');
+              }
+            });
+          });
+        });
+
+        // 기록 타임라인형 필터 인터랙션
+        const filterBtns = card2.querySelectorAll('.timeline-filter-btn');
+        const timelineItems = card2.querySelectorAll('.timeline-item');
+        filterBtns.forEach(fbtn => {
+          fbtn.addEventListener('click', () => {
+            const filter = fbtn.getAttribute('data-filter');
+            filterBtns.forEach(b => b.classList.remove('active'));
+            fbtn.classList.add('active');
+
+            timelineItems.forEach(item => {
+              const itemType = item.getAttribute('data-type');
+              if (filter === 'all') {
+                item.style.display = 'flex';
+              } else if (filter === 'warn' && itemType === 'warn') {
+                item.style.display = 'flex';
+              } else if (filter === 'unknown' && itemType === 'unknown') {
+                item.style.display = 'flex';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
+      };
+      setTimeout(initLayoutModeSwitcher, 80);
+
 
       // 아코디언 접기/펼치기 동적 인디케이터 초기화
       const initFoldIndicators = () => {
