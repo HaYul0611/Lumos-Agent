@@ -1418,13 +1418,31 @@ li.event:hover {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.audit-toggle-icon {
+  display: inline-block;
+  transition: transform 0.25s ease;
 }
 .aleph-audit-drawer[open] .audit-toggle-text {
   color: var(--accent);
 }
+.aleph-audit-drawer[open] .audit-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* 닫힌 상태: 브라우저 기본 및 CSS 오버라이드를 방지하고 완벽하게 접힘 유지 */
+.aleph-audit-drawer:not([open]) > :not(summary),
+.aleph-audit-drawer:not([open]) .aleph-card-side {
+  display: none !important;
+}
+
+/* 펼친 상태: 2열 그리드로 정돈되어 확장 */
 .aleph-audit-drawer[open] .aleph-card-side {
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-top: 14px;
@@ -1435,8 +1453,8 @@ li.event:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 사이드 박스 영역 */
-.aleph-card-side { display: flex; flex-direction: column; gap: 12px; }
+/* 사이드 박스 기본 정의 (펼쳐졌을 때 내부 아이템용) */
+.aleph-card-side { gap: 12px; }
 .aleph-side-box {
   border-radius: var(--radius);
   padding: 16px 20px;

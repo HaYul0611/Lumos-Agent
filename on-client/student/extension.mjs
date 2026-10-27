@@ -458,7 +458,7 @@ export function createStudentView() {
               </span>
               <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
             </div>
-            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+            <span class="audit-toggle-text">가이드 펼치기 <span class="audit-toggle-icon">▾</span></span>
           </summary>
           <div class="aleph-card-side">
             <div class="aleph-side-box green-box">
@@ -741,7 +741,7 @@ export function createStudentView() {
               </span>
               <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
             </div>
-            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+            <span class="audit-toggle-text">가이드 펼치기 <span class="audit-toggle-icon">▾</span></span>
           </summary>
           <div class="aleph-card-side">
             <div class="aleph-side-box green-box">
@@ -783,7 +783,7 @@ export function createStudentView() {
               </span>
               <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
             </div>
-            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+            <span class="audit-toggle-text">가이드 펼치기 <span class="audit-toggle-icon">▾</span></span>
           </summary>
           <div class="aleph-card-side">
             <div class="aleph-side-box green-box">
@@ -825,7 +825,7 @@ export function createStudentView() {
               </span>
               <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
             </div>
-            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+            <span class="audit-toggle-text">가이드 펼치기 <span class="audit-toggle-icon">▾</span></span>
           </summary>
           <div class="aleph-card-side">
             <div class="aleph-side-box green-box">
@@ -872,7 +872,7 @@ export function createStudentView() {
               </span>
               <span class="audit-hint">상용 배포 시 자동 접힘 · 자체 검증 기준 및 트러블슈팅 열기</span>
             </div>
-            <span class="audit-toggle-text">가이드 펼치기 ▾</span>
+            <span class="audit-toggle-text">가이드 펼치기 <span class="audit-toggle-icon">▾</span></span>
           </summary>
           <div class="aleph-card-side">
             <div class="aleph-side-box green-box">
