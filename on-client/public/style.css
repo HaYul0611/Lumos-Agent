@@ -1620,3 +1620,289 @@ li.event:hover {
   border-top: 1px dashed var(--border);
   padding-top: 10px;
 }
+
+
+/* ============================================================
+   폰트 가독성 및 가시성 전면 강화
+   ============================================================ */
+:root {
+  --text: #0f172a;
+  --text-muted: #475569;
+}
+:root[data-theme="dark"] {
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 15.5px;
+  line-height: 1.62;
+}
+
+p {
+  line-height: 1.65;
+}
+
+.muted {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   아코디언 카드 (Card 9, 10) 여백 및 가시성 개선 (다닥다닥 붙음 해결)
+   ============================================================ */
+.aleph-accordion-card {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-top: 28px !important;
+}
+
+.aleph-foldable-details {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+  overflow: hidden !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease !important;
+  margin: 0 !important;
+}
+:root[data-theme="dark"] .aleph-foldable-details {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+.aleph-foldable-details:hover {
+  border-color: var(--border-glow) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+.aleph-foldable-summary {
+  padding: 20px 26px !important;
+  min-height: 62px !important;
+  font-size: 1.08rem !important;
+  font-weight: 800 !important;
+  color: var(--text) !important;
+  background: var(--surface-elevated) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid transparent !important;
+  user-select: none !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease !important;
+}
+.aleph-foldable-details[open] .aleph-foldable-summary {
+  border-bottom: 1px solid var(--border) !important;
+}
+.aleph-foldable-summary:hover {
+  background: var(--border) !important;
+}
+
+.muted-tag {
+  color: var(--text-muted) !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  margin-left: 12px !important;
+  letter-spacing: -0.01em !important;
+}
+
+.fold-indicator {
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+  background: var(--accent-soft) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  padding: 5px 16px !important;
+  border-radius: var(--radius-pill) !important;
+  letter-spacing: -0.01em !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.fold-indicator:hover {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+}
+
+.aleph-foldable-content {
+  padding: 26px 28px !important;
+  line-height: 1.72 !important;
+  font-size: 0.93rem !important;
+  color: var(--text) !important;
+}
+
+.four-perspectives-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+  gap: 18px !important;
+  margin-top: 14px !important;
+}
+.perspective-box {
+  background: var(--surface-elevated) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  padding: 18px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: transform 0.2s ease, border-color 0.2s ease !important;
+}
+.perspective-box:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--border-glow) !important;
+}
+
+/* ============================================================
+   2번 이미지 영역: 학생 AI 사건 설명 전면 리디자인
+   ============================================================ */
+.ai-explain-card {
+  border-left: 4px solid var(--student) !important;
+  padding: 24px 28px !important;
+  background: var(--surface-card) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 24px !important;
+}
+
+.ai-explain-header-flex {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 28px !important;
+  padding-bottom: 20px !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+@media (max-width: 800px) {
+  .ai-explain-header-flex {
+    flex-direction: column-reverse !important;
+    align-items: flex-start !important;
+  }
+}
+
+.ai-explain-info {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+.ai-explain-info h2 {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: var(--text) !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+.ai-explain-info p {
+  margin: 0 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
+  color: var(--text-muted) !important;
+}
+
+.ai-explain-art-wrap {
+  flex-shrink: 0 !important;
+  width: 140px !important;
+  height: 105px !important;
+  border-radius: 12px !important;
+  background: var(--surface-elevated) !important;
+  border: 1px solid var(--border) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.08) !important;
+}
+.art-explain {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 4px 10px rgba(99, 102, 241, 0.2)) !important;
+}
+
+#student-explanation {
+  margin-top: 18px !important;
+}
+.student-explanation-title {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  margin: 0 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.student-explanation-title::before {
+  content: "✦";
+  color: var(--student);
+  font-size: 1.1rem;
+}
+
+.student-explanation-idle {
+  background: var(--surface-elevated) !important;
+  border: 1px dashed var(--border-strong) !important;
+  border-radius: var(--radius) !important;
+  padding: 22px 26px !important;
+  font-size: 0.94rem !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  line-height: 1.5 !important;
+}
+.student-explanation-idle::before {
+  content: "ℹ";
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.student-explanation-loading {
+  background: var(--accent-soft) !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--radius) !important;
+  padding: 20px 24px !important;
+  color: var(--accent) !important;
+  font-weight: 700 !important;
+  font-size: 0.94rem !important;
+}
+
+.student-explanation-error {
+  background: var(--deny-soft) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  border-left: 4px solid var(--deny) !important;
+  border-radius: var(--radius) !important;
+  padding: 16px 20px !important;
+  color: var(--deny) !important;
+  font-weight: 700 !important;
+  font-size: 0.96rem !important;
+  margin: 0 0 8px !important;
+}
+.student-explanation-error-reason,
+.student-explanation-error-message,
+.student-explanation-record-unchanged {
+  margin: 6px 0 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  color: var(--text) !important;
+}

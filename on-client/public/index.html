@@ -250,13 +250,19 @@
               renderEvents</span></h2>
           <div id="student-events" class="student-slot" aria-live="polite"></div>
         </section>
-        <section class="card student" aria-labelledby="student-explanation-title">
-          <img class="alekov-art art-explain" src="/assets/alekov/alekov-ai-explain.webp" alt="" aria-hidden="true"
-            draggable="false">
-          <h2 id="student-explanation-title">학생 AI 사건 설명 <span class="tag tag-student">student/extension.mjs ·
-              renderExplanation</span></h2>
-          <p class="muted">선택한 사건의 근거·규칙·현재 상태와 설명 결과를 함께 확인합니다. 조치 제안은 실행되지 않습니다.</p>
-          <button type="button" id="ai-explanation-cancel" class="btn" disabled>AI 설명 취소</button>
+        <section class="card student ai-explain-card" aria-labelledby="student-explanation-title">
+          <div class="ai-explain-header-flex">
+            <div class="ai-explain-info">
+              <h2 id="student-explanation-title">학생 AI 사건 설명 <span class="tag tag-student">student/extension.mjs · renderExplanation</span></h2>
+              <p class="muted">선택한 사건의 근거·규칙·현재 상태와 설명 결과를 함께 확인합니다. 조치 제안은 실행되지 않습니다.</p>
+              <div class="row" style="margin-top: 10px;">
+                <button type="button" id="ai-explanation-cancel" class="btn" disabled>AI 설명 취소</button>
+              </div>
+            </div>
+            <div class="ai-explain-art-wrap">
+              <img class="alekov-art art-explain" src="/assets/alekov/alekov-ai-explain.webp" alt="AI 사건 설명 일러스트" aria-hidden="true" draggable="false">
+            </div>
+          </div>
           <div id="student-explanation" class="student-slot" aria-live="polite"></div>
         </section>
         <section class="card provided" aria-labelledby="action-title">

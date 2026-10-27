@@ -888,7 +888,7 @@ export function createStudentView() {
           </div>
         </details>
 
-        <details class="aleph-foldable-details" open style="margin-top: 14px;">
+        <details class="aleph-foldable-details" open style="margin-top: 24px;">
           <summary class="aleph-foldable-summary">
             <span><strong>결과물을 보는 네 가지 관점</strong> <span class="muted-tag">기능 · 근거 · 사용 편의 · 재현</span></span>
             <span class="fold-indicator">접기</span>
@@ -1046,6 +1046,20 @@ export function createStudentView() {
       `;
 
       testCardsContainer.append(card1, card2, card3, card4, card5, card6, card7, card8, card9, card10);
+
+      // 아코디언 접기/펼치기 동적 인디케이터 초기화
+      const initFoldIndicators = () => {
+        root.querySelectorAll('.aleph-foldable-details').forEach(d => {
+          const ind = d.querySelector('.fold-indicator');
+          if (!ind) return;
+          ind.textContent = d.open ? '접기' : '펼치기';
+          d.addEventListener('toggle', () => {
+            ind.textContent = d.open ? '접기' : '펼치기';
+          });
+        });
+      };
+      setTimeout(initFoldIndicators, 60);
+
 
       // Card 10 예시 보기 토글 인터랙션 (pc-saas-reader 고유 기능)
       const saasToggleBtn = card10.querySelector('#saas-toggle-example-btn');
