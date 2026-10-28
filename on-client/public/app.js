@@ -386,10 +386,22 @@ function currentMode() {
 
 function renderMode() {
   const badge = $('mode-badge');
+  if (!badge) return;
   const mode = currentMode();
-  badge.dataset.mode = mode;
-  badge.textContent = MODE_LABELS[mode];
-  $('checked-at').textContent = state.checkedAt ? `확인 시각 ${formatTime(state.checkedAt)}` : '';
+  if (badge.dataset.mode !== mode) {
+    badge.dataset.mode = mode;
+  }
+  const label = MODE_LABELS[mode] || mode;
+  if (badge.textContent !== label) {
+    badge.textContent = label;
+  }
+  const checkedAtEl = $('checked-at');
+  if (checkedAtEl) {
+    const text = state.checkedAt ? `확인 시각 ${formatTime(state.checkedAt)}` : '';
+    if (checkedAtEl.textContent !== text) {
+      checkedAtEl.textContent = text;
+    }
+  }
   renderStudent('status');
 }
 
@@ -1385,6 +1397,19 @@ function init() {
   $('native-login-redeem').addEventListener('click', () => { if (nativeLogin) nativeLogin.redeem(); });
   $('native-login-check').addEventListener('click', () => { if (nativeLogin) nativeLogin.check(); });
   $('native-login-cancel').addEventListener('click', () => { if (nativeLogin) nativeLogin.cancel(); });
+  const guardOpenLink = (id) => {
+    const linkEl = $(id);
+    if (!linkEl) return;
+    linkEl.addEventListener('click', (e) => {
+      const href = linkEl.getAttribute('href');
+      if (!href) {
+        e.preventDefault();
+        return;
+      }
+    });
+  };
+  guardOpenLink('ai-connect-open');
+  guardOpenLink('native-login-open');
   // 페이지를 떠날 때는 화면 진행과 이 화면의 요청만 끝낸다. 원격 취소를 보내거나 성공이라고 주장하지 않는다.
   window.addEventListener('pagehide', () => { if (nativeLogin) nativeLogin.reset(); });
   guardStaticArt();

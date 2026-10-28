@@ -24,13 +24,6 @@
 
   <header class="topbar">
     <div class="brand">
-      <button type="button" id="sidebar-toggle-btn" class="sidebar-toggle-btn" aria-label="메뉴 열기/닫기" title="사이드바 접기/펼치기">
-        <svg class="sidebar-toggle-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
       <img class="brand-icon lumos-logo" src="data:image/png;base64,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" alt="Lumos Symbol">
       <span class="brand-mark" id="brand-mark-fallback" aria-hidden="true" hidden>L</span>
       <span class="brand-name">
@@ -41,34 +34,29 @@
     </div>
     <div class="topbar-status">
       <span id="mode-badge" class="mode-badge" data-mode="loading" role="status" aria-live="polite">상태 확인 중</span>
-      <button type="button" class="cmdk-trigger" id="cmdk-trigger" aria-label="명령 창 열기 (Ctrl+K)" title="명령 창 (Ctrl+K)">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <span class="cmdk-trigger-label">검색 · 명령</span>
-        <kbd class="cmdk-trigger-kbd">⌘K</kbd>
-      </button>
       <div class="theme-switch">
-        <button type="button" class="theme-switch-btn" id="theme-switch-btn" aria-haspopup="menu" aria-expanded="false" aria-label="테마 설정">
+        <button type="button" class="theme-switch-btn" id="theme-switch-btn" aria-label="테마 전환 (다크/라이트)" title="테마 전환 (클릭 시 다크 ↔ 라이트)">
           <svg class="theme-switch-icon theme-icon-auto" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3 A9 9 0 0 1 12 21 Z" fill="currentColor" stroke="none"/></svg>
           <svg class="theme-switch-icon theme-icon-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg class="theme-switch-icon theme-icon-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-        <div class="theme-switch-menu" id="theme-switch-menu" role="menu" aria-labelledby="theme-switch-btn" hidden>
-          <button type="button" class="theme-switch-item" role="menuitemradio" aria-checked="true" data-theme-mode="auto">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3 A9 9 0 0 1 12 21 Z" fill="currentColor" stroke="none"/></svg>
-            <span>자동</span>
-            <span class="theme-switch-item-meta" id="theme-auto-meta">시스템 · 시간대</span>
-          </button>
-          <button type="button" class="theme-switch-item" role="menuitemradio" aria-checked="false" data-theme-mode="light">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            <span>라이트</span>
-          </button>
-          <button type="button" class="theme-switch-item" role="menuitemradio" aria-checked="false" data-theme-mode="dark">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <span>다크</span>
-          </button>
-        </div>
       </div>
-      <span id="checked-at" class="checked-at"></span>
+      <div class="time-capsule" id="time-capsule" title="실시간 동기화 시계">
+        <div class="analog-clock" id="analog-clock" aria-hidden="true">
+          <svg class="analog-clock-svg" viewBox="0 0 24 24" width="18" height="18">
+            <circle cx="12" cy="12" r="10" class="clock-dial" />
+            <line x1="12" y1="3" x2="12" y2="4.8" class="clock-tick clock-tick-12" />
+            <line x1="21" y1="12" x2="19.2" y2="12" class="clock-tick clock-tick-3" />
+            <line x1="12" y1="21" x2="12" y2="19.2" class="clock-tick clock-tick-6" />
+            <line x1="3" y1="12" x2="4.8" y2="12" class="clock-tick clock-tick-9" />
+            <line x1="12" y1="12" x2="12" y2="7.5" class="clock-hand clock-hour" id="clock-hour" />
+            <line x1="12" y1="12" x2="12" y2="5" class="clock-hand clock-min" id="clock-min" />
+            <line x1="12" y1="13.5" x2="12" y2="4" class="clock-hand clock-sec" id="clock-sec" />
+            <circle cx="12" cy="12" r="1.4" class="clock-pivot" />
+          </svg>
+        </div>
+        <span id="checked-at" class="checked-at"></span>
+      </div>
       <button type="button" id="refresh" class="btn">다시 불러오기</button>
     </div>
   </header>
@@ -76,23 +64,100 @@
   <div class="layout">
     <nav class="sidebar" id="sidebar" aria-label="주 메뉴">
       <div class="sidebar-header">
+        <button type="button" id="sidebar-toggle-btn" class="sidebar-toggle-btn" aria-label="메뉴 열기/닫기" title="사이드바 접기/펼치기">
+          <svg class="sidebar-toggle-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
         <span class="sidebar-header-title">SECURITY CONSOLE</span>
       </div>
       <div role="tablist" aria-orientation="vertical" id="nav">
+        <!-- Category 1: 관제 & 지점망 (SOC/GIS) -->
+        <div class="nav-category-label">
+          <span class="nav-category-text">관제 &amp; 지점망 (SOC/GIS)</span>
+        </div>
         <button type="button" role="tab" id="tab-protection" data-testid="nav-protection" data-view="protection"
           aria-controls="view-protection" aria-selected="true" tabindex="0">
           <span class="nav-tab-icon-wrap">
             <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </span>
-          <span class="nav-tab-label">보호 현황</span>
-          <span class="nav-badge" id="badge-protection" hidden></span>
+          <span class="nav-tab-label">보호 모니터링</span>
+          <span class="nav-badge live" id="badge-protection">LIVE</span>
         </button>
+        <button type="button" role="tab" id="tab-sites" data-testid="nav-sites" data-view="sites"
+          aria-controls="view-sites" aria-selected="false" tabindex="-1">
+          <span class="nav-tab-icon-wrap">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </span>
+          <span class="nav-tab-label">지점망 GIS 관제</span>
+          <span class="nav-badge" id="badge-sites">164</span>
+        </button>
+        <button type="button" role="tab" id="tab-topology" data-testid="nav-topology" data-view="topology"
+          aria-controls="view-topology" aria-selected="false" tabindex="-1">
+          <span class="nav-tab-icon-wrap">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </span>
+          <span class="nav-tab-label">인프라 토폴로지</span>
+          <span class="nav-badge" id="badge-topology">7-TIER</span>
+        </button>
+        <button type="button" role="tab" id="tab-ueba" data-testid="nav-ueba" data-view="ueba"
+          aria-controls="view-ueba" aria-selected="false" tabindex="-1">
+          <span class="nav-tab-icon-wrap">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </span>
+          <span class="nav-tab-label">UEBA 보안 분석</span>
+          <span class="nav-badge critical" id="badge-ueba">AI</span>
+        </button>
+        <button type="button" role="tab" id="tab-cases" data-testid="nav-cases" data-view="cases"
+          aria-controls="view-cases" aria-selected="false" tabindex="-1">
+          <span class="nav-tab-icon-wrap">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </span>
+          <span class="nav-tab-label">사건·케이스 관제</span>
+          <span class="nav-badge" id="badge-cases">24</span>
+        </button>
+        <button type="button" role="tab" id="tab-endpoints" data-testid="nav-endpoints" data-view="endpoints"
+          aria-controls="view-endpoints" aria-selected="false" tabindex="-1">
+          <span class="nav-tab-icon-wrap">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </span>
+          <span class="nav-tab-label">단말·자산 관리</span>
+          <span class="nav-badge" id="badge-endpoints">1</span>
+        </button>
+
+        <!-- Category 2: 취약점 & AI 연동 -->
+        <div class="nav-category-label">
+          <span class="nav-category-text">취약점 &amp; AI 연동</span>
+        </div>
+        <button type="button" role="tab" id="tab-vulnerabilities" data-testid="nav-vulnerabilities" data-view="vulnerabilities"
+          aria-controls="view-vulnerabilities" aria-selected="false" tabindex="-1">
+          <span class="nav-tab-icon-wrap">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </span>
+          <span class="nav-tab-label">취약점 점검</span>
+          <span class="nav-badge" id="badge-vulnerabilities">OSV</span>
+        </button>
+        <button type="button" role="tab" id="tab-ai-connect" data-testid="nav-ai-connect" data-view="ai-connect"
+          aria-controls="view-ai-connect" aria-selected="false" tabindex="-1">
+          <span class="nav-tab-icon-wrap">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span class="nav-tab-label">AI 연동·설정</span>
+          <span class="nav-badge" id="badge-ai-connect" hidden></span>
+        </button>
+
+        <!-- Category 3: 보안 통제 & 패킷 로그 -->
+        <div class="nav-category-label">
+          <span class="nav-category-text">보안 통제 &amp; 패킷 로그</span>
+        </div>
         <button type="button" role="tab" id="tab-apps" data-testid="nav-apps" data-view="apps" aria-controls="view-apps"
           aria-selected="false" tabindex="-1">
           <span class="nav-tab-icon-wrap">
             <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
           </span>
-          <span class="nav-tab-label">업무 앱</span>
+          <span class="nav-tab-label">업무 앱 (ZTNA)</span>
           <span class="nav-badge" id="badge-apps" hidden></span>
         </button>
         <button type="button" role="tab" id="tab-records" data-testid="nav-records" data-view="records"
@@ -100,72 +165,1553 @@
           <span class="nav-tab-icon-wrap">
             <svg class="nav-tab-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </span>
-          <span class="nav-tab-label">보안 기록</span>
-          <span class="nav-badge critical" id="badge-records" hidden></span>
+          <span class="nav-tab-label">방화벽 &amp; 패킷 로그</span>
+          <span class="nav-badge critical" id="badge-records">LIVE</span>
         </button>
       </div>
-      <p class="sidebar-note">메뉴는 위·아래 방향키로 이동할 수 있습니다.</p>
+      <div class="sidebar-footer">
+        <button type="button" class="sidebar-cmdk-btn" id="sidebar-cmdk-trigger" aria-label="명령 창 열기 (Ctrl+K)" title="검색 및 명령 창 열기 (Ctrl+K)">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span class="sidebar-cmdk-label">검색 · 명령</span>
+          <kbd class="sidebar-cmdk-kbd">⌘K</kbd>
+        </button>
+        <div class="sidebar-shortcuts-hint">
+          <span class="shortcut-desc">빠른 메뉴 이동</span>
+          <span class="shortcut-keys"><kbd class="kbd-chip">↑</kbd><kbd class="kbd-chip">↓</kbd> / <kbd class="kbd-chip">g</kbd>+<kbd class="kbd-chip">key</kbd></span>
+        </div>
+      </div>
     </nav>
+
+    <!-- [Image 4 Style] 슬림 레일 연동 플로팅 서브메뉴 (화면을 밀어내지 않고 오버레이되는 플로팅 스마트 드로어) -->
+    <div class="nav-flyout-overlay" id="nav-flyout-overlay" hidden>
+      <div class="nav-flyout-content" id="nav-flyout-content">
+        <div class="flyout-header">
+          <div class="flyout-header-info">
+            <span class="flyout-title" id="flyout-title">위협 및 컴플라이언스</span>
+            <span class="flyout-sub" id="flyout-sub">수집된 위협 및 규제 매핑</span>
+          </div>
+          <button type="button" class="flyout-close-btn" id="flyout-close-btn" aria-label="하위 메뉴 닫기">✕</button>
+        </div>
+        <div class="flyout-body" id="flyout-body">
+          <div class="flyout-group">
+            <span class="flyout-group-label">취약점 관리</span>
+            <button type="button" class="flyout-item active" data-target="view-vulnerabilities" data-action="vuln-mgmt">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>취약점 개요 &amp; CVSS</span>
+            </button>
+            <button type="button" class="flyout-item" data-target="view-vulnerabilities" data-action="sbom">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>SBOM 종속성 분석</span>
+            </button>
+            <button type="button" class="flyout-item" data-target="view-vulnerabilities" data-action="patch">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>패치 관리 및 백신</span>
+            </button>
+          </div>
+          <div class="flyout-group">
+            <span class="flyout-group-label">컴플라이언스 관리</span>
+            <button type="button" class="flyout-item" data-target="view-vulnerabilities" data-action="compliance">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>GDPR / HIPAA / NIST 준수</span>
+            </button>
+            <button type="button" class="flyout-item" data-target="view-vulnerabilities" data-action="audit">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              <span>감사 보고서 및 규제 매핑</span>
+            </button>
+          </div>
+          <div class="flyout-group">
+            <span class="flyout-group-label">보안 인텔리전스</span>
+            <button type="button" class="flyout-item" data-target="view-protection" data-action="cases">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>사건·케이스 관제 센터</span>
+            </button>
+            <button type="button" class="flyout-item" data-target="view-records" data-action="ueba">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>UEBA 머신러닝 분석</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <main id="main" tabindex="-1">
       <div id="error-message" class="error-banner" data-testid="error-message" role="alert" hidden></div>
 
-      <div class="notice">
-        <svg class="notice-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <div class="notice-text">
-          <strong>Lumos Enterprise Security Agent</strong>가 단말에서 실시간 구동 중입니다.
-          인가된 Zero Trust(ZTNA) 기기 정책 및 통합 XDR 세션 무결성을 지속적으로 검증하고 보호합니다.
-        </div>
-      </div>
-
+      <!-- ============================================================
+           [VIEW 1] 보호 모니터링 (Image 1 Style Overview & Telemetry Dashboard)
+           ============================================================ -->
       <section id="view-protection" class="view" role="tabpanel" aria-labelledby="tab-protection">
-        <h1>보호 현황</h1>
+        <!-- Breadcrumbs -->
+        <nav class="topbar-breadcrumb" aria-label="브레드크럼">
+          <span class="breadcrumb-item">Lumos ZTNA</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item">개요</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item active">보호 모니터링</span>
+        </nav>
 
-        <div class="grid-2">
-          <section class="card provided" aria-labelledby="identity-title">
-            <h2 id="identity-title">현재 로그인 계정 <span class="tag">Core</span></h2>
-            <dl class="identity">
-              <dt>사용자</dt>
-              <dd data-testid="identity-user" id="identity-user">불러오는 중</dd>
-              <dt>기기</dt>
-              <dd data-testid="identity-device" id="identity-device">불러오는 중</dd>
-              <dt>세션</dt>
-              <dd data-testid="identity-session" id="identity-session">불러오는 중</dd>
-            </dl>
-          </section>
-
-          <section class="card student" aria-labelledby="student-identity-title">
-            <h2 id="student-identity-title">단말 신원 및 무결성 점검 <span class="tag tag-student">Verified</span></h2>
-            <div id="student-identity" class="student-slot" aria-live="polite"></div>
-          </section>
-        </div>
-
-        <div class="grid-2">
-          <section class="card provided" aria-labelledby="devices-title">
-            <h2 id="devices-title">등록 기기 상태 <span class="tag">Core</span></h2>
-            <div id="devices" aria-live="polite"></div>
-          </section>
-          <section class="card provided" aria-labelledby="sessions-title">
-            <h2 id="sessions-title">보안 세션 상태 <span class="tag">Core</span></h2>
-            <div id="sessions" aria-live="polite"></div>
-          </section>
-        </div>
-
-        <section class="card student" aria-labelledby="student-status-title">
-          <h2 id="student-status-title">보안 관제 및 위협 모니터링 <span class="tag tag-student">Live Telemetry</span></h2>
-          <div id="student-status" class="student-slot" aria-live="polite"></div>
-        </section>
-
-        <section class="card provided" aria-labelledby="diag-title">
-          <h2 id="diag-title">진단 및 지원 정보 <span class="tag">System</span></h2>
-          <p class="muted">서버의 비밀 없는 연결 점검 결과를 불러와 직접 확인한 뒤 복사할 수 있습니다. 자동으로 전송하지 않습니다.</p>
-          <div class="row">
-            <button type="button" id="diag-load" class="btn">도움정보 불러오기</button>
-            <button type="button" id="diag-copy" class="btn" disabled>확인했으며 복사합니다</button>
+        <!-- Success notification banner (Image 1 style - auto-dismiss after delay) -->
+        <div class="banner-success" id="banner-success" role="status">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+          <div class="banner-success-text">
+            <strong>Success:</strong> 인가된 단말(CPE) 및 Zero Trust 세션이 정상 구동 중이며 실시간 무결성을 유지하고 있습니다.
           </div>
-          <p id="diag-status" class="muted" role="status" aria-live="polite"></p>
-          <pre id="diag-output" class="diag-output" tabindex="0" hidden></pre>
+          <button type="button" class="banner-close-btn" id="banner-close-btn" aria-label="알림 배너 닫기" title="닫기">✕</button>
+        </div>
+
+        <!-- KPI Metrics Grid (Image 1: 주요 지표 (Erl)) -->
+        <div class="kpi-section">
+          <div class="kpi-section-header">
+            <h2 class="kpi-section-title">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              주요 지표 (Erl)
+            </h2>
+          </div>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-card-inner">
+                <span class="kpi-label">사이트 / 보호 단말</span>
+                <div class="kpi-val-row">
+                  <span class="kpi-number" id="kpi-devices-count">1</span>
+                  <span class="kpi-unit">CPE 사이트</span>
+                </div>
+                <span class="kpi-sub">무결성 검증 완료 1대</span>
+              </div>
+              <svg class="kpi-icon-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-inner">
+                <span class="kpi-label">ZTNA 보안 세션</span>
+                <div class="kpi-val-row">
+                  <span class="kpi-number" id="kpi-sessions-count">1 / 1</span>
+                  <span class="kpi-unit">대기: 0개</span>
+                </div>
+                <span class="kpi-sub">활성 인증 세션 유지 중</span>
+              </div>
+              <svg class="kpi-icon-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-inner">
+                <span class="kpi-label">실시간 위협 탐지율</span>
+                <div class="kpi-val-row">
+                  <span class="kpi-number">0.0%</span>
+                  <span class="kpi-unit">80% 이상: 0 / 1개</span>
+                </div>
+                <span class="kpi-sub">위험 알림 0건 (안전)</span>
+              </div>
+              <svg class="kpi-icon-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-inner">
+                <span class="kpi-label">네트워크 &amp; 방화벽</span>
+                <div class="kpi-val-row">
+                  <span class="kpi-number">유선 활성</span>
+                  <span class="kpi-unit">1Gbps</span>
+                </div>
+                <span class="kpi-sub">방화벽 켜짐 · SDP 분리</span>
+              </div>
+              <svg class="kpi-icon-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- [Image 4 Style] 엔터프라이즈 SOC 종합 위협 관제 센터 -->
+        <section class="soc-section" aria-labelledby="soc-overview-title">
+          <div class="soc-section-header">
+            <div class="soc-header-left">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <h2 id="soc-overview-title" class="soc-section-title">보안 요약</h2>
+              <span class="soc-header-badge">SITE 수집 전국 연동</span>
+            </div>
+            <div class="soc-header-right">
+              <span class="soc-refresh-hint">자동 새로고침: <strong>1분</strong></span>
+              <button type="button" class="btn btn-xs btn-outline" id="soc-refresh-btn">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                새로고침
+              </button>
+            </div>
+          </div>
+
+          <!-- SOC 상단 메트릭스: 100점 대형 스코어 게이지 + 24시간 이벤트/경고 현황 -->
+          <div class="soc-metrics-grid">
+            <!-- 1. 보안 스코어 100점 대형 게이지 카드 -->
+            <div class="soc-score-card">
+              <div class="soc-score-header">
+                <span class="soc-card-label">보안 점수 (무결성 진단)</span>
+                <span class="soc-score-badge">매우 우수</span>
+              </div>
+              <div class="soc-score-val-row">
+                <span class="soc-score-number" id="soc-score-val">100</span>
+                <span class="soc-score-max">/ 100</span>
+              </div>
+              <div class="soc-gauge-track">
+                <div class="soc-gauge-fill" style="width: 100%;"></div>
+              </div>
+              <span class="soc-score-desc">점수가 높을수록 안전합니다. 현재 탐지된 위협/취약점이 없습니다.</span>
+              <div class="soc-score-sublist">
+                <div class="soc-sub-row"><span class="sub-key">진행 중 고위험 케이스</span><span class="sub-val ok">0건</span></div>
+                <div class="soc-sub-row"><span class="sub-key">비인가 단말 (CPE)</span><span class="sub-val ok">0대</span></div>
+                <div class="soc-sub-row"><span class="sub-key">Agent 미설치 / 비활성</span><span class="sub-val ok">0대</span></div>
+              </div>
+            </div>
+
+            <!-- 2. 차단 및 격리 이벤트 요약 카드 1 -->
+            <div class="soc-stat-card">
+              <div class="soc-stat-item">
+                <div class="soc-stat-icon-wrap icon-red">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="soc-stat-content">
+                  <span class="soc-stat-label">차단 중 케이스</span>
+                  <span class="soc-stat-num">0</span>
+                  <span class="soc-stat-note">신규 차단: 0건 · 정상 격리</span>
+                </div>
+              </div>
+              <div class="soc-stat-divider"></div>
+              <div class="soc-stat-item">
+                <div class="soc-stat-icon-wrap icon-amber">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <div class="soc-stat-content">
+                  <span class="soc-stat-label">격리된 이벤트 (24시간)</span>
+                  <span class="soc-stat-num">0</span>
+                  <span class="soc-stat-note">치료 및 격리: 0건</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. 실시간 알림 및 접속 현황 카드 2 -->
+            <div class="soc-stat-card">
+              <div class="soc-stat-item">
+                <div class="soc-stat-icon-wrap icon-blue">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </div>
+                <div class="soc-stat-content">
+                  <span class="soc-stat-label">이벤트 및 경고 알림</span>
+                  <span class="soc-stat-num">0</span>
+                  <span class="soc-stat-note">24시간 발생 이벤트: 0건</span>
+                </div>
+              </div>
+              <div class="soc-stat-divider"></div>
+              <div class="soc-stat-item">
+                <div class="soc-stat-icon-wrap icon-green">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div class="soc-stat-content">
+                  <span class="soc-stat-label">CPE 및 Agent 수신</span>
+                  <span class="soc-stat-num">4 <span class="soc-stat-unit">정상 연동</span></span>
+                  <span class="soc-stat-note">미수신 Client Agent: 0건</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOC 중단 차트 그리드: 위협 개요 시계열 추이 + 심각도 도넛 분포 차트 -->
+          <div class="soc-charts-grid">
+            <div class="soc-chart-card">
+              <div class="soc-chart-header">
+                <div class="soc-chart-title-wrap">
+                  <span class="soc-chart-title">위협 개요 (오늘 시간대별 실시간 추이)</span>
+                  <span class="soc-chart-sub">실시간 감시 센서 연동</span>
+                </div>
+                <div class="soc-chart-legend">
+                  <span class="legend-item"><span class="legend-dot dot-blue"></span> 정상 트래픽 핑</span>
+                  <span class="legend-item"><span class="legend-dot dot-red"></span> 탐지된 위협 (0)</span>
+                </div>
+              </div>
+              <div id="soc-trend-chart" class="soc-chart-body"></div>
+            </div>
+
+            <div class="soc-chart-card soc-donut-card">
+              <div class="soc-chart-header">
+                <div class="soc-chart-title-wrap">
+                  <span class="soc-chart-title">심각도 분포</span>
+                  <span class="soc-chart-sub">케이스 기준 · 누적</span>
+                </div>
+              </div>
+              <div class="soc-donut-body">
+                <div id="soc-donut-chart"></div>
+                <div class="soc-severity-legend">
+                  <div class="sev-item"><span class="sev-dot dot-danger"></span><span class="sev-name">위험</span><span class="sev-count">0 (0.0%)</span></div>
+                  <div class="sev-item"><span class="sev-dot dot-high"></span><span class="sev-name">높음</span><span class="sev-count">0 (0.0%)</span></div>
+                  <div class="sev-item"><span class="sev-dot dot-medium"></span><span class="sev-name">보통</span><span class="sev-count">0 (0.0%)</span></div>
+                  <div class="sev-item"><span class="sev-dot dot-low"></span><span class="sev-name">낮음</span><span class="sev-count">0 (0.0%)</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
+
+        <!-- [Image 2 Style] 보안 사건 / 케이스 관제 대시보드 (Case & Incident Management) -->
+        <section class="sec-cases-section" id="sec-cases-section" aria-labelledby="cases-dashboard-title">
+          <div class="cases-section-header">
+            <div class="cases-header-left">
+              <span class="cases-section-badge">SIEM / SOAR</span>
+              <h2 id="cases-dashboard-title" class="cases-section-title">사건 및 케이스 관제 현황</h2>
+              <span class="soc-header-badge">실시간 상관분석 연동</span>
+            </div>
+            <div class="cases-header-right">
+              <div class="cases-auto-refresh">
+                <span class="cases-refresh-label">자동 새로고침:</span>
+                <span class="status-pill allow">켬 · 1분</span>
+              </div>
+              <div class="cases-time-filter">
+                <button type="button" class="btn btn-xs btn-outline active">최근 7일</button>
+                <button type="button" class="btn btn-xs btn-outline">최근 24시간</button>
+              </div>
+              <button type="button" class="btn btn-xs btn-outline" id="cases-refresh-btn" title="케이스 지표 새로고침">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                새로고침
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. 상태 분포 7대 핵심 KPI 그리드 (Image 2) -->
+          <div class="cases-kpi-grid">
+            <div class="cases-kpi-card highlight">
+              <span class="cases-kpi-label">전체 케이스</span>
+              <div class="cases-kpi-val-row">
+                <span class="cases-kpi-val mono">19,106</span>
+                <svg class="cases-kpi-mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              </div>
+              <span class="cases-kpi-sub">수집 집계 완료</span>
+            </div>
+            <div class="cases-kpi-card">
+              <span class="cases-kpi-label">신규 (New)</span>
+              <span class="cases-kpi-val mono text-cyan">19,004</span>
+              <span class="cases-kpi-sub">미할당 99.4%</span>
+            </div>
+            <div class="cases-kpi-card">
+              <span class="cases-kpi-label">오픈 (Open)</span>
+              <span class="cases-kpi-val mono text-warning">2</span>
+              <span class="cases-kpi-sub">분석관 배정</span>
+            </div>
+            <div class="cases-kpi-card">
+              <span class="cases-kpi-label">진행 중</span>
+              <span class="cases-kpi-val mono">0</span>
+              <span class="cases-kpi-sub">대응 조치 중</span>
+            </div>
+            <div class="cases-kpi-card">
+              <span class="cases-kpi-label">해결 (Resolved)</span>
+              <span class="cases-kpi-val mono">0</span>
+              <span class="cases-kpi-sub">조치 완료</span>
+            </div>
+            <div class="cases-kpi-card">
+              <span class="cases-kpi-label">종료 (Closed)</span>
+              <span class="cases-kpi-val mono text-pass">99</span>
+              <span class="cases-kpi-sub">정상 마감</span>
+            </div>
+            <div class="cases-kpi-card">
+              <span class="cases-kpi-label">보류 (On-hold)</span>
+              <span class="cases-kpi-val mono">0</span>
+              <span class="cases-kpi-sub">승인 대기</span>
+            </div>
+          </div>
+
+          <!-- 2. 심각도 분포 & 생성 유형 분포 (Image 2 중간 영역) -->
+          <div class="cases-distribution-row">
+            <div class="cases-severity-box">
+              <div class="cases-box-header">
+                <span class="cases-box-title">심각도 분포 (Severity Matrix)</span>
+              </div>
+              <div class="cases-severity-cards">
+                <div class="sev-card sev-crit">
+                  <span class="sev-count mono">2</span>
+                  <span class="sev-label">치명 (Critical)</span>
+                </div>
+                <div class="sev-card sev-high">
+                  <span class="sev-count mono">768</span>
+                  <span class="sev-label">높음 (High)</span>
+                </div>
+                <div class="sev-card sev-med">
+                  <span class="sev-count mono">1,963</span>
+                  <span class="sev-label">보통 (Medium)</span>
+                </div>
+                <div class="sev-card sev-low">
+                  <span class="sev-count mono">16,373</span>
+                  <span class="sev-label">낮음 (Low)</span>
+                </div>
+                <div class="sev-card sev-info">
+                  <span class="sev-count mono">0</span>
+                  <span class="sev-label">정보 (Info)</span>
+                </div>
+                <div class="sev-card sev-unspec">
+                  <span class="sev-count mono">0</span>
+                  <span class="sev-label">미지정 케이스</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cases-type-box">
+              <div class="cases-box-header">
+                <span class="cases-box-title">생성 유형 분포 (Origin)</span>
+              </div>
+              <div class="cases-type-cards">
+                <div class="type-card">
+                  <div class="type-icon-wrap text-cyan">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                  </div>
+                  <span class="type-val mono">103</span>
+                  <span class="type-label">자동 생성 케이스</span>
+                </div>
+                <div class="type-card">
+                  <div class="type-icon-wrap text-pass">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <span class="type-val mono">0</span>
+                  <span class="type-label">수동 생성 케이스</span>
+                </div>
+                <div class="type-card">
+                  <div class="type-icon-wrap text-warning">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                  </div>
+                  <span class="type-val mono">19,002</span>
+                  <span class="type-label">상관분석 케이스</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Image 2 3-Column Visual Charts Grid -->
+          <div class="cases-charts-grid">
+            <!-- 차트 1: 심각도별 케이스 추이 -->
+            <div class="chart-card case-trend-card">
+              <div class="chart-header">
+                <div class="chart-title-wrap">
+                  <span class="chart-title">심각도별 케이스 추이</span>
+                  <span class="chart-sub">최근 7일 일별 신규 케이스 (누적·평균·기간 일평균)</span>
+                </div>
+                <div class="chart-legend-row">
+                  <span class="legend-badge crit">CRIT (2)</span>
+                  <span class="legend-badge high">HIGH (768)</span>
+                  <span class="legend-badge med">MED (1,963)</span>
+                  <span class="legend-badge low">LOW (16,373)</span>
+                </div>
+              </div>
+              <div class="chart-canvas-wrap" id="case-trend-chart-wrap">
+                <!-- SVG Time Series Area Chart -->
+              </div>
+            </div>
+
+            <!-- 차트 2: 심각도 분포 도넛 차트 -->
+            <div class="chart-card case-donut-card">
+              <div class="chart-header">
+                <span class="chart-title">심각도 분포</span>
+                <span class="chart-sub">전체 19,106건 심각도 구성</span>
+              </div>
+              <div class="donut-content-row" id="case-severity-donut-wrap">
+                <!-- SVG Donut Chart + Legend -->
+              </div>
+            </div>
+
+            <!-- 차트 3: 상태 분포 도넛 차트 -->
+            <div class="chart-card case-donut-card">
+              <div class="chart-header">
+                <span class="chart-title">상태 분포</span>
+                <span class="chart-sub">처리 단계별 케이스 구성</span>
+              </div>
+              <div class="donut-content-row" id="case-status-donut-wrap">
+                <!-- SVG Donut Chart + Legend -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Filter & View Mode Toolbar (Image 1 style) -->
+        <!-- Filter & View Mode Toolbar (Image 3 style) -->
+        <div class="monitoring-filter-bar">
+          <div class="filter-left-group">
+            <div class="filter-select-wrap">
+              <select class="filter-select" id="filter-site-select" aria-label="대상 사이트 및 단말 선택">
+                <option value="hq-gw">통합 본사 게이트웨이 (HQ_Primary_WAN)</option>
+                <option value="local">내 PC (관리자 엔드포인트)</option>
+                <option value="branch-gw">지역 거점 지사 게이트웨이 (Branch_WAN)</option>
+                <option value="cloud-vpc">클라우드 트랜짓 게이트웨이 (Cloud_AWS_VPC)</option>
+              </select>
+            </div>
+            <div class="time-range-group" role="group" aria-label="조회 기간">
+              <button type="button" class="time-btn" data-time="1h">1h</button>
+              <button type="button" class="time-btn active" data-time="8h">8h</button>
+              <button type="button" class="time-btn" data-time="24h">24h</button>
+              <button type="button" class="time-btn" data-time="7d">7d</button>
+            </div>
+            <span class="filter-caption">트래픽 상위 사이트 · 구독 최신 사용률 (단말 실측)</span>
+          </div>
+          <div class="filter-right-group">
+            <span class="view-mode-label">보기 모드:</span>
+            <div class="view-mode-group" role="group" aria-label="보기 모드">
+              <button type="button" class="view-mode-btn active" data-mode="overview">개요 (2)</button>
+              <button type="button" class="view-mode-btn" data-mode="cpe">CPE (1)</button>
+              <button type="button" class="view-mode-btn" data-mode="site">사이트 (2)</button>
+              <button type="button" class="view-mode-btn" data-mode="sub">연결 구독 (4)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- [Image 3 Style] Split 2-Column Balanced Dashboard (5:5 완벽 대칭 관제) -->
+        <div class="dashboard-split">
+          <!-- Left Column: 트래픽 상위 사이트 (Top 10) 가로 막대 차트 -->
+          <div class="dashboard-col traffic-top-col">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3 class="panel-title">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  트래픽 상위 사이트 <span class="panel-count">(Top 10)</span>
+                </h3>
+                <p class="panel-desc">기간 합계 (Rx + Tx - CloudWAN 집계 값), 막대를 누르면 그 사이트로 이동합니다.</p>
+              </div>
+            </div>
+            <div class="card traffic-chart-card">
+              <div id="traffic-bar-chart" class="traffic-bar-chart" aria-label="사이트별 트래픽 가로 막대 차트"></div>
+            </div>
+          </div>
+
+          <!-- Right Column: 구독 최신 사용률 4개 테이블 & CSV 내보내기 (Image 3 Style) -->
+          <div class="dashboard-col usage-col">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3 class="panel-title">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                  구독 최신 사용률 <span class="panel-count">4개</span>
+                </h3>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline btn-export" id="btn-export-metrics" title="CSV 내보내기">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                내보내기
+              </button>
+            </div>
+            <div class="card usage-table-card">
+              <div class="table-wrap usage-table-wrap">
+                <table class="table usage-table" id="usage-summary-table" aria-label="구독 및 단말 네트워크 사용률">
+                  <thead>
+                    <tr>
+                      <th scope="col">구독</th>
+                      <th scope="col">사이트</th>
+                      <th scope="col">대역폭</th>
+                      <th scope="col">Rx</th>
+                      <th scope="col">Tx</th>
+                      <th scope="col">사용률(최대)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="usage-table-tbody">
+                    <tr>
+                      <td><span class="cell-tag">HQ_Primary_WAN_Default</span></td>
+                      <td>HQ_Main_Gateway</td>
+                      <td>1000 Mb/s</td>
+                      <td><span class="mono">142.5 Mbps</span></td>
+                      <td><span class="mono">86.2 Mbps</span></td>
+                      <td>
+                        <div class="usage-meter-cell">
+                          <div class="usage-bar-track"><div class="usage-bar-fill" style="width: 22.8%;"></div></div>
+                          <span class="usage-val mono">22.8%</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="cell-tag">HQ_Internet_WAN_Default</span></td>
+                      <td>HQ_Internet_Node</td>
+                      <td>1000 Mb/s</td>
+                      <td><span class="mono">48.2 Mbps</span></td>
+                      <td><span class="mono">31.4 Mbps</span></td>
+                      <td>
+                        <div class="usage-meter-cell">
+                          <div class="usage-bar-track"><div class="usage-bar-fill" style="width: 7.9%;"></div></div>
+                          <span class="usage-val mono">7.9%</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="cell-tag">Branch_Alpha_WAN_Default</span></td>
+                      <td>Branch_Alpha_Node</td>
+                      <td>1000 Mb/s</td>
+                      <td><span class="mono">28.3 Mbps</span></td>
+                      <td><span class="mono">15.7 Mbps</span></td>
+                      <td>
+                        <div class="usage-meter-cell">
+                          <div class="usage-bar-track"><div class="usage-bar-fill" style="width: 4.4%;"></div></div>
+                          <span class="usage-val mono">4.4%</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="cell-tag">Cloud_AWS_Transit_Default</span></td>
+                      <td>Cloud_AWS_Seoul_VPC</td>
+                      <td>10000 Mb/s</td>
+                      <td><span class="mono">850.1 Mbps</span></td>
+                      <td><span class="mono">412.0 Mbps</span></td>
+                      <td>
+                        <div class="usage-meter-cell">
+                          <div class="usage-bar-track"><div class="usage-bar-fill" style="width: 12.6%;"></div></div>
+                          <span class="usage-val mono">12.6%</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-pagination">
+                <button type="button" class="btn btn-xs" disabled>&lt; Previous</button>
+                <span class="page-num active">1</span>
+                <button type="button" class="btn btn-xs" disabled>Next &gt;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 하단 실시간 단말 텔레메트리 진단 패널 -->
+        <div class="endpoint-telemetry-panel">
+          <div class="panel-header">
+            <h3 class="panel-title">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              엔드포인트 실시간 진단 (Endpoint Live Telemetry &amp; System Diagnostics)
+            </h3>
+            <span class="panel-badge live">실시간 수신 중</span>
+          </div>
+          <section class="card student student-telemetry-card" aria-labelledby="student-status-title">
+            <h2 id="student-status-title" class="sr-only">보안 관제 및 위협 모니터링 <span class="tag tag-student">Live Telemetry</span></h2>
+            <div id="student-status" class="student-slot" aria-live="polite"></div>
+          </section>
+          <div id="dashboard-metrics-slot" class="dashboard-metrics-slot"></div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           [VIEW: SITES] 사이트 관리 > 대리점 관리 (Images 3 & 4 GIS 관제)
+           ============================================================ -->
+      <section id="view-sites" class="view" role="tabpanel" aria-labelledby="tab-sites" hidden>
+        <!-- Topbar Breadcrumb & Header -->
+        <div class="view-header-row gis-header-row">
+          <nav class="topbar-breadcrumb" aria-label="브레드크럼">
+            <span class="breadcrumb-item">사이트 관리</span>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-item active">대리점 관리</span>
+          </nav>
+          <div class="view-header-actions">
+            <span class="gis-last-sync" id="gis-last-sync-time">마지막 갱신 : Oct 28, 2026 12:45 PM</span>
+            <button type="button" class="btn btn-sm btn-outline-cyan btn-gis-refresh" id="btn-sites-refresh" title="지점 현황 새로고침">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              <span>새로고침</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Success Notification Banner -->
+        <div class="banner-success banner-gis" id="banner-gis-status">
+          <div class="banner-success-main">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <div class="banner-success-text">
+              <strong>Success</strong>: 특별히 필요한 조치사항이 없습니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- [Top 5-Card Stats Bar] 통계 수치 상단 재배치 -->
+        <div class="gis-stats-bar gis-stats-bar-top">
+          <div class="gis-stat-pill">
+            <span class="gis-stat-val" id="gis-stat-total">164</span>
+            <span class="gis-stat-lbl">전체</span>
+          </div>
+          <div class="gis-stat-pill">
+            <span class="gis-stat-val text-green" id="gis-stat-low">0</span>
+            <span class="gis-stat-lbl">낮음</span>
+          </div>
+          <div class="gis-stat-pill">
+            <span class="gis-stat-val text-cyan" id="gis-stat-med">0</span>
+            <span class="gis-stat-lbl">보통</span>
+          </div>
+          <div class="gis-stat-pill">
+            <span class="gis-stat-val text-orange" id="gis-stat-high">1,606</span>
+            <span class="gis-stat-lbl">높음</span>
+          </div>
+          <div class="gis-stat-pill">
+            <span class="gis-stat-val text-crit" id="gis-stat-crit">91</span>
+            <span class="gis-stat-lbl">차단</span>
+          </div>
+        </div>
+
+        <!-- [Full-Width Grand GIS Map Container with Floating Mobile Hub] -->
+        <div class="gis-grand-map-card">
+          <div class="gis-map-header">
+            <div class="gis-title-wrap">
+              <span class="gis-badge-tag" id="gis-current-mode-tag">Seoul</span>
+              <span class="gis-map-sub">지점 관제 지도</span>
+            </div>
+            <div class="gis-map-controls">
+              <button type="button" class="btn-gis-tool" id="btn-gis-reset" title="원래 배율로 초기화">⟲ Reset</button>
+              <button type="button" class="btn-gis-tool active" id="btn-gis-toggle-mode">← Nationwide</button>
+            </div>
+          </div>
+
+          <div class="gis-canvas-wrap" id="gis-canvas-wrap">
+            <!-- SVG Map with clickable districts and pulsating radar nodes -->
+            <svg id="gis-svg-map" class="gis-svg-map" viewBox="30 45 540 430" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <filter id="radar-glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                <radialGradient id="node-pulse-grad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#EF4444" stop-opacity="0.9"/>
+                  <stop offset="50%" stop-color="#EF4444" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <g id="gis-map-paths-group"></g>
+              <g id="gis-map-radar-group"></g>
+            </svg>
+
+            <!-- Hover Tooltip Box -->
+            <div class="gis-tooltip" id="gis-tooltip" hidden>
+              <div class="gis-tooltip-title" id="gis-tt-title">강남지사</div>
+              <div class="gis-tooltip-row"><span>전체 대리점 :</span> <strong id="gis-tt-total">2</strong></div>
+              <div class="gis-tooltip-row"><span>설치 대리점 :</span> <strong id="gis-tt-installed">2</strong></div>
+              <div class="gis-tooltip-row text-pass"><span>Block :</span> <strong id="gis-tt-block">0</strong></div>
+              <div class="gis-tooltip-row text-crit"><span>Critical :</span> <strong id="gis-tt-crit">70</strong></div>
+            </div>
+
+            <!-- [Collapsed Mode] Floating Mobile Hub Toggle Button (지도 우측 상단 캡슐 칩) -->
+            <button type="button" class="gis-mobile-toggle-btn" id="btn-toggle-mobile-hub" title="대리점 및 보안 케이스 목록 열기">
+              <span class="mobile-icon">📱</span>
+              <span class="mobile-toggle-label">대리점 · 케이스 목록</span>
+              <span class="mobile-count-pill" id="mobile-hub-badge">44</span>
+              <span class="mobile-arrow">↗</span>
+            </button>
+
+            <!-- [Expanded Mode] Floating Mobile Hub Window (휴대폰 미니화면 윈도우) -->
+            <div class="gis-mobile-hub" id="gis-mobile-hub" hidden>
+              <!-- Mobile Phone Window Header / Notch -->
+              <div class="mobile-hub-topbar">
+                <div class="mobile-notch-handle"></div>
+                <div class="mobile-hub-header-row">
+                  <div class="mobile-hub-title-group">
+                    <span class="mobile-hub-icon">📱</span>
+                    <strong class="mobile-hub-title">지점 관제 미니 허브</strong>
+                  </div>
+                  <div class="mobile-hub-header-actions">
+                    <button type="button" class="btn-mobile-ctrl" id="btn-close-mobile-hub" title="축소하기">✕</button>
+                  </div>
+                </div>
+                <!-- Segmented Tabs: 대리점 목록 vs 케이스 목록 -->
+                <div class="mobile-hub-tabs">
+                  <button type="button" class="btn-hub-tab active" data-tab="sites" id="btn-hub-tab-sites">🏢 대리점 목록</button>
+                  <button type="button" class="btn-hub-tab" data-tab="cases" id="btn-hub-tab-cases">🚨 케이스 <span id="mobile-case-badge" class="gis-case-region-label">(서울)</span></button>
+                </div>
+              </div>
+
+              <!-- Mobile Window Body -->
+              <div class="mobile-hub-body">
+                <!-- Panel 1: 대리점 목록 -->
+                <div class="mobile-hub-panel active" id="hub-panel-sites">
+                  <div class="mobile-search-bar">
+                    <input type="text" class="gis-search-input" id="gis-site-search" placeholder="검색할 단어나 코드를 입력하세요.">
+                    <button type="button" class="btn btn-xs btn-cyan" id="gis-site-search-btn">SEARCH</button>
+                  </div>
+
+                  <div class="mobile-table-wrap">
+                    <table class="table gis-table" id="gis-sites-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 45px;">상태</th>
+                          <th style="width: 55px;">지역</th>
+                          <th style="width: 120px;">대리점</th>
+                          <th>주소</th>
+                          <th style="width: 65px; text-align: center;">설치</th>
+                        </tr>
+                      </thead>
+                      <tbody id="gis-sites-tbody">
+                        <!-- Dynamic Rows by JS -->
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="gis-table-footer mobile-table-footer">
+                    <span class="gis-count-info" id="gis-site-count-info">전체 23개</span>
+                    <div class="gis-pagination">
+                      <button type="button" class="btn-page" id="gis-page-prev">Previous</button>
+                      <button type="button" class="btn-page active">1</button>
+                      <button type="button" class="btn-page">2</button>
+                      <button type="button" class="btn-page" id="gis-page-next">Next</button>
+                    </div>
+                    <div class="gis-page-sizes">
+                      <button type="button" class="btn-size active">10</button>
+                      <button type="button" class="btn-size">20</button>
+                      <button type="button" class="btn-size">50</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Panel 2: 케이스 목록 -->
+                <div class="mobile-hub-panel" id="hub-panel-cases" hidden>
+                  <div class="mobile-search-bar">
+                    <input type="text" class="gis-search-input" id="gis-case-search" placeholder="케이스 ID · 제목 · 설명으로 검색">
+                    <button type="button" class="btn btn-xs btn-cyan" id="gis-case-search-btn">SEARCH</button>
+                  </div>
+
+                  <div class="mobile-table-wrap">
+                    <table class="table gis-table" id="gis-cases-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 85px;">케이스 ID</th>
+                          <th>제목</th>
+                          <th style="width: 55px; text-align: center;">심각도</th>
+                          <th style="width: 55px; text-align: center;">실태</th>
+                          <th style="width: 110px;">대상</th>
+                          <th style="width: 55px; text-align: center;">담당</th>
+                        </tr>
+                      </thead>
+                      <tbody id="gis-cases-tbody">
+                        <!-- Dynamic Cases Rows by JS -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           [VIEW: TOPOLOGY] 센터 연결 정보 (Image 5 토폴로지 연결도)
+           ============================================================ -->
+      <section id="view-topology" class="view" role="tabpanel" aria-labelledby="tab-topology" hidden>
+        <!-- Header -->
+        <div class="view-header-row">
+          <div class="topology-title-group">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <h2 class="topology-heading">센터 연결 정보</h2>
+          </div>
+          <div class="topology-toolbar">
+            <span class="topology-status-badge live">● 실시간 스트림 정상</span>
+            <button type="button" class="btn btn-sm btn-outline-cyan" id="btn-topo-auto-layout" title="자동 정렬">
+              <span>자동 정렬</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-cyan" id="btn-topo-reset" title="배율 초기화">
+              <span>화면 맞춤</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-cyan" id="btn-topo-fullscreen" title="전체 화면">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 7-Tier Topology Canvas Container -->
+        <div class="topology-canvas-container" id="topology-canvas-container">
+          <!-- 7 Tier Zone Headers -->
+          <div class="topology-tier-headers">
+            <div class="tier-col-header">디바이스</div>
+            <div class="tier-col-header">대리점</div>
+            <div class="tier-col-header">시/군/구</div>
+            <div class="tier-col-header">시/도</div>
+            <div class="tier-col-header">SD-WAN Group</div>
+            <div class="tier-col-header">데이터센터</div>
+            <div class="tier-col-header">Swing-gw</div>
+          </div>
+
+          <!-- Dynamic SVG Vector Links & Flow Particles -->
+          <svg class="topology-svg-links" id="topology-svg-links"></svg>
+
+          <!-- 7 Columns of Nodes Grid -->
+          <div class="topology-nodes-grid" id="topology-nodes-grid">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Node Inspector Drawer (Bottom or Float) -->
+        <div class="topology-inspector-card" id="topology-inspector" hidden>
+          <div class="inspector-header">
+            <div class="inspector-node-title" id="topo-inspect-title">Device 03 (Alert)</div>
+            <button type="button" class="btn-close-sm" id="btn-close-topo-inspect">✕</button>
+          </div>
+          <div class="inspector-grid">
+            <div class="inspect-item"><span>식별 IP</span> <strong id="topo-inspect-ip">172.16.27.12</strong></div>
+            <div class="inspect-item"><span>상태</span> <strong id="topo-inspect-status" class="text-crit">Alert (권한 상승 감지)</strong></div>
+            <div class="inspect-item"><span>트래픽 (Tx/Rx)</span> <strong id="topo-inspect-traffic">48.2 MB / 12.1 MB</strong></div>
+            <div class="inspect-item"><span>연결 게이트웨이</span> <strong id="topo-inspect-gw">Boramae Center CPE #1</strong></div>
+            <div class="inspect-item"><span>ZTNA 점검</span> <strong class="text-green">통과 (Trust 88)</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           [VIEW: UEBA] 분석 및 리포팅 > 보안 분석 (Images 1 & 2 UEBA)
+           ============================================================ -->
+      <section id="view-ueba" class="view" role="tabpanel" aria-labelledby="tab-ueba" hidden>
+        <!-- Topbar Breadcrumb & Header -->
+        <div class="view-header-row">
+          <nav class="topbar-breadcrumb" aria-label="브레드크럼">
+            <span class="breadcrumb-item">분석 및 리포팅</span>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-item active">보안 분석</span>
+          </nav>
+          <div class="view-header-actions">
+            <button type="button" class="btn btn-sm btn-outline-cyan" id="btn-ueba-refresh" title="UEBA 데이터 새로고침">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              <span>새로고침</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Top KPI Cards (Screenshot 2) -->
+        <div class="ueba-kpi-grid">
+          <div class="ueba-kpi-card">
+            <div class="kpi-label">모니터링 엔티티</div>
+            <div class="kpi-number">7</div>
+            <div class="kpi-sub">필터 적용 후 7개 / 최근 14일</div>
+          </div>
+          <div class="ueba-kpi-card">
+            <div class="kpi-label text-crit">고위험 엔티티</div>
+            <div class="kpi-number text-crit">4</div>
+            <div class="kpi-sub">점수 60 이상 · 추세 변동</div>
+          </div>
+          <div class="ueba-kpi-card">
+            <div class="kpi-label text-cyan">Use Case 일치</div>
+            <div class="kpi-number text-cyan">8</div>
+            <div class="kpi-sub">UEBA 시나리오 5종 전체</div>
+          </div>
+          <div class="ueba-kpi-card">
+            <div class="kpi-label">평균 위험점수</div>
+            <div class="kpi-number">59</div>
+            <div class="kpi-sub">등급 보통 / 표준편차 40.3</div>
+          </div>
+        </div>
+
+        <!-- Filter Bar (Screenshot 2) -->
+        <div class="ueba-filter-bar">
+          <div class="filter-group-row">
+            <div class="filter-field search-field">
+              <label class="filter-label">검색</label>
+              <div class="filter-input-wrap">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" class="filter-input" id="ueba-search-input" placeholder="엔티티 · Use Case · 요약으로 검색...">
+              </div>
+            </div>
+            <div class="filter-field">
+              <label class="filter-label">엔티티 유형</label>
+              <select class="filter-select" id="ueba-type-select">
+                <option value="all">전체</option>
+                <option value="user">사용자</option>
+                <option value="host">호스트</option>
+                <option value="ip">IP</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label class="filter-label">위험 등급</label>
+              <select class="filter-select" id="ueba-grade-select">
+                <option value="all">전체</option>
+                <option value="crit">치명 (90~100)</option>
+                <option value="high">높음 (60~89)</option>
+                <option value="med">보통 (40~59)</option>
+                <option value="low">낮음 (20~39)</option>
+                <option value="min">미비 (0~19)</option>
+              </select>
+            </div>
+            <div class="filter-actions">
+              <button type="button" class="btn btn-sm btn-cyan" id="btn-ueba-search">검색</button>
+              <button type="button" class="btn btn-sm btn-outline" id="btn-ueba-reset">초기화</button>
+            </div>
+          </div>
+          <div class="filter-period-row">
+            <span class="period-label">기간</span>
+            <div class="time-range-group" role="group" aria-label="UEBA 분석 기간">
+              <button type="button" class="time-btn" data-period="24h">24h</button>
+              <button type="button" class="time-btn" data-period="7d">7d</button>
+              <button type="button" class="time-btn active" data-period="14d">14d</button>
+              <button type="button" class="time-btn" data-period="30d">30d</button>
+            </div>
+            <div class="view-mode-tabs">
+              <span class="view-mode-label">보기 모드:</span>
+              <button type="button" class="vm-tab" data-mode="range">범위 분석(8)</button>
+              <button type="button" class="vm-tab active" data-mode="anomaly">이상 탐지(5)</button>
+              <button type="button" class="vm-tab" data-mode="predict">예측 능력(3)</button>
+              <button type="button" class="vm-tab" data-mode="trend">위험 추세(4)</button>
+            </div>
+            <span class="total-entity-caption">현재 엔티티 7개</span>
+          </div>
+        </div>
+
+        <!-- 5 Use Case 탐지 시나리오 카드 (Screenshot 2) -->
+        <div class="ueba-usecases-section">
+          <div class="panel-header">
+            <h3 class="panel-title">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+              Use Case 탐지 <span class="panel-sub">UEBA 시나리오 5종</span>
+            </h3>
+            <span class="scenario-detect-badge">시나리오 5종 중 5종 탐지</span>
+          </div>
+          <div class="ueba-usecases-grid">
+            <!-- UC-001 -->
+            <div class="uc-card" data-uc="UC-001">
+              <div class="uc-header">
+                <span class="uc-tag">UC-001</span>
+                <span class="uc-count text-orange">1</span>
+              </div>
+              <div class="uc-name">비정상 로그인 시간대</div>
+              <div class="uc-desc">비즈니스 정상 활동 외 시간대의 접속 (2건 이내)</div>
+              <div class="uc-footer">
+                <span class="uc-mitre">MITRE -</span>
+                <span class="uc-target">svc_backup</span>
+              </div>
+            </div>
+            <!-- UC-002 -->
+            <div class="uc-card" data-uc="UC-002">
+              <div class="uc-header">
+                <span class="uc-tag">UC-002</span>
+                <span class="uc-count text-orange">1</span>
+              </div>
+              <div class="uc-name">불가능한 이동</div>
+              <div class="uc-desc">2시간 내 500km 이상 떨어진 두 지역 로그인</div>
+              <div class="uc-footer">
+                <span class="uc-mitre">MITRE -</span>
+                <span class="uc-target">j.kim</span>
+              </div>
+            </div>
+            <!-- UC-003 -->
+            <div class="uc-card" data-uc="UC-003">
+              <div class="uc-header">
+                <span class="uc-tag">UC-003</span>
+                <span class="uc-count text-crit">2</span>
+              </div>
+              <div class="uc-name">권한 상승</div>
+              <div class="uc-desc">동일 세션에서 두 전송자 권한 승격</div>
+              <div class="uc-footer">
+                <span class="uc-mitre">MITRE: Credential Access Privilege Escalation</span>
+                <span class="uc-target">svc_backup, web-prod-01</span>
+              </div>
+            </div>
+            <!-- UC-004 -->
+            <div class="uc-card" data-uc="UC-004">
+              <div class="uc-header">
+                <span class="uc-tag">UC-004</span>
+                <span class="uc-count text-crit">3</span>
+              </div>
+              <div class="uc-name">데이터 유출 패턴</div>
+              <div class="uc-desc">외부 목적지 급증 · 외부 비율 베이스라인 1.5배 초과</div>
+              <div class="uc-footer">
+                <span class="uc-mitre">MITRE: Exfiltration</span>
+                <span class="uc-target">web-prod-01, 141.98.83.48, db-prod-02</span>
+              </div>
+            </div>
+            <!-- UC-005 -->
+            <div class="uc-card" data-uc="UC-005">
+              <div class="uc-header">
+                <span class="uc-tag">UC-005</span>
+                <span class="uc-count text-orange">1</span>
+              </div>
+              <div class="uc-name">휴면 계정 활성화</div>
+              <div class="uc-desc">7일 이상 활동이 없다가 새 이벤트 발생</div>
+              <div class="uc-footer">
+                <span class="uc-mitre">MITRE -</span>
+                <span class="uc-target">svc_backup</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2D 이상치 분포 버블 차트 (Screenshot 2) -->
+        <div class="card ueba-scatter-card">
+          <div class="panel-header">
+            <h3 class="panel-title">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/></svg>
+              이상치 분포 <span class="panel-sub">X: 전체 엔티티 점수 · 버블 크기: 일치한 Use Case 수</span>
+            </h3>
+          </div>
+          <div class="scatter-chart-canvas-wrap" id="ueba-scatter-wrap">
+            <svg class="ueba-scatter-svg" id="ueba-scatter-svg" viewBox="0 0 1000 240" preserveAspectRatio="none">
+              <!-- Grid lines & Axes -->
+              <g id="scatter-grid-lines"></g>
+              <!-- Bubbles -->
+              <g id="scatter-bubbles-group"></g>
+            </svg>
+            <div class="scatter-tooltip" id="scatter-tooltip" hidden></div>
+          </div>
+        </div>
+
+        <!-- 엔티티 위험 순위 데이터 테이블 (Screenshot 1) -->
+        <div class="card ueba-risk-table-card">
+          <div class="panel-header">
+            <h3 class="panel-title">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              엔티티 위험 순위
+            </h3>
+          </div>
+          <div class="table-wrap">
+            <table class="table ueba-risk-table" id="ueba-risk-table">
+              <thead>
+                <tr>
+                  <th style="width: 160px;">엔티티</th>
+                  <th style="width: 80px; text-align: center;">유형</th>
+                  <th style="width: 70px; text-align: center;">점수</th>
+                  <th style="width: 80px; text-align: center;">등급</th>
+                  <th style="width: 80px; text-align: center;">추세</th>
+                  <th style="width: 180px;">Use Case</th>
+                  <th>요약</th>
+                </tr>
+              </thead>
+              <tbody id="ueba-risk-tbody">
+                <!-- 7 Exact Rows from Screenshot 1 Rendered by JS / HTML -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           [VIEW: CASES] 사건·케이스 관제 (SIEM / SOAR Case Console)
+           ============================================================ -->
+      <section id="view-cases" class="view" role="tabpanel" aria-labelledby="tab-cases" hidden>
+        <div class="view-header-row">
+          <nav class="topbar-breadcrumb" aria-label="브레드크럼">
+            <span class="breadcrumb-item">Lumos ZTNA</span>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-item">관제</span>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-item active">사건·케이스 관제</span>
+          </nav>
+        </div>
+
+        <div class="cases-kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">전체 사건</span>
+            <span class="kpi-number">24</span>
+            <span class="kpi-sub">수집된 SIEM/SOAR 케이스</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label text-crit">긴급 (Critical)</span>
+            <span class="kpi-number text-crit">2</span>
+            <span class="kpi-sub">즉시 사람 확인 필요</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label text-orange">높음 (High)</span>
+            <span class="kpi-number text-orange">5</span>
+            <span class="kpi-sub">조치 권고 대기 중</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label text-pass">해결 완료</span>
+            <span class="kpi-number text-pass">17</span>
+            <span class="kpi-sub">정책 집행 완료</span>
+          </div>
+        </div>
+
+        <div class="card cases-table-card">
+          <div class="panel-header">
+            <h3 class="panel-title">통합 관제 케이스 인벤토리</h3>
+          </div>
+          <div class="table-wrap">
+            <table class="table cases-full-table" id="cases-full-table">
+              <thead>
+                <tr>
+                  <th style="width: 100px;">케이스 ID</th>
+                  <th>사건 요약</th>
+                  <th style="width: 80px; text-align: center;">심각도</th>
+                  <th style="width: 80px; text-align: center;">상태</th>
+                  <th style="width: 160px;">대상 자산/계정</th>
+                  <th style="width: 120px;">발생 일시</th>
+                  <th style="width: 100px; text-align: center;">조치</th>
+                </tr>
+              </thead>
+              <tbody id="cases-full-tbody">
+                <!-- Cases Rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           [VIEW 2] 단말·자산 관리 (Image 2 Style Hierarchy Tree & Inventory)
+           ============================================================ -->
+      <section id="view-endpoints" class="view" role="tabpanel" aria-labelledby="tab-endpoints" hidden>
+        <!-- Top Sub-Tabs (Image 5 style: 관리자 / 사이트별 사용자) & Guidance Notice -->
+        <div class="endpoints-top-bar">
+          <div class="endpoints-sub-nav">
+            <button type="button" class="sub-nav-btn" data-sub="admin">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              관리자 단말
+            </button>
+            <button type="button" class="sub-nav-btn active" data-sub="site-users">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              사이트별 사용자 / 단말
+            </button>
+          </div>
+          <div class="endpoints-notice-bar">
+            <span>* 관제 대상 사이트의 사용자입니다. Site Management 에는 로그인할 수 없고, 부여된 사이트로 연동됩니다.</span>
+          </div>
+        </div>
+
+        <!-- Split Hierarchy Panel & Data Grid (Image 5 style) -->
+        <div class="endpoints-split-panel">
+          <!-- Left: Organization Tree Panel (Image 5: 조직 계층 트리) -->
+          <div class="tree-panel">
+            <div class="tree-panel-header">
+              <div class="tree-panel-title-row">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span class="tree-panel-title">조직</span>
+              </div>
+              <div class="tree-controls">
+                <button type="button" class="tree-ctrl-btn" id="tree-expand-all" title="전체 펼치기">+</button>
+                <button type="button" class="tree-ctrl-btn" id="tree-collapse-all" title="전체 접기">⤢</button>
+              </div>
+            </div>
+            
+            <div class="tree-unassigned-row">
+              <span class="unassigned-label">미배정</span>
+              <span class="unassigned-badge">0</span>
+            </div>
+
+            <div class="tree-container">
+              <ul class="tree-root">
+                <li class="tree-node open">
+                  <div class="tree-node-item active" data-org="all">
+                    <span class="tree-toggle">▼</span>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="tree-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    <span class="tree-node-label">Global Enterprise Corp</span>
+                    <span class="tree-badge">19</span>
+                  </div>
+                  <ul class="tree-children">
+                    <li class="tree-leaf">
+                      <div class="tree-node-item" data-org="hq">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="tree-icon-leaf"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+                        <span class="tree-node-label">본사 HQ Campus</span>
+                        <div class="tree-node-meta">
+                          <span class="tree-badge sub-badge">12</span>
+                          <span class="tree-badge-cpe">1</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="tree-leaf">
+                      <div class="tree-node-item" data-org="branch">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="tree-icon-leaf"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span class="tree-node-label">Regional Branch Office (지사 Alpha)</span>
+                        <span class="tree-badge sub-badge">7</span>
+                      </div>
+                    </li>
+                    <li class="tree-leaf">
+                      <div class="tree-node-item" data-org="cloud">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="tree-icon-leaf"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span class="tree-node-label">클라우드 SecOps</span>
+                        <span class="tree-badge sub-badge">3</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right: Main Data Grid Panel (Image 5 Right Area) -->
+          <div class="endpoints-main-panel">
+            <!-- 1. 사이트별 사용자 및 단말 인벤토리 뷰 (기본 표시) -->
+            <div id="panel-site-users" class="sub-tab-panel active">
+              <div class="iam-header-bar">
+                <div class="iam-title-wrap">
+                  <h3 class="iam-title">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <span id="iam-org-title">전체 사용자</span>
+                    <span class="iam-count-badge" id="iam-user-count">19명</span>
+                  </h3>
+                </div>
+                <div class="iam-actions-right">
+                  <button type="button" class="btn btn-outline btn-xs" id="iam-refresh-btn">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                    새로고침
+                  </button>
+                  <button type="button" class="btn btn-primary btn-xs" id="iam-add-user-btn">
+                    + 사이트 사용자 추가
+                  </button>
+                </div>
+              </div>
+
+              <!-- Filter Toolbar (Image 5 style) -->
+              <div class="iam-filter-toolbar">
+                <div class="filter-dropdown-wrap">
+                  <select class="filter-select" id="iam-org-select" aria-label="소속 조직 선택">
+                    <option value="all">전체 조직 (Global Enterprise)</option>
+                    <option value="hq">본사 HQ Campus</option>
+                    <option value="branch">Regional Branch Office (지사 Alpha)</option>
+                    <option value="cloud">클라우드 SecOps</option>
+                  </select>
+                </div>
+                <div class="search-input-wrap iam-search-wrap">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" class="search-input" id="iam-search-input" placeholder="이메일 · 로그인 ID · 이름으로 검색..." aria-label="사용자 및 단말 검색">
+                </div>
+                <select class="filter-select filter-select-sm" id="iam-status-select" aria-label="상태 필터">
+                  <option value="all">전체 상태</option>
+                  <option value="ACTIVE">ACTIVE (정상)</option>
+                  <option value="STANDBY">STANDBY (대기)</option>
+                </select>
+                <button type="button" class="btn btn-accent btn-sm" id="iam-search-btn">검색</button>
+              </div>
+
+              <!-- IAM & Endpoints Data Table (Image 5 style) -->
+              <div class="card iam-table-card">
+                <div class="table-wrap">
+                  <table class="table iam-table" id="iam-users-table" aria-label="사이트별 사용자 및 인가 단말 목록">
+                    <thead>
+                      <tr>
+                        <th scope="col">사용자 ID</th>
+                        <th scope="col">이름 · 직책 · 부서</th>
+                        <th scope="col">소속 조직</th>
+                        <th scope="col">인가 단말 (CPE / MAC)</th>
+                        <th scope="col">상태</th>
+                      </tr>
+                    </thead>
+                    <tbody id="iam-table-tbody">
+                      <!-- ui-chrome.js에서 19개 행 동적 렌더링 -->
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-pagination">
+                  <button type="button" class="btn btn-xs" disabled>&lt; Previous</button>
+                  <span class="page-num active">1</span>
+                  <button type="button" class="btn btn-xs" disabled>Next &gt;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. 관리자 단말 전용 텔레메트리 뷰 (기존 Core 및 Student 계약 보존) -->
+            <div id="panel-admin" class="sub-tab-panel" hidden>
+              <div class="grid-2 asset-cards-grid">
+                <section class="card provided" aria-labelledby="identity-title">
+                  <h2 id="identity-title">현재 로그인 계정 <span class="tag">Core</span></h2>
+                  <dl class="identity">
+                    <dt>사용자</dt>
+                    <dd data-testid="identity-user" id="identity-user">불러오는 중</dd>
+                    <dt>기기</dt>
+                    <dd data-testid="identity-device" id="identity-device">불러오는 중</dd>
+                    <dt>세션</dt>
+                    <dd data-testid="identity-session" id="identity-session">불러오는 중</dd>
+                  </dl>
+                </section>
+
+                <section class="card student" aria-labelledby="student-identity-title">
+                  <h2 id="student-identity-title">단말 신원 및 무결성 점검 <span class="tag tag-student">Verified</span></h2>
+                  <div id="student-identity" class="student-slot" aria-live="polite"></div>
+                </section>
+              </div>
+
+              <div class="grid-2 asset-cards-grid">
+                <section class="card provided" aria-labelledby="devices-title">
+                  <h2 id="devices-title">등록 기기 상태 <span class="tag">Core</span></h2>
+                  <div id="devices" aria-live="polite"></div>
+                </section>
+                <section class="card provided" aria-labelledby="sessions-title">
+                  <h2 id="sessions-title">보안 세션 상태 <span class="tag">Core</span></h2>
+                  <div id="sessions" aria-live="polite"></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           [VIEW 3] 종속성 취약점 점검 (Dedicated OSV Security Scanner)
+           ============================================================ -->
+      <section id="view-vulnerabilities" class="view" role="tabpanel" aria-labelledby="tab-vulnerabilities" hidden>
+        <nav class="topbar-breadcrumb" aria-label="브레드크럼">
+          <span class="breadcrumb-item">Lumos ZTNA</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item">위협 및 컴플라이언스</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item active">취약점 관리 &amp; 규제 표준</span>
+        </nav>
+
+        <!-- [Image 3 & 4 Style] 취약점 관리 & 글로벌 컴플라이언스 대시보드 -->
+        <div class="vuln-compliance-section">
+          <!-- 1. 취약점 개요 4대 핵심 KPI 카드 (Image 3) -->
+          <div class="vuln-kpi-grid">
+            <div class="vuln-kpi-card">
+              <span class="vuln-kpi-label">전체 취약점</span>
+              <div class="vuln-kpi-val-row">
+                <span class="vuln-kpi-number mono" id="vuln-total-count">0</span>
+              </div>
+              <span class="vuln-kpi-sub">조치 완료: 0건</span>
+            </div>
+
+            <div class="vuln-kpi-card">
+              <span class="vuln-kpi-label">고위험 취약점</span>
+              <div class="vuln-kpi-val-row">
+                <span class="vuln-kpi-number mono text-pass" id="vuln-high-count">0</span>
+              </div>
+              <span class="vuln-kpi-sub">조치 우선순위: 낮음</span>
+            </div>
+
+            <div class="vuln-kpi-card">
+              <span class="vuln-kpi-label">위험성 비율</span>
+              <div class="vuln-kpi-val-row">
+                <span class="vuln-kpi-number mono text-pass">0.0%</span>
+              </div>
+              <span class="vuln-kpi-sub">전체 0개 자산 중 0개가 취약</span>
+            </div>
+
+            <div class="vuln-kpi-card">
+              <span class="vuln-kpi-label">전체 관리 자산</span>
+              <div class="vuln-kpi-val-row">
+                <span class="vuln-kpi-number mono">1</span>
+              </div>
+              <span class="vuln-kpi-sub">침해 0 · 안전 1</span>
+            </div>
+          </div>
+
+          <!-- 2. 심각도별 상세 통계 & CVSS 점수 분포 -->
+          <div class="vuln-stats-row">
+            <div class="vuln-stat-card sev-crit-box">
+              <span class="vuln-stat-val mono">0</span>
+              <span class="vuln-stat-label">치명 (0%)</span>
+            </div>
+            <div class="vuln-stat-card sev-high-box">
+              <span class="vuln-stat-val mono">0</span>
+              <span class="vuln-stat-label">높음 (0%)</span>
+            </div>
+            <div class="vuln-stat-card sev-med-box">
+              <span class="vuln-stat-val mono">0</span>
+              <span class="vuln-stat-label">보통 (0%)</span>
+            </div>
+            <div class="vuln-stat-card sev-low-box">
+              <span class="vuln-stat-val mono">0</span>
+              <span class="vuln-stat-label">낮음 (0%)</span>
+            </div>
+            <div class="vuln-stat-card cvss-box">
+              <span class="vuln-stat-val mono">0</span>
+              <span class="vuln-stat-label">고유 CVE</span>
+            </div>
+            <div class="vuln-stat-card cvss-box">
+              <span class="vuln-stat-val mono">0.0</span>
+              <span class="vuln-stat-label">평균 CVSS</span>
+            </div>
+            <div class="vuln-stat-card cvss-box">
+              <span class="vuln-stat-val mono">0.0</span>
+              <span class="vuln-stat-label">최고 CVSS</span>
+            </div>
+          </div>
+
+          <!-- 3. Image 3 Visual Charts: CVSS 점수 분포 + 심각도 도넛 + 자산 상태 도넛 -->
+          <div class="vuln-charts-grid">
+            <div class="chart-card">
+              <div class="chart-header">
+                <span class="chart-title">CVSS 점수 분포</span>
+                <span class="chart-sub">취약점 심각도 구간별 분포 (0.0 ~ 10.0)</span>
+              </div>
+              <div class="cvss-chart-canvas" id="cvss-bar-chart-wrap">
+                <!-- SVG CVSS Bar Chart -->
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <span class="chart-title">심각도 분포</span>
+                <span class="chart-sub">Critical / High / Medium / Low</span>
+              </div>
+              <div class="donut-content-row" id="vuln-severity-donut-wrap">
+                <!-- SVG Donut Chart -->
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <span class="chart-title">자산 보안 상태</span>
+                <span class="chart-sub">Vulnerable vs Safe Assets</span>
+              </div>
+              <div class="donut-content-row" id="vuln-asset-donut-wrap">
+                <!-- SVG Donut Chart -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. [Image 4 Style] 글로벌 규제 컴플라이언스 관리 (Compliance Matrix) -->
+          <div class="compliance-matrix-card">
+            <div class="compliance-header">
+              <div class="comp-title-wrap">
+                <span class="comp-badge">GOVERNANCE &amp; COMPLIANCE</span>
+                <h3 class="comp-title">글로벌 규제 컴플라이언스 준수 현황</h3>
+              </div>
+              <div class="comp-score-pill">
+                <span class="comp-score-label">통합 컴플라이언스 점수:</span>
+                <span class="comp-score-val mono">64.4점</span>
+                <span class="status-pill allow">위험 차단 보증</span>
+              </div>
+            </div>
+
+            <div class="compliance-cards-grid">
+              <div class="comp-card">
+                <div class="comp-card-top">
+                  <span class="comp-card-name">GDPR (개인정보보호)</span>
+                  <span class="comp-card-pct mono text-pass">100.0%</span>
+                </div>
+                <div class="comp-card-val mono">44,546건</div>
+                <div class="comp-progress"><div class="comp-progress-bar pass" style="width: 100%;"></div></div>
+                <span class="comp-sub">EU 개인정보 데이터 보호 규정 완벽 준수</span>
+              </div>
+
+              <div class="comp-card">
+                <div class="comp-card-top">
+                  <span class="comp-card-name">HIPAA (의료·보건 보안)</span>
+                  <span class="comp-card-pct mono text-pass">100.0%</span>
+                </div>
+                <div class="comp-card-val mono">44,515건</div>
+                <div class="comp-progress"><div class="comp-progress-bar pass" style="width: 100%;"></div></div>
+                <span class="comp-sub">의료 데이터 기밀성 및 무결성 보호 검증</span>
+              </div>
+
+              <div class="comp-card">
+                <div class="comp-card-top">
+                  <span class="comp-card-name">NIST 800-53</span>
+                  <span class="comp-card-pct mono text-pass">99.9%</span>
+                </div>
+                <div class="comp-card-val mono">44,521건</div>
+                <div class="comp-progress"><div class="comp-progress-bar pass" style="width: 99.9%;"></div></div>
+                <span class="comp-sub">미국 연방 정보보호 통제 항목 최적 충족</span>
+              </div>
+
+              <div class="comp-card">
+                <div class="comp-card-top">
+                  <span class="comp-card-name">ISO 27001 &amp; CIS</span>
+                  <span class="comp-card-pct mono text-cyan">적용</span>
+                </div>
+                <div class="comp-card-val mono">N/A 기준 통과</div>
+                <div class="comp-progress"><div class="comp-progress-bar cyan" style="width: 95%;"></div></div>
+                <span class="comp-sub">국제 표준 정보보안 관리체계 연계</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="card provided" aria-labelledby="vulnerabilities-title">
+          <h2 id="vulnerabilities-title">종속성 취약점 점검 (OSV) <span class="tag">Security Scanner</span></h2>
+          <p class="muted">서버에 연결한 프로젝트의 공개 조회 승인 패키지만 정확한 설치 버전으로 대조합니다. 조회 실패와 미조회는 알려진 항목 없음이 아닙니다.</p>
+          <div class="row">
+            <button type="button" id="vulnerabilities-load" class="btn">설치 패키지 조회</button>
+            <button type="button" id="vulnerabilities-cancel" class="btn" disabled>패키지 조회 취소</button>
+          </div>
+          <div id="vulnerabilities-result" class="vulnerabilities-result" aria-live="polite"></div>
+        </section>
+
+        <section class="card student" aria-labelledby="student-vulnerabilities-title">
+          <h2 id="student-vulnerabilities-title">패키지 분석 리포트 <span class="tag tag-student">Audit</span></h2>
+          <div id="student-vulnerabilities" class="student-slot" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <!-- ============================================================
+           [VIEW 4] AI 연동 & 진단 (Dedicated AI Copilot & Platform Connect)
+           ============================================================ -->
+      <section id="view-ai-connect" class="view" role="tabpanel" aria-labelledby="tab-ai-connect" hidden>
+        <nav class="topbar-breadcrumb" aria-label="브레드크럼">
+          <span class="breadcrumb-item">Lumos ZTNA</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item">연동</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item active">AI 엔진 및 계정 연결</span>
+        </nav>
 
         <section class="card provided" aria-labelledby="ai-connect-title" data-testid="ai-connect-card">
           <h2 id="ai-connect-title">AI 연결 <span class="tag">제공 · 17단계 연결 절차</span></h2>
@@ -238,23 +1784,21 @@
           </div>
           <div id="ai-connection-result" class="ai-result" data-state="idle" aria-live="polite"></div>
         </section>
+
         <section class="card student" aria-labelledby="student-ai-connection-title">
           <h2 id="student-ai-connection-title">AI 보안 엔진 상태 점검 <span class="tag tag-student">Active</span></h2>
           <div id="student-ai-connection" class="student-slot" aria-live="polite"></div>
         </section>
 
-        <section class="card provided" aria-labelledby="vulnerabilities-title">
-          <h2 id="vulnerabilities-title">종속성 취약점 점검 (OSV) <span class="tag">Security Scanner</span></h2>
-          <p class="muted">서버에 연결한 프로젝트의 공개 조회 승인 패키지만 정확한 설치 버전으로 대조합니다. 조회 실패와 미조회는 알려진 항목 없음이 아닙니다.</p>
+        <section class="card provided" aria-labelledby="diag-title">
+          <h2 id="diag-title">진단 및 지원 정보 <span class="tag">System</span></h2>
+          <p class="muted">서버의 비밀 없는 연결 점검 결과를 불러와 직접 확인한 뒤 복사할 수 있습니다. 자동으로 전송하지 않습니다.</p>
           <div class="row">
-            <button type="button" id="vulnerabilities-load" class="btn">설치 패키지 조회</button>
-            <button type="button" id="vulnerabilities-cancel" class="btn" disabled>패키지 조회 취소</button>
+            <button type="button" id="diag-load" class="btn">도움정보 불러오기</button>
+            <button type="button" id="diag-copy" class="btn" disabled>확인했으며 복사합니다</button>
           </div>
-          <div id="vulnerabilities-result" class="vulnerabilities-result" aria-live="polite"></div>
-        </section>
-        <section class="card student" aria-labelledby="student-vulnerabilities-title">
-          <h2 id="student-vulnerabilities-title">패키지 분석 리포트 <span class="tag tag-student">Audit</span></h2>
-          <div id="student-vulnerabilities" class="student-slot" aria-live="polite"></div>
+          <p id="diag-status" class="muted" role="status" aria-live="polite"></p>
+          <pre id="diag-output" class="diag-output" tabindex="0" hidden></pre>
         </section>
       </section>
 
@@ -280,14 +1824,297 @@
       </section>
 
       <section id="view-records" class="view" role="tabpanel" aria-labelledby="tab-records" hidden>
-        <h1>보안 기록</h1>
-        <section class="card provided" aria-labelledby="records-title">
-          <h2 id="records-title">통합 접속 및 XDR 보안 감사 로그 <span class="tag">SIEM Feed</span></h2>
-          <p class="muted">AI 설명은 기록 식별자만 보내며, 실패해도 기록은 그대로 유지됩니다. 조치는 원천 권한 확인과 별도의 사람 확인을 거칩니다.</p>
-          <div id="records" aria-live="polite">
-            <ul id="records-list" data-testid="records-list" class="records"></ul>
+        <!-- Breadcrumbs -->
+        <nav class="topbar-breadcrumb" aria-label="브레드크럼">
+          <span class="breadcrumb-item">Lumos ZTNA</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item">보안 기록</span>
+          <span class="breadcrumb-sep">&gt;</span>
+          <span class="breadcrumb-item active">pfSense 방화벽 &amp; XDR 패킷 로그 수집·분석기</span>
+        </nav>
+
+        <!-- [Phase 4] pfSense 스타일 실시간 방화벽/ZTNA 패킷 로그 수집·분석기 -->
+        <div class="pfsense-section">
+          <!-- 1. 패킷 관제 상단 통계 KPI 카드 -->
+          <div class="pfsense-kpi-grid">
+            <div class="pfsense-kpi-card">
+              <div class="pfsense-kpi-header">
+                <span class="pfsense-kpi-label">수집 패킷 총계</span>
+                <span class="pfsense-live-pulse">LIVE</span>
+              </div>
+              <div class="pfsense-kpi-val-row">
+                <span class="pfsense-kpi-number mono" id="pfsense-total-pkts">24,518</span>
+                <span class="pfsense-kpi-unit">pkts</span>
+              </div>
+              <span class="pfsense-kpi-sub">실시간 WAN/ZTNA 패킷 캡처 중</span>
+            </div>
+
+            <div class="pfsense-kpi-card">
+              <div class="pfsense-kpi-header">
+                <span class="pfsense-kpi-label">정상 통과 (PASS)</span>
+                <span class="status-pill allow">98.7%</span>
+              </div>
+              <div class="pfsense-kpi-val-row">
+                <span class="pfsense-kpi-number mono text-pass" id="pfsense-pass-pkts">24,190</span>
+                <span class="pfsense-kpi-unit">pkts</span>
+              </div>
+              <span class="pfsense-kpi-sub">인가된 ZTNA 세션 및 통신</span>
+            </div>
+
+            <div class="pfsense-kpi-card">
+              <div class="pfsense-kpi-header">
+                <span class="pfsense-kpi-label">차단된 위협 (BLOCK)</span>
+                <span class="status-pill deny">1.3%</span>
+              </div>
+              <div class="pfsense-kpi-val-row">
+                <span class="pfsense-kpi-number mono text-block" id="pfsense-block-pkts">328</span>
+                <span class="pfsense-kpi-unit">pkts</span>
+              </div>
+              <span class="pfsense-kpi-sub">비인가 포트 스캔 및 침입 차단</span>
+            </div>
+
+            <div class="pfsense-kpi-card">
+              <div class="pfsense-kpi-header">
+                <span class="pfsense-kpi-label">Top 차단 룰 (Rule)</span>
+                <span class="cell-tag">FW-RULE-01</span>
+              </div>
+              <div class="pfsense-kpi-val-row">
+                <span class="pfsense-kpi-text mono text-warn" id="pfsense-top-rule">Default-Deny-All</span>
+              </div>
+              <span class="pfsense-kpi-sub">24시간 기준 285회 트리거</span>
+            </div>
           </div>
-        </section>
+
+          <!-- 2. pfSense 필터 & 액션 툴바 -->
+          <div class="pfsense-toolbar">
+            <div class="pfsense-action-filter-group" role="group" aria-label="Action 필터">
+              <button type="button" class="pfsense-btn active" data-action="all">ALL (전체)</button>
+              <button type="button" class="pfsense-btn btn-pass" data-action="PASS">
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 8.5 6.5 12 13 4.5"/></svg>
+                PASS
+              </button>
+              <button type="button" class="pfsense-btn btn-block" data-action="BLOCK">
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>
+                BLOCK
+              </button>
+            </div>
+
+            <div class="pfsense-filter-select-wrap">
+              <select class="filter-select" id="pfsense-iface-select" aria-label="인터페이스 필터">
+                <option value="all">전체 인터페이스 (All Ifaces)</option>
+                <option value="WAN">WAN (공용 게이트웨이)</option>
+                <option value="ZTNA_VPN">ZTNA_VPN (암호화 터널)</option>
+                <option value="LAN">LAN (내부 관리망)</option>
+                <option value="Cloud_VPC">Cloud_VPC (트랜짓 VPC)</option>
+              </select>
+            </div>
+
+            <div class="search-input-wrap pfsense-search-wrap">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" class="search-input" id="pfsense-search-input" placeholder="IP, Port, Proto, 룰 ID로 실시간 검색..." aria-label="패킷 로그 검색">
+            </div>
+
+            <div class="pfsense-toolbar-actions">
+              <button type="button" class="btn btn-outline btn-sm" id="pfsense-live-toggle" title="실시간 로그 캡처 일시정지 / 재개">
+                <span class="live-dot"></span>
+                <span id="pfsense-live-status-text">일시정지</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" id="pfsense-export-btn" title="CSV로 내보내기">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                CSV
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" id="pfsense-copy-raw-btn" title="Syslog 원문 복사">
+                Syslog
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. pfSense 실시간 방화벽 패킷 로그 데이터 그리드 -->
+          <div class="card pfsense-table-card">
+            <div class="table-wrap pfsense-table-wrap">
+              <table class="table pfsense-table" id="pfsense-log-table" aria-label="pfSense 실시간 방화벽 패킷 로그">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 75px;">Action</th>
+                    <th scope="col" style="width: 100px;">Time</th>
+                    <th scope="col" style="width: 95px;">Interface</th>
+                    <th scope="col">Source (IP:Port)</th>
+                    <th scope="col">Destination (IP:Port)</th>
+                    <th scope="col" style="width: 70px;">Proto</th>
+                    <th scope="col">Rule / Reason</th>
+                  </tr>
+                </thead>
+                <tbody id="pfsense-log-tbody">
+                  <!-- ui-chrome.js에서 실시간 동적 렌더링 -->
+                </tbody>
+              </table>
+            </div>
+            <div class="pfsense-table-footer">
+              <span class="pfsense-footer-hint">행을 클릭하면 세부 패킷 헤더(TTL, Flags, TCP Window)를 확인합니다.</span>
+              <span class="pfsense-buffer-info mono" id="pfsense-buffer-count">최근 40개 패킷 보관</span>
+            </div>
+        <!-- [Image 5 Style] UEBA 사용자 및 엔티티 행위 보안 분석 센터 -->
+        <div class="ueba-section" id="ueba-section">
+          <div class="ueba-section-header">
+            <div class="ueba-header-left">
+              <span class="ueba-badge">UEBA / ML ANOMALY</span>
+              <h3 class="ueba-title">분석 및 리포팅 &gt; 보안 분석 (UEBA 행동 프로파일링)</h3>
+            </div>
+            <div class="ueba-header-right">
+              <span class="ueba-hint">분석 요약: <strong>UEBA 합성 점수 - 위험 등급 80 (60) 40 / 20</strong></span>
+            </div>
+          </div>
+
+          <!-- 1. UEBA 핵심 요약 4대 KPI -->
+          <div class="ueba-kpi-grid">
+            <div class="ueba-kpi-card">
+              <span class="ueba-kpi-label">감시 대상 엔티티</span>
+              <div class="ueba-kpi-val-row">
+                <span class="ueba-kpi-number mono">7</span>
+                <span class="ueba-kpi-tag">엔티티</span>
+              </div>
+              <span class="ueba-kpi-sub">임계 커버리지 초과: 최근 14일</span>
+            </div>
+
+            <div class="ueba-kpi-card danger">
+              <span class="ueba-kpi-label">고위험 엔티티</span>
+              <div class="ueba-kpi-val-row">
+                <span class="ueba-kpi-number mono text-crit">4</span>
+                <span class="ueba-kpi-tag text-crit">치명/경고</span>
+              </div>
+              <span class="ueba-kpi-sub">점수 60 이상 · 조사 권장</span>
+            </div>
+
+            <div class="ueba-kpi-card">
+              <span class="ueba-kpi-label">Use Case 탐지</span>
+              <div class="ueba-kpi-val-row">
+                <span class="ueba-kpi-number mono text-cyan">8</span>
+                <span class="ueba-kpi-tag">시나리오</span>
+              </div>
+              <span class="ueba-kpi-sub">UEBA 시나리오 전개 완료</span>
+            </div>
+
+            <div class="ueba-kpi-card">
+              <span class="ueba-kpi-label">평균 위험 점수</span>
+              <div class="ueba-kpi-val-row">
+                <span class="ueba-kpi-number mono text-warning">59</span>
+                <span class="ueba-kpi-tag">주의</span>
+              </div>
+              <span class="ueba-kpi-sub">위험 보통 (요구 점수 60)</span>
+            </div>
+          </div>
+
+          <!-- 2. 필터 툴바 (Image 5) -->
+          <div class="ueba-filter-bar">
+            <div class="ueba-filter-inputs">
+              <div class="ueba-search-box">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" class="ueba-search-input" id="ueba-search-input" placeholder="엔티티 · Use Case · 요약으로 검색..." />
+              </div>
+              <select class="filter-select" id="ueba-entity-type-select" aria-label="엔티티 유형 선택">
+                <option value="all">엔티티 유형: 전체 (7개)</option>
+                <option value="service">서비스 계정 (svc_backup 등)</option>
+                <option value="admin">관리자 계정 (admin_corp)</option>
+                <option value="endpoint">사용자 단말 (CPE-HQ)</option>
+              </select>
+              <select class="filter-select" id="ueba-risk-level-select" aria-label="위험 등급 선택">
+                <option value="all">위험 등급: 전체</option>
+                <option value="crit">치명 (80점 이상)</option>
+                <option value="high">높음 (60~79점)</option>
+                <option value="med">보통 (40~59점)</option>
+                <option value="low">낮음 (0~39점)</option>
+              </select>
+            </div>
+            <div class="ueba-filter-periods">
+              <button type="button" class="btn btn-xs btn-outline">24시간</button>
+              <button type="button" class="btn btn-xs btn-outline">7일</button>
+              <button type="button" class="btn btn-xs btn-outline active">14일</button>
+              <button type="button" class="btn btn-xs btn-outline">30일</button>
+            </div>
+          </div>
+
+          <!-- 3. 엔티티 심층 분석 카드 & 14일 베이스라인 편차 프로파일 (Image 5 2분할) -->
+          <div class="ueba-split-grid">
+            <!-- 좌측: 엔티티 다차원 이상 징후 가중치 분석 (가중치 40/30/20/10) -->
+            <div class="ueba-entity-card">
+              <div class="ueba-card-top">
+                <div class="ueba-entity-meta">
+                  <span class="ueba-entity-name mono" id="ueba-top-entity">svc_backup</span>
+                  <span class="ueba-entity-badge">서비스 계정</span>
+                </div>
+                <div class="ueba-score-tag crit">
+                  <span class="ueba-score-num mono">92</span>
+                  <span class="ueba-score-lvl">치명</span>
+                </div>
+              </div>
+
+              <div class="ueba-bars-list">
+                <div class="ueba-bar-item">
+                  <div class="ueba-bar-header">
+                    <span class="ueba-bar-name">베이스라인 편차</span>
+                    <span class="ueba-bar-val mono text-crit">30 / 40</span>
+                  </div>
+                  <div class="ueba-bar-track"><div class="ueba-bar-fill crit" style="width: 75%;"></div></div>
+                  <span class="ueba-bar-sub">정상 기준 대비 350% 초과 트래픽</span>
+                </div>
+
+                <div class="ueba-bar-item">
+                  <div class="ueba-bar-header">
+                    <span class="ueba-bar-name">ML 머신러닝 이상도</span>
+                    <span class="ueba-bar-val mono text-warning">27 / 30</span>
+                  </div>
+                  <div class="ueba-bar-track"><div class="ueba-bar-fill high" style="width: 90%;"></div></div>
+                  <span class="ueba-bar-sub">오전 02:00 비인가 시각 데이터 전송 감지</span>
+                </div>
+
+                <div class="ueba-bar-item">
+                  <div class="ueba-bar-header">
+                    <span class="ueba-bar-name">Use Case 일치도</span>
+                    <span class="ueba-bar-val mono text-cyan">20 / 20</span>
+                  </div>
+                  <div class="ueba-bar-track"><div class="ueba-bar-fill cyan" style="width: 100%;"></div></div>
+                  <span class="ueba-bar-sub">데이터 유출 및 권한 상승 패턴 완전 일치</span>
+                </div>
+
+                <div class="ueba-bar-item">
+                  <div class="ueba-bar-header">
+                    <span class="ueba-bar-name">위도/빈도 이상</span>
+                    <span class="ueba-bar-val mono text-pass">7 / 10</span>
+                  </div>
+                  <div class="ueba-bar-track"><div class="ueba-bar-fill pass" style="width: 70%;"></div></div>
+                  <span class="ueba-bar-sub">알려진 내부 서브넷 간 요청</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 우측: 14일 베이스라인 편차 프로파일 시계열 라인 차트 -->
+            <div class="ueba-chart-card">
+              <div class="chart-header">
+                <div class="chart-title-wrap">
+                  <span class="chart-title">베이스라인 편차 (14일 프로파일 추이)</span>
+                  <span class="chart-sub">정상 기준선 대비 급증 이상치(Outlier) 실시간 감지</span>
+                </div>
+                <div class="ueba-chart-legend">
+                  <span class="legend-dot pass"></span><span class="legend-text">베이스라인 범위</span>
+                  <span class="legend-dot crit"></span><span class="legend-text">실제 수치 (이상치)</span>
+                </div>
+              </div>
+              <div class="ueba-chart-canvas" id="ueba-profile-chart-wrap">
+                <!-- SVG Baseline Profile Line Chart -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기존 Core & Student 감사 로그 및 AI/SOAR 조치 섹션 보존 -->
+        <div class="records-core-wrapper">
+          <section class="card provided" aria-labelledby="records-title">
+            <h2 id="records-title">통합 접속 및 XDR 보안 감사 로그 <span class="tag">SIEM Feed</span></h2>
+            <p class="muted">AI 설명은 기록 식별자만 보내며, 실패해도 기록은 그대로 유지됩니다. 조치는 원천 권한 확인과 별도의 사람 확인을 거칩니다.</p>
+            <div id="records" aria-live="polite">
+              <ul id="records-list" data-testid="records-list" class="records"></ul>
+            </div>
+          </section>
         <section class="card student" aria-labelledby="student-events-title">
           <h2 id="student-events-title">실시간 위협 이벤트 분석 <span class="tag tag-student">Detection</span></h2>
           <div id="student-events" class="student-slot" aria-live="polite"></div>
@@ -322,6 +2149,7 @@
           <h2 id="student-action-title">조치 집행 감사 기록 <span class="tag tag-student">Audit Trail</span></h2>
           <div id="student-action" class="student-slot" aria-live="polite"></div>
         </section>
+        </div>
       </section>
     </main>
   </div>

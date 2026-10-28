@@ -1,4 +1,4 @@
-// 이ファイルは学生が同じプロジェクトで 이어서 구현합니다.
+// 이 파일은 학생이 같은 프로젝트에서 이어서 구현합니다.
 // 제공 UI를 받은 것만으로 단계 완료를 인정하지 않습니다.
 export function createStudentView() {
   let lastEventsData = null;
@@ -8,6 +8,7 @@ export function createStudentView() {
   return {
     renderIdentity({ me, devices, sessions } = {}) {
       const root = document.createElement('div');
+      root.className = 'student-identity-group';
       const deviceLabels = {
         compliant: '보안 기준 충족',
         noncompliant: '보안 기준 미충족',
@@ -1053,227 +1054,238 @@ export function createStudentView() {
         </details>
       `;
 
-      // 7. 내 앱을 어떻게 설치하게 할까요 (과정 포장 묶음 & Inno Setup 2종 가이드) - 첨부 이미지 1:1 완벽 구현
+      // 7. 내 앱을 어떻게 설치하게 할까요 (과정 포장 묶음 & Inno Setup 2종 가이드) - 첨부 이미지 1:1 완벽 구현 (아코디언 접힘)
       const card7 = document.createElement('div');
-      card7.className = 'deploy-guide-section';
+      card7.className = 'aleph-accordion-card deploy-guide-section';
       card7.innerHTML = `
-        <div class="deploy-guide-header">
-          <h3 class="deploy-guide-title">내 앱을 어떻게 설치하게 할까요</h3>
-          <p class="deploy-guide-desc">
-            방어진 결과물은 1번(과정 포장)만으로 충분합니다. 친구나 가족 PC에도 진짜 프로그램처럼 깔아 주고 싶다면 2번(무료 설치 프로그램)까지만 해 보세요. 돈이 들거나 심사 기간이 긴 코드 서명과 스토어 등록은 과정이 끝난 뒤 참고할 수 있게 가이드만 남겨 두었습니다.
-          </p>
-        </div>
-
-        <div class="deploy-cards-grid">
-          <!-- 1번: 과정 포장 묶음과 바로가기 -->
-          <div class="deploy-card">
-            <div class="deploy-card-header">
-              <span class="deploy-step-chip">1 · 기본</span>
-              <span class="deploy-free-tag">무료</span>
-            </div>
-            <h4 class="deploy-card-name">과정 포장 묶음과 바로가기</h4>
-            <p class="deploy-card-summary">
-              6일차의 npm run package-app 결과를 그대로 쓰고, INSTALL.md 순서대로 새 경로에 설치해 바로가기로 실행합니다.
-            </p>
-
-            <div class="deploy-meta-rows">
-              <div class="deploy-meta-row">
-                <span class="meta-label">난이도</span>
-                <span class="meta-val">쉬움 · 6일차 안내 그대로</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">받는 사람이 보는 화면</span>
-                <span class="meta-val">과정에서 승인한 실행 환경이 있는 PC에서 바로가기로 열립니다.</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">이런 경우에</span>
-                <span class="meta-val">방어진 결과물을 정리하고 내 PC에서 매일 쓸 때</span>
-              </div>
+        <details class="aleph-foldable-details">
+          <summary class="aleph-foldable-summary">
+            <span><strong>내 앱을 어떻게 설치하게 할까요</strong> <span class="muted-tag">과정 포장 묶음 &amp; Inno Setup 2종 가이드</span></span>
+            <span class="fold-indicator">펼치기</span>
+          </summary>
+          <div class="aleph-foldable-content">
+            <div class="deploy-guide-header">
+              <p class="deploy-guide-desc">
+                방어진 결과물은 1번(과정 포장)만으로 충분합니다. 친구나 가족 PC에도 진짜 프로그램처럼 깔아 주고 싶다면 2번(무료 설치 프로그램)까지만 해 보세요. 돈이 들거나 심사 기간이 긴 코드 서명과 스토어 등록은 과정이 끝난 뒤 참고할 수 있게 가이드만 남겨 두었습니다.
+              </p>
             </div>
 
-            <details class="deploy-details">
-              <summary class="deploy-summary">▼ 따라 할 순서와 공식 자료</summary>
-              <div class="deploy-content">
-                <ol class="deploy-steps-ol">
-                  <li>6일차 안내대로 <code>npm run package-app</code>으로 묶음을 만듭니다.</li>
-                  <li><code>INSTALL.md</code>의 설치 명령으로 새 경로에 설치합니다.</li>
-                  <li>바탕화면이나 시작 메뉴 바로가기로 실행하고, 같은 묶음의 manifest와 INSTALL.md를 함께 보관합니다.</li>
-                </ol>
-                <div class="deploy-warning-banner">
-                  <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
-                  <span class="deploy-warning-text">승인 키나 제공 실행 환경이 없다는 안내가 나오면 우회하지 말고 담당자에게 알립니다.</span>
+            <div class="deploy-cards-grid">
+              <!-- 1번: 과정 포장 묶음과 바로가기 -->
+              <div class="deploy-card">
+                <div class="deploy-card-header">
+                  <span class="deploy-step-chip">1 · 기본</span>
+                  <span class="deploy-free-tag">무료</span>
                 </div>
-              </div>
-            </details>
-          </div>
+                <h4 class="deploy-card-name">과정 포장 묶음과 바로가기</h4>
+                <p class="deploy-card-summary">
+                  6일차의 npm run package-app 결과를 그대로 쓰고, INSTALL.md 순서대로 새 경로에 설치해 바로가기로 실행합니다.
+                </p>
 
-          <!-- 2번: setup.exe로 묶기 · Inno Setup 권장 -->
-          <div class="deploy-card">
-            <div class="deploy-card-header">
-              <span class="deploy-step-chip">2 · 설치 프로그램</span>
-              <span class="deploy-free-tag">무료</span>
-            </div>
-            <h4 class="deploy-card-name">setup.exe로 묶기 · Inno Setup 권장</h4>
-            <p class="deploy-card-summary">
-              포장 묶음을 무료 도구 Inno Setup의 마법사로 설치 파일(setup.exe)에 담습니다. 시작 메뉴 등록과 제거 프로그램이 함께 만들어지고, 심사나 비용이 없습니다.
-            </p>
-
-            <div class="deploy-meta-rows">
-              <div class="deploy-meta-row">
-                <span class="meta-label">난이도</span>
-                <span class="meta-val">보통 · 마법사로 시작</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">받는 사람이 보는 화면</span>
-                <span class="meta-val">PC 보안 정책과 파일 평판에 따라 경고가 뜨거나 실행이 제한될 수 있습니다. 보호 설정을 끄지 말고, 막히면 차단 메시지를 담당자에게 전달합니다.</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">이런 경우에</span>
-                <span class="meta-val">다른 사람 PC에 깔끔하게 깔고 지울 수 있게 하고 싶을 때</span>
-              </div>
-            </div>
-
-            <details class="deploy-details">
-              <summary class="deploy-summary">▼ 따라 할 순서와 공식 자료</summary>
-              <div class="deploy-content">
-                <ol class="deploy-steps-ol">
-                  <li>기존 포장 묶음은 그대로 두고, 별도 폴더에 복사본을 만들어 설치 프로그램 재료로 씁니다.</li>
-                  <li>Inno Setup의 스크립트 마법사에서 앱 이름, 버전, 게시자, 재료 폴더를 넣고 <strong>사용자 단위 설치(관리자 권한 없이)</strong>를 고릅니다.</li>
-                  <li>시작 메뉴 바로가기와 제거 프로그램을 켜고 <code>setup.exe</code>를 만듭니다.</li>
-                  <li>다른 사용자 계정이나 새 경로에서 설치 → 실행 → 제거까지 한 번씩 해 보고, <code>setup.exe</code>의 SHA-256 해시를 안내문에 적습니다.</li>
-                </ol>
-                <div class="deploy-warning-banner">
-                  <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
-                  <span class="deploy-warning-text">설치 프로그램은 포장 결과를 담아 옮길 뿐입니다. 실행에 필요한 제공 실행 환경은 받는 PC에도 준비돼 있어야 합니다. pkg(vercel)는 지원이 끝났으니 쓰지 않습니다.</span>
+                <div class="deploy-meta-rows">
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">난이도</span>
+                    <span class="meta-val">쉬움 · 6일차 안내 그대로</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">받는 사람이 보는 화면</span>
+                    <span class="meta-val">과정에서 승인한 실행 환경이 있는 PC에서 바로가기로 열립니다.</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">이런 경우에</span>
+                    <span class="meta-val">방어진 결과물을 정리하고 내 PC에서 매일 쓸 때</span>
+                  </div>
                 </div>
-                <ul class="deploy-links-ul">
-                  <li><a href="https://jrsoftware.org/isinfo.php" target="_blank" rel="noopener noreferrer">Inno Setup 공식 안내 ↗</a></li>
-                  <li><a href="https://nsis.sourceforge.io/" target="_blank" rel="noopener noreferrer">(익숙하다면) NSIS 공식 안내 ↗</a></li>
-                  <li><a href="https://wixtoolset.org/" target="_blank" rel="noopener noreferrer">(MSI가 꼭 필요하다면) WiX Toolset 문서 ↗</a></li>
-                </ul>
+
+                <details class="deploy-details">
+                  <summary class="deploy-summary">▼ 따라 할 순서와 공식 자료</summary>
+                  <div class="deploy-content">
+                    <ol class="deploy-steps-ol">
+                      <li>6일차 안내대로 <code>npm run package-app</code>으로 묶음을 만듭니다.</li>
+                      <li><code>INSTALL.md</code>의 설치 명령으로 새 경로에 설치합니다.</li>
+                      <li>바탕화면이나 시작 메뉴 바로가기로 실행하고, 같은 묶음의 manifest와 INSTALL.md를 함께 보관합니다.</li>
+                    </ol>
+                    <div class="deploy-warning-banner">
+                      <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                      <span class="deploy-warning-text">승인 키나 제공 실행 환경이 없다는 안내가 나오면 우회하지 말고 담당자에게 알립니다.</span>
+                    </div>
+                  </div>
+                </details>
               </div>
-            </details>
+
+              <!-- 2번: setup.exe로 묶기 · Inno Setup 권장 -->
+              <div class="deploy-card">
+                <div class="deploy-card-header">
+                  <span class="deploy-step-chip">2 · 설치 프로그램</span>
+                  <span class="deploy-free-tag">무료</span>
+                </div>
+                <h4 class="deploy-card-name">setup.exe로 묶기 · Inno Setup 권장</h4>
+                <p class="deploy-card-summary">
+                  포장 묶음을 무료 도구 Inno Setup의 마법사로 설치 파일(setup.exe)에 담습니다. 시작 메뉴 등록과 제거 프로그램이 함께 만들어지고, 심사나 비용이 없습니다.
+                </p>
+
+                <div class="deploy-meta-rows">
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">난이도</span>
+                    <span class="meta-val">보통 · 마법사로 시작</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">받는 사람이 보는 화면</span>
+                    <span class="meta-val">PC 보안 정책과 파일 평판에 따라 경고가 뜨거나 실행이 제한될 수 있습니다. 보호 설정을 끄지 말고, 막히면 차단 메시지를 담당자에게 전달합니다.</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">이런 경우에</span>
+                    <span class="meta-val">다른 사람 PC에 깔끔하게 깔고 지울 수 있게 하고 싶을 때</span>
+                  </div>
+                </div>
+
+                <details class="deploy-details">
+                  <summary class="deploy-summary">▼ 따라 할 순서와 공식 자료</summary>
+                  <div class="deploy-content">
+                    <ol class="deploy-steps-ol">
+                      <li>기존 포장 묶음은 그대로 두고, 별도 폴더에 복사본을 만들어 설치 프로그램 재료로 씁니다.</li>
+                      <li>Inno Setup의 스크립트 마법사에서 앱 이름, 버전, 게시자, 재료 폴더를 넣고 <strong>사용자 단위 설치(관리자 권한 없이)</strong>를 고릅니다.</li>
+                      <li>시작 메뉴 바로가기와 제거 프로그램을 켜고 <code>setup.exe</code>를 만듭니다.</li>
+                      <li>다른 사용자 계정이나 새 경로에서 설치 → 실행 → 제거까지 한 번씩 해 보고, <code>setup.exe</code>의 SHA-256 해시를 안내문에 적습니다.</li>
+                    </ol>
+                    <div class="deploy-warning-banner">
+                      <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                      <span class="deploy-warning-text">설치 프로그램은 포장 결과를 담아 옮길 뿐입니다. 실행에 필요한 제공 실행 환경은 받는 PC에도 준비돼 있어야 합니다. pkg(vercel)는 지원이 끝났으니 쓰지 않습니다.</span>
+                    </div>
+                    <ul class="deploy-links-ul">
+                      <li><a href="https://jrsoftware.org/isinfo.php" target="_blank" rel="noopener noreferrer">Inno Setup 공식 안내 ↗</a></li>
+                      <li><a href="https://nsis.sourceforge.io/" target="_blank" rel="noopener noreferrer">(익숙하다면) NSIS 공식 안내 ↗</a></li>
+                      <li><a href="https://wixtoolset.org/" target="_blank" rel="noopener noreferrer">(MSI가 꼭 필요하다면) WiX Toolset 문서 ↗</a></li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+            </div>
           </div>
-        </div>
+        </details>
       `;
 
 
-      // 8. 과정이 끝난 뒤 참고 · 가이드만 (코드 서명 & MS Store/winget 등록) - 첨부 이미지 1, 2 완벽 구현
+      // 8. 과정이 끝난 뒤 참고 · 가이드만 (코드 서명 & MS Store/winget 등록) - 첨부 이미지 1, 2 완벽 구현 (아코디언 접힘)
       const card8 = document.createElement('div');
-      card8.className = 'deploy-guide-section post-course-section';
+      card8.className = 'aleph-accordion-card deploy-guide-section post-course-section';
       card8.innerHTML = `
-        <div class="deploy-guide-header">
-          <h3 class="deploy-guide-title">과정이 끝난 뒤 참고 · 가이드만</h3>
-        </div>
-
-        <div class="deploy-cards-grid">
-          <!-- 3번: 코드 서명으로 게시자 밝히기 -->
-          <div class="deploy-card">
-            <div class="deploy-card-header">
-              <span class="deploy-free-tag tag-paid">유료 · 필수 아님</span>
-              <h4 class="deploy-card-name deploy-card-heading">코드 서명으로 게시자 밝히기</h4>
-            </div>
-            <p class="deploy-card-summary">
-              신뢰되는 공인 코드 서명 인증서로 설치 파일에 서명하면 '알 수 없는 게시자' 대신 인증서로 확인된 게시자 이름이 보입니다. 자체 서명은 서명 원리를 내 PC에서 익히는 학습용이며, 공인 서명은 필요할 때만 고릅니다.
-            </p>
-
-            <div class="deploy-meta-rows">
-              <div class="deploy-meta-row">
-                <span class="meta-label">난이도</span>
-                <span class="meta-val">어려움 · 인증서와 개인키 관리</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">받는 사람이 보는 화면</span>
-                <span class="meta-val">공인 서명이라도 처음에는 경고가 남을 수 있고, 같은 인증서로 설치가 쌓여야 줄어듭니다. 자체 서명으로 다른 사람 PC의 신뢰를 얻을 수 있다는 보장은 없습니다.</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">이런 경우에</span>
-                <span class="meta-val">오래 배포할 앱이고 게시자 이름을 밝히고 싶을 때</span>
-              </div>
-            </div>
-
-            <details class="deploy-details">
-              <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
-              <div class="deploy-content">
-                <ol class="deploy-steps-ol">
-                  <li>학습용으로 내 PC에서 자체 서명 인증서를 만들어 setup.exe에 서명하고, 파일 속성의 '디지털 서명' 탭에서 어떻게 보이는지 확인합니다.</li>
-                  <li>공인 서명이 필요하면 고릅니다: 오픈소스로 공개한 앱은 SignPath Foundation(무료, 심사) 또는 Certum 오픈소스 클라우드 인증서(49유로부터), 그 밖에는 OV 인증서입니다. OV 가격은 발급 기관과 기간마다 다르니 각 기관의 공식 가격 페이지에서 확인합니다.</li>
-                  <li>공인 코드 서명 인증서를 쓸 때는 발급 기관이 요구하는 보안 하드웨어나 클라우드의 개인키 보관 조건을 확인합니다. 공인 인증서의 조건을 첫 단계의 자체 서명 학습과 혼동하지 않습니다. 서명할 때는 타임스탬프 서버를 꼭 지정합니다.</li>
-                  <li>서명한 뒤에는 파일을 고치지 않습니다. 고치면 서명이 깨지니 다시 서명합니다.</li>
-                </ol>
-                <div class="deploy-warning-banner">
-                  <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
-                  <span class="deploy-warning-text">
-                    개인키와 .pfx·p12 파일, 인증서 비밀번호는 저장소·채널·결과물 어디에도 올리지 않습니다. 남의 PC에 내 자체 서명 인증서를 신뢰하라고 넣게 하지 않습니다. Microsoft의 Artifact Signing(옛 Trusted Signing) Public Trust는 공식 신청 안내에 한국 소재 조직도 포함합니다. 개인 개발자는 미국이나 캐나다에 소재해야 하므로 한국 개인은 해당하지 않습니다. 지역 조건을 충족해도 실제 신청과 심사 통과가 보장되지는 않습니다.
-                  </span>
+        <details class="aleph-foldable-details">
+          <summary class="aleph-foldable-summary">
+            <span><strong>과정이 끝난 뒤 참고 · 가이드만</strong> <span class="muted-tag">코드 서명 &amp; MS Store/winget 등록</span></span>
+            <span class="fold-indicator">펼치기</span>
+          </summary>
+          <div class="aleph-foldable-content">
+            <div class="deploy-cards-grid">
+              <!-- 3번: 코드 서명으로 게시자 밝히기 -->
+              <div class="deploy-card">
+                <div class="deploy-card-header">
+                  <span class="deploy-free-tag tag-paid">유료 · 필수 아님</span>
+                  <h4 class="deploy-card-name deploy-card-heading">코드 서명으로 게시자 밝히기</h4>
                 </div>
-                <ul class="deploy-links-ul">
-                  <li><a href="https://learn.microsoft.com/ko-kr/azure/trusted-signing/" target="_blank" rel="noopener noreferrer">Artifact Signing 신청 전제 조건(Microsoft) ↗</a></li>
-                  <li><a href="https://support.microsoft.com/ko-kr/windows" target="_blank" rel="noopener noreferrer">스마트 앱 컨트롤 자주 묻는 질문(Microsoft) ↗</a></li>
-                  <li><a href="https://learn.microsoft.com/ko-kr/windows/win32/seccrypto/signtool" target="_blank" rel="noopener noreferrer">코드 서명 선택지(Microsoft) ↗</a></li>
-                  <li><a href="https://learn.microsoft.com/ko-kr/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen" target="_blank" rel="noopener noreferrer">SmartScreen 평판이 쌓이는 방식 ↗</a></li>
-                  <li><a href="https://about.signpath.io/open-source" target="_blank" rel="noopener noreferrer">SignPath Foundation(오픈소스 무료 서명) ↗</a></li>
-                  <li><a href="https://shop.certum.eu/open-source-code-signing.html" target="_blank" rel="noopener noreferrer">Certum 코드 서명 인증서 가격 ↗</a></li>
-                </ul>
-              </div>
-            </details>
-          </div>
+                <p class="deploy-card-summary">
+                  신뢰되는 공인 코드 서명 인증서로 설치 파일에 서명하면 '알 수 없는 게시자' 대신 인증서로 확인된 게시자 이름이 보입니다. 자체 서명은 서명 원리를 내 PC에서 익히는 학습용이며, 공인 서명은 필요할 때만 고릅니다.
+                </p>
 
-          <!-- 4번: Microsoft Store나 winget에 올리기 -->
-          <div class="deploy-card">
-            <div class="deploy-card-header">
-              <span class="deploy-free-tag tag-audit">무료 · 심사 기간 있음</span>
-              <h4 class="deploy-card-name deploy-card-heading">Microsoft Store나 winget에 올리기</h4>
-            </div>
-            <p class="deploy-card-summary">
-              Microsoft Store에 MSIX로 올리면 Microsoft가 다시 서명하고, Store에서 받은 앱에는 SmartScreen 다운로드 경고가 뜨지 않습니다. 2025년 9월부터 개인 개발자 등록이 무료입니다. 명령어 설치를 원하면 winget 등록도 있습니다.
-            </p>
-
-            <div class="deploy-meta-rows">
-              <div class="deploy-meta-row">
-                <span class="meta-label">난이도</span>
-                <span class="meta-val">어려움 · 심사와 공개 주소 필요</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">받는 사람이 보는 화면</span>
-                <span class="meta-val">Store로 설치하면 SmartScreen 다운로드 경고가 뜨지 않습니다. 앱이 요청하는 권한, 기관·회사의 기기 관리 정책, 다른 보안 알림은 따로 나타날 수 있습니다. winget은 공개 HTTPS 주소와 백신 검사를 거친 설치 파일이 필요합니다.</span>
-              </div>
-              <div class="deploy-meta-row">
-                <span class="meta-label">이런 경우에</span>
-                <span class="meta-val">과정이 끝난 뒤에도 앱을 계속 다듬어 공개하고 싶을 때. 심사가 며칠 이상 걸릴 수 있어 과정 기간에는 권하지 않습니다.</span>
-              </div>
-            </div>
-
-            <details class="deploy-details">
-              <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
-              <div class="deploy-content">
-                <ol class="deploy-steps-ol">
-                  <li>MSIX Packaging Tool로 2번에서 만든 설치 과정을 MSIX로 바꿉니다. Store가 다시 서명해 주므로 따로 인증서를 사지 않아도 됩니다.</li>
-                  <li>Microsoft Store 개인 개발자로 무료 등록하고 앱 설명, 개인정보 처리 안내, 화면 사진을 준비합니다.</li>
-                  <li>심사에서 고칠 점이 나오면 반영해 다시 올립니다. winget을 고르면 공개 저장소에 설명 파일(YAML)을 제출합니다.</li>
-                </ol>
-                <div class="deploy-warning-banner deploy-banner-accent">
-                  <span class="deploy-warning-icon">ℹ</span>
-                  <span class="deploy-warning-text">
-                    이 앱은 방화벽·네트워크 상태를 읽기만 합니다. 공개 배포 전에 읽는 정보가 무엇인지 설명에 정확히 적고, 관리자 권한을 요구하지 않게 둡니다.
-                  </span>
+                <div class="deploy-meta-rows">
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">난이도</span>
+                    <span class="meta-val">어려움 · 인증서와 개인키 관리</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">받는 사람이 보는 화면</span>
+                    <span class="meta-val">공인 서명이라도 처음에는 경고가 남을 수 있고, 같은 인증서로 설치가 쌓여야 줄어듭니다. 자체 서명으로 다른 사람 PC의 신뢰를 얻을 수 있다는 보장은 없습니다.</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">이런 경우에</span>
+                    <span class="meta-val">오래 배포할 앱이고 게시자 이름을 밝히고 싶을 때</span>
+                  </div>
                 </div>
-                <ul class="deploy-links-ul">
-                  <li><a href="https://learn.microsoft.com/ko-kr/windows/apps/publish/partner-center/register" target="_blank" rel="noopener noreferrer">Microsoft Store 개인 개발자 무료 등록 안내 ↗</a></li>
-                  <li><a href="https://learn.microsoft.com/ko-kr/windows/msix/packaging-tool/tool-overview" target="_blank" rel="noopener noreferrer">MSIX Packaging Tool ↗</a></li>
-                  <li><a href="https://learn.microsoft.com/ko-kr/windows/msix/package/signing-package-overview" target="_blank" rel="noopener noreferrer">MSIX 서명 안내 ↗</a></li>
-                  <li><a href="https://learn.microsoft.com/ko-kr/windows/package-manager/package/" target="_blank" rel="noopener noreferrer">winget 저장소 제출 안내 ↗</a></li>
-                </ul>
-              </div>
-            </details>
-          </div>
-        </div>
 
-        <div class="deploy-footer-banner">
-          <p class="deploy-footer-line"><strong>어느 단계를 고르든 결과물 평가에 가산이나 감점은 없습니다.</strong> 내 앱을 쓸 사람과 내가 들일 수 있는 시간에 맞춰 고르세요.</p>
-          <p class="deploy-footer-line">받는 사람에게 SmartScreen, Defender, 스마트 앱 컨트롤을 끄라고 안내하지 않습니다. 스마트 앱 컨트롤을 다시 켤 수 있는 조건은 기기, Windows 업데이트, 관리 정책에 따라 다릅니다. 설치가 막히면 보호 설정을 바꾸지 말고 차단 메시지를 그대로 담당자에게 전달합니다.</p>
-          <p class="deploy-footer-muted">가격과 조건은 2026년 10월 24일에 각 공식 페이지에서 확인한 내용입니다. 실제로 고르기 전에 링크에서 다시 확인하세요.</p>
-        </div>
+                <details class="deploy-details">
+                  <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
+                  <div class="deploy-content">
+                    <ol class="deploy-steps-ol">
+                      <li>학습용으로 내 PC에서 자체 서명 인증서를 만들어 setup.exe에 서명하고, 파일 속성의 '디지털 서명' 탭에서 어떻게 보이는지 확인합니다.</li>
+                      <li>공인 서명이 필요하면 고릅니다: 오픈소스로 공개한 앱은 SignPath Foundation(무료, 심사) 또는 Certum 오픈소스 클라우드 인증서(49유로부터), 그 밖에는 OV 인증서입니다. OV 가격은 발급 기관과 기간마다 다르니 각 기관의 공식 가격 페이지에서 확인합니다.</li>
+                      <li>공인 코드 서명 인증서를 쓸 때는 발급 기관이 요구하는 보안 하드웨어나 클라우드의 개인키 보관 조건을 확인합니다. 공인 인증서의 조건을 첫 단계의 자체 서명 학습과 혼동하지 않습니다. 서명할 때는 타임스탬프 서버를 꼭 지정합니다.</li>
+                      <li>서명한 뒤에는 파일을 고치지 않습니다. 고치면 서명이 깨지니 다시 서명합니다.</li>
+                    </ol>
+                    <div class="deploy-warning-banner">
+                      <span class="deploy-warning-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                      <span class="deploy-warning-text">
+                        개인키와 .pfx·p12 파일, 인증서 비밀번호는 저장소·채널·결과물 어디에도 올리지 않습니다. 남의 PC에 내 자체 서명 인증서를 신뢰하라고 넣게 하지 않습니다. Microsoft의 Artifact Signing(옛 Trusted Signing) Public Trust는 공식 신청 안내에 한국 소재 조직도 포함합니다. 개인 개발자는 미국이나 캐나다에 소재해야 하므로 한국 개인은 해당하지 않습니다. 지역 조건을 충족해도 실제 신청과 심사 통과가 보장되지는 않습니다.
+                      </span>
+                    </div>
+                    <ul class="deploy-links-ul">
+                      <li><a href="https://learn.microsoft.com/ko-kr/azure/trusted-signing/" target="_blank" rel="noopener noreferrer">Artifact Signing 신청 전제 조건(Microsoft) ↗</a></li>
+                      <li><a href="https://support.microsoft.com/ko-kr/windows" target="_blank" rel="noopener noreferrer">스마트 앱 컨트롤 자주 묻는 질문(Microsoft) ↗</a></li>
+                      <li><a href="https://learn.microsoft.com/ko-kr/windows/win32/seccrypto/signtool" target="_blank" rel="noopener noreferrer">코드 서명 선택지(Microsoft) ↗</a></li>
+                      <li><a href="https://learn.microsoft.com/ko-kr/windows/security/operating-system-security/virus-and-threat-protection/microsoft-defender-smartscreen" target="_blank" rel="noopener noreferrer">SmartScreen 평판이 쌓이는 방식 ↗</a></li>
+                      <li><a href="https://about.signpath.io/open-source" target="_blank" rel="noopener noreferrer">SignPath Foundation(오픈소스 무료 서명) ↗</a></li>
+                      <li><a href="https://shop.certum.eu/open-source-code-signing.html" target="_blank" rel="noopener noreferrer">Certum 코드 서명 인증서 가격 ↗</a></li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+
+              <!-- 4번: Microsoft Store나 winget에 올리기 -->
+              <div class="deploy-card">
+                <div class="deploy-card-header">
+                  <span class="deploy-free-tag tag-audit">무료 · 심사 기간 있음</span>
+                  <h4 class="deploy-card-name deploy-card-heading">Microsoft Store나 winget에 올리기</h4>
+                </div>
+                <p class="deploy-card-summary">
+                  Microsoft Store에 MSIX로 올리면 Microsoft가 다시 서명하고, Store에서 받은 앱에는 SmartScreen 다운로드 경고가 뜨지 않습니다. 2025년 9월부터 개인 개발자 등록이 무료입니다. 명령어 설치를 원하면 winget 등록도 있습니다.
+                </p>
+
+                <div class="deploy-meta-rows">
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">난이도</span>
+                    <span class="meta-val">어려움 · 심사와 공개 주소 필요</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">받는 사람이 보는 화면</span>
+                    <span class="meta-val">Store로 설치하면 SmartScreen 다운로드 경고가 뜨지 않습니다. 앱이 요청하는 권한, 기관·회사의 기기 관리 정책, 다른 보안 알림은 따로 나타날 수 있습니다. winget은 공개 HTTPS 주소와 백신 검사를 거친 설치 파일이 필요합니다.</span>
+                  </div>
+                  <div class="deploy-meta-row">
+                    <span class="meta-label">이런 경우에</span>
+                    <span class="meta-val">과정이 끝난 뒤에도 앱을 계속 다듬어 공개하고 싶을 때. 심사가 며칠 이상 걸릴 수 있어 과정 기간에는 권하지 않습니다.</span>
+                  </div>
+                </div>
+
+                <details class="deploy-details">
+                  <summary class="deploy-summary">▼ 순서와 공식 안내 자료</summary>
+                  <div class="deploy-content">
+                    <ol class="deploy-steps-ol">
+                      <li>MSIX Packaging Tool로 2번에서 만든 설치 과정을 MSIX로 바꿉니다. Store가 다시 서명해 주므로 따로 인증서를 사지 않아도 됩니다.</li>
+                      <li>Microsoft Store 개인 개발자로 무료 등록하고 앱 설명, 개인정보 처리 안내, 화면 사진을 준비합니다.</li>
+                      <li>심사에서 고칠 점이 나오면 반영해 다시 올립니다. winget을 고르면 공개 저장소에 설명 파일(YAML)을 제출합니다.</li>
+                    </ol>
+                    <div class="deploy-warning-banner deploy-banner-accent">
+                      <span class="deploy-warning-icon">ℹ</span>
+                      <span class="deploy-warning-text">
+                        이 앱은 방화벽·네트워크 상태를 읽기만 합니다. 공개 배포 전에 읽는 정보가 무엇인지 설명에 정확히 적고, 관리자 권한을 요구하지 않게 둡니다.
+                      </span>
+                    </div>
+                    <ul class="deploy-links-ul">
+                      <li><a href="https://learn.microsoft.com/ko-kr/windows/apps/publish/partner-center/register" target="_blank" rel="noopener noreferrer">Microsoft Store 개인 개발자 무료 등록 안내 ↗</a></li>
+                      <li><a href="https://learn.microsoft.com/ko-kr/windows/msix/packaging-tool/tool-overview" target="_blank" rel="noopener noreferrer">MSIX Packaging Tool ↗</a></li>
+                      <li><a href="https://learn.microsoft.com/ko-kr/windows/msix/package/signing-package-overview" target="_blank" rel="noopener noreferrer">MSIX 서명 안내 ↗</a></li>
+                      <li><a href="https://learn.microsoft.com/ko-kr/windows/package-manager/package/" target="_blank" rel="noopener noreferrer">winget 저장소 제출 안내 ↗</a></li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="deploy-footer-banner">
+              <p class="deploy-footer-line"><strong>어느 단계를 고르든 결과물 평가에 가산이나 감점은 없습니다.</strong> 내 앱을 쓸 사람과 내가 들일 수 있는 시간에 맞춰 고르세요.</p>
+              <p class="deploy-footer-line">받는 사람에게 SmartScreen, Defender, 스마트 앱 컨트롤을 끄라고 안내하지 않습니다. 스마트 앱 컨트롤을 다시 켤 수 있는 조건은 기기, Windows 업데이트, 관리 정책에 따라 다릅니다. 설치가 막히면 보호 설정을 바꾸지 말고 차단 메시지를 그대로 담당자에게 전달합니다.</p>
+              <p class="deploy-footer-muted">가격과 조건은 2026년 10월 24일에 각 공식 페이지에서 확인한 내용입니다. 실제로 고르기 전에 링크에서 다시 확인하세요.</p>
+            </div>
+          </div>
+        </details>
       `;
 
       // 9. 완성본에 반영되는 작업 위치 & 결과물을 보는 네 가지 관점 - 첨부 이미지 3 완벽 구현
@@ -1691,21 +1703,11 @@ export function createStudentView() {
         });
       }
 
-      // 3초 주기 실측 데이터 단일 갱신 (가짜 난수 생성기 완전 삭제)
-      const metricTimer = setInterval(updateRealPcStats, 3000);
-      root.addEventListener('DOMNodeRemoved', () => clearInterval(metricTimer), { once: true });
-
-      // 상단 확인 시각 (#checked-at) 1초 주기 실시간 동적 갱신 (멈춘 시각 문제 해결)
-      const updateLiveTopClock = () => {
-        const checkedAtEl = document.getElementById('checked-at');
-        if (checkedAtEl) {
-          const now = new Date();
-          checkedAtEl.textContent = `확인 시각 ${now.toLocaleString('ko-KR')}`;
-        }
-      };
-      updateLiveTopClock();
-      const clockTimer = setInterval(updateLiveTopClock, 1000);
-      root.addEventListener('DOMNodeRemoved', () => clearInterval(clockTimer), { once: true });
+      // 3초 주기 실측 데이터 단일 갱신 (누수 방지 싱글톤 타이머)
+      if (typeof window !== 'undefined') {
+        if (window.__lumosMetricTimer) clearInterval(window.__lumosMetricTimer);
+        window.__lumosMetricTimer = setInterval(updateRealPcStats, 3000);
+      }
 
       const showCollection = (title, resource, kind) => {
         const section = document.createElement('section');
