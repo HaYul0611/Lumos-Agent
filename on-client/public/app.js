@@ -397,9 +397,11 @@ function renderMode() {
   }
   const checkedAtEl = $('checked-at');
   if (checkedAtEl) {
-    const text = state.checkedAt ? `확인 시각 ${formatTime(state.checkedAt)}` : '';
-    if (checkedAtEl.textContent !== text) {
-      checkedAtEl.textContent = text;
+    if (state.checkedAt) {
+      checkedAtEl.dataset.serverCheckedAt = state.checkedAt;
+    }
+    if (!checkedAtEl.textContent && state.checkedAt) {
+      checkedAtEl.textContent = `확인 시각 ${formatTime(state.checkedAt)}`;
     }
   }
   renderStudent('status');

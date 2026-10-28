@@ -847,7 +847,7 @@
 
           <div class="gis-canvas-wrap" id="gis-canvas-wrap">
             <!-- SVG Map with clickable districts and pulsating radar nodes -->
-            <svg id="gis-svg-map" class="gis-svg-map" viewBox="30 45 540 430" preserveAspectRatio="xMidYMid meet">
+            <svg id="gis-svg-map" class="gis-svg-map" viewBox="10 20 570 470" preserveAspectRatio="xMidYMid meet">
               <defs>
                 <filter id="radar-glow" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
@@ -918,11 +918,11 @@
                     <table class="table gis-table" id="gis-sites-table">
                       <thead>
                         <tr>
-                          <th style="width: 45px;">상태</th>
-                          <th style="width: 55px;">지역</th>
-                          <th style="width: 120px;">대리점</th>
+                          <th style="width: 54px; text-align: center;">상태</th>
+                          <th style="width: 68px; text-align: center;">지역</th>
+                          <th style="width: 180px;">대리점</th>
                           <th>주소</th>
-                          <th style="width: 65px; text-align: center;">설치</th>
+                          <th style="width: 80px; text-align: center;">설치</th>
                         </tr>
                       </thead>
                       <tbody id="gis-sites-tbody">
@@ -1004,15 +1004,15 @@
 
         <!-- 7-Tier Topology Canvas Container -->
         <div class="topology-canvas-container" id="topology-canvas-container">
-          <!-- 7 Tier Zone Headers -->
+          <!-- 7 Tier Zone Headers (Matching Image 121318.png) -->
           <div class="topology-tier-headers">
-            <div class="tier-col-header">디바이스</div>
-            <div class="tier-col-header">대리점</div>
-            <div class="tier-col-header">시/군/구</div>
-            <div class="tier-col-header">시/도</div>
-            <div class="tier-col-header">SD-WAN Group</div>
-            <div class="tier-col-header">데이터센터</div>
-            <div class="tier-col-header">Swing-gw</div>
+            <div class="tier-col-header">엔드포인트 단말</div>
+            <div class="tier-col-header">지점 게이트웨이</div>
+            <div class="tier-col-header">지역 엑세스 허브</div>
+            <div class="tier-col-header">광역 코어 백본</div>
+            <div class="tier-col-header">SD-WAN 전송망</div>
+            <div class="tier-col-header">통합 코어 데이터센터</div>
+            <div class="tier-col-header">Swing 제로 트러스트 엣지</div>
           </div>
 
           <!-- Dynamic SVG Vector Links & Flow Particles -->
@@ -1024,18 +1024,54 @@
           </div>
         </div>
 
-        <!-- Node Inspector Drawer (Bottom or Float) -->
+        <!-- Node Inspector Drawer (Bottom or Float) - Image 121232.png 실시간 장비 사용 정보 반영 -->
         <div class="topology-inspector-card" id="topology-inspector" hidden>
           <div class="inspector-header">
-            <div class="inspector-node-title" id="topo-inspect-title">Device 03 (Alert)</div>
+            <div class="inspector-title-row">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#00E5FF" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              <div class="inspector-node-title" id="topo-inspect-title">Device 03 (Alert)</div>
+              <span class="inspector-badge alert" id="topo-inspect-badge">비인가 위협 감지</span>
+            </div>
             <button type="button" class="btn-close-sm" id="btn-close-topo-inspect">✕</button>
           </div>
+
+          <!-- 121232.png 스타일 3단 실시간 리소스 게이지 -->
+          <div class="inspector-gauges-row">
+            <div class="topo-gauge-item">
+              <div class="topo-gauge-header">
+                <span>CPU Usage</span>
+                <strong id="topo-gauge-cpu-val">77%</strong>
+              </div>
+              <div class="topo-gauge-track">
+                <div class="topo-gauge-fill alert" id="topo-gauge-cpu-bar" style="width: 77%"></div>
+              </div>
+            </div>
+            <div class="topo-gauge-item">
+              <div class="topo-gauge-header">
+                <span>RAM Usage</span>
+                <strong id="topo-gauge-ram-val">77%</strong>
+              </div>
+              <div class="topo-gauge-track">
+                <div class="topo-gauge-fill" id="topo-gauge-ram-bar" style="width: 77%"></div>
+              </div>
+            </div>
+            <div class="topo-gauge-item">
+              <div class="topo-gauge-header">
+                <span>Disk Usage</span>
+                <strong id="topo-gauge-disk-val">77%</strong>
+              </div>
+              <div class="topo-gauge-track">
+                <div class="topo-gauge-fill" id="topo-gauge-disk-bar" style="width: 77%"></div>
+              </div>
+            </div>
+          </div>
+
           <div class="inspector-grid">
             <div class="inspect-item"><span>식별 IP</span> <strong id="topo-inspect-ip">172.16.27.12</strong></div>
             <div class="inspect-item"><span>상태</span> <strong id="topo-inspect-status" class="text-crit">Alert (권한 상승 감지)</strong></div>
-            <div class="inspect-item"><span>트래픽 (Tx/Rx)</span> <strong id="topo-inspect-traffic">48.2 MB / 12.1 MB</strong></div>
+            <div class="inspect-item"><span>네트워크 지연/지터</span> <strong id="topo-inspect-latency">14ms / 1.1ms</strong></div>
             <div class="inspect-item"><span>연결 게이트웨이</span> <strong id="topo-inspect-gw">Boramae Center CPE #1</strong></div>
-            <div class="inspect-item"><span>ZTNA 점검</span> <strong class="text-green">통과 (Trust 88)</strong></div>
+            <div class="inspect-item"><span>ZTNA 무결성 점검</span> <strong id="topo-inspect-ztna" class="text-green">통과 (Trust 88)</strong></div>
           </div>
         </div>
       </section>
