@@ -1193,7 +1193,7 @@
               <div class="uc-desc">비즈니스 정상 활동 외 시간대의 접속 (2건 이내)</div>
               <div class="uc-footer">
                 <span class="uc-mitre">MITRE -</span>
-                <span class="uc-target">svc_backup</span>
+                <span class="uc-target">svc_sync</span>
               </div>
             </div>
             <!-- UC-002 -->
@@ -1219,7 +1219,7 @@
               <div class="uc-desc">동일 세션에서 두 전송자 권한 승격</div>
               <div class="uc-footer">
                 <span class="uc-mitre">MITRE: Credential Access Privilege Escalation</span>
-                <span class="uc-target">svc_backup, web-prod-01</span>
+                <span class="uc-target">svc_sync, web-prod-01</span>
               </div>
             </div>
             <!-- UC-004 -->
@@ -1232,7 +1232,7 @@
               <div class="uc-desc">외부 목적지 급증 · 외부 비율 베이스라인 1.5배 초과</div>
               <div class="uc-footer">
                 <span class="uc-mitre">MITRE: Exfiltration</span>
-                <span class="uc-target">web-prod-01, 141.98.83.48, db-prod-02</span>
+                <span class="uc-target">web-prod-01, 198.51.100.48, db-prod-02</span>
               </div>
             </div>
             <!-- UC-005 -->
@@ -1245,7 +1245,7 @@
               <div class="uc-desc">7일 이상 활동이 없다가 새 이벤트 발생</div>
               <div class="uc-footer">
                 <span class="uc-mitre">MITRE -</span>
-                <span class="uc-target">svc_backup</span>
+                <span class="uc-target">svc_sync</span>
               </div>
             </div>
           </div>
@@ -2049,7 +2049,7 @@
               </div>
               <select class="filter-select" id="ueba-entity-type-select" aria-label="엔티티 유형 선택">
                 <option value="all">엔티티 유형: 전체 (7개)</option>
-                <option value="service">서비스 계정 (svc_backup 등)</option>
+                <option value="service">서비스 계정 (svc_sync 등)</option>
                 <option value="admin">관리자 계정 (admin_corp)</option>
                 <option value="endpoint">사용자 단말 (CPE-HQ)</option>
               </select>
@@ -2075,7 +2075,7 @@
             <div class="ueba-entity-card">
               <div class="ueba-card-top">
                 <div class="ueba-entity-meta">
-                  <span class="ueba-entity-name mono" id="ueba-top-entity">svc_backup</span>
+                  <span class="ueba-entity-name mono" id="ueba-top-entity">svc_sync</span>
                   <span class="ueba-entity-badge">서비스 계정</span>
                 </div>
                 <div class="ueba-score-tag crit">

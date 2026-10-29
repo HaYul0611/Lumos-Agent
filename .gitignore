@@ -1,0 +1,43 @@
+# Logs & Temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+
+# Environment variables & credentials
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+*.pem
+*.key
+*.cert
+*.pfx
+
+# Security Audit & Evidence (Do NOT publish to public repositories)
+00-먼저-읽어주세요.md
+Lumos-Agent-침투-보안감사-보고서.md
+evidence/
+scratch_db/
+
+# Confidential / PII Internal Resources
+보안 관제 참고자료/
+보안관제참고자료/
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+

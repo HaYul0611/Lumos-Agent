@@ -1033,17 +1033,17 @@
         : `<span class="pfsense-badge block"><svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg> BLOCK</span>`;
 
       return `
-        <tr class="pfsense-row ${isPass ? 'row-pass' : 'row-block'}" data-rule="${pkt.rule}">
+        <tr class="pfsense-row ${isPass ? 'row-pass' : 'row-block'}" data-rule="${escapeHtml(pkt.rule)}">
           <td>${actionBadge}</td>
-          <td><span class="mono pfsense-time">${pkt.time}</span></td>
-          <td><span class="pfsense-iface-tag mono">${pkt.iface}</span></td>
-          <td><span class="mono pfsense-ip">${pkt.src}</span></td>
-          <td><span class="mono pfsense-ip">${pkt.dst}</span></td>
-          <td><span class="mono pfsense-proto">${pkt.proto}</span></td>
+          <td><span class="mono pfsense-time">${escapeHtml(pkt.time)}</span></td>
+          <td><span class="pfsense-iface-tag mono">${escapeHtml(pkt.iface)}</span></td>
+          <td><span class="mono pfsense-ip">${escapeHtml(pkt.src)}</span></td>
+          <td><span class="mono pfsense-ip">${escapeHtml(pkt.dst)}</span></td>
+          <td><span class="mono pfsense-proto">${escapeHtml(pkt.proto)}</span></td>
           <td>
             <div class="pfsense-rule-cell">
-              <span class="pfsense-rule-name mono">${pkt.rule}</span>
-              <span class="pfsense-rule-info">${pkt.info}</span>
+              <span class="pfsense-rule-name mono">${escapeHtml(pkt.rule)}</span>
+              <span class="pfsense-rule-info">${escapeHtml(pkt.info)}</span>
             </div>
           </td>
         </tr>
@@ -2278,14 +2278,14 @@ window.LumosMapVectors = {
   ];
 
   const GIS_CASES = [
-    { id: 'SC-002891', title: 'CPE Adding Dynamic Route Failure - Level critical', level: 'crit', state: 'CPE', target: 'KTNG-BSU-SD-2006', agent: '미배정' },
-    { id: 'SC-002890', title: 'CPE Adding Dynamic Route Failure - Level critical', level: 'crit', state: 'CPE', target: 'KTNG-NSU-HQ-2009', agent: '미배정' },
-    { id: 'SC-002882', title: 'CPE Adding Dynamic Route Failure - Level critical', level: 'crit', state: 'CPE', target: 'KTNG-BSU-KY-2008', agent: '미배정' },
-    { id: 'SC-005284', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'KTNG-KW-KR-2003', agent: '미배정' },
-    { id: 'SC-005283', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'KTNG-KN-TY-2006', agent: '미배정' },
-    { id: 'SC-005282', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'KTNG-SS-US-2008', agent: '미배정' },
-    { id: 'SC-005280', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'KTNG-KW-KR-2000', agent: '미배정' },
-    { id: 'SC-003270', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'KTNG-CB-JC-2006', agent: '미배정' }
+    { id: 'SC-002891', title: 'CPE Adding Dynamic Route Failure - Level critical', level: 'crit', state: 'CPE', target: 'EDGE-BSU-SD-2006', agent: '미배정' },
+    { id: 'SC-002890', title: 'CPE Adding Dynamic Route Failure - Level critical', level: 'crit', state: 'CPE', target: 'EDGE-NSU-HQ-2009', agent: '미배정' },
+    { id: 'SC-002882', title: 'CPE Adding Dynamic Route Failure - Level critical', level: 'crit', state: 'CPE', target: 'EDGE-BSU-KY-2008', agent: '미배정' },
+    { id: 'SC-005284', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'EDGE-KW-KR-2003', agent: '미배정' },
+    { id: 'SC-005283', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'EDGE-KN-TY-2006', agent: '미배정' },
+    { id: 'SC-005282', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'EDGE-SS-US-2008', agent: '미배정' },
+    { id: 'SC-005280', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'EDGE-KW-KR-2000', agent: '미배정' },
+    { id: 'SC-003270', title: 'CPE WAN Latency High - Level major', level: 'high', state: 'WAN', target: 'EDGE-CB-JC-2006', agent: '미배정' }
   ];
 
   let gisMode = 'seoul'; // 'seoul' or 'nationwide'
@@ -2686,14 +2686,14 @@ window.LumosMapVectors = {
       const filtered = GIS_CASES.filter(c => !q || c.id.toLowerCase().includes(q) || c.title.toLowerCase().includes(q) || c.target.toLowerCase().includes(q));
       tbody.innerHTML = filtered.map(c => `
         <tr>
-          <td><strong class="mono text-cyan">${c.id}</strong></td>
+          <td><strong class="mono text-cyan">${escapeHtml(c.id)}</strong></td>
           <td><span class="gis-case-title">${escapeHtml(c.title)}</span></td>
           <td style="text-align: center;">
             <span class="badge ${c.level === 'crit' ? 'badge-critical' : 'badge-warn'}">${c.level === 'crit' ? '치명' : '높음'}</span>
           </td>
-          <td style="text-align: center;"><span class="badge badge-info">${c.state}</span></td>
-          <td><span class="mono muted">${c.target}</span></td>
-          <td style="text-align: center;"><span class="muted">${c.agent}</span></td>
+          <td style="text-align: center;"><span class="badge badge-info">${escapeHtml(c.state)}</span></td>
+          <td><span class="mono muted">${escapeHtml(c.target)}</span></td>
+          <td style="text-align: center;"><span class="muted">${escapeHtml(c.agent)}</span></td>
         </tr>
       `).join('');
     }
@@ -3324,9 +3324,9 @@ window.LumosMapVectors = {
 
   // 3. UEBA 보안 분석 (Images 1 & 2: 엔티티 위험 순위 & 2D 이상치 분포 버블 차트)
   const UEBA_ENTITIES = [
-    { entity: 'svc_backup', type: '사용자', score: 92, grade: '치명', gradeClass: 'crit', delta: '▲ 34', deltaClass: 'up', useCases: ['UC-001', 'UC-003', 'UC-005'], summary: 'Dormant service account reactivated, then escalated privileges within the same session.' },
+    { entity: 'svc_sync', type: '사용자', score: 92, grade: '치명', gradeClass: 'crit', delta: '▲ 34', deltaClass: 'up', useCases: ['UC-001', 'UC-003', 'UC-005'], summary: 'Dormant service account reactivated, then escalated privileges within the same session.' },
     { entity: 'web-prod-01', type: '호스트', score: 78, grade: '높음', gradeClass: 'high', delta: '▲ 21', deltaClass: 'up', useCases: ['UC-003', 'UC-004'], summary: 'Outbound destination count surged and privilege escalation tactics were observed on the same host.' },
-    { entity: '141.98.83.48', type: 'IP', score: 74, grade: '높음', gradeClass: 'high', delta: '▲ 74', deltaClass: 'up', useCases: ['UC-004'], summary: 'First-seen external address that scanned, then received a 2.4 GB outbound transfer.' },
+    { entity: '198.51.100.48', type: 'IP', score: 74, grade: '높음', gradeClass: 'high', delta: '▲ 74', deltaClass: 'up', useCases: ['UC-004'], summary: 'First-seen external address that scanned, then received a 2.4 GB outbound transfer.' },
     { entity: 'j.kim', type: '사용자', score: 61, grade: '높음', gradeClass: 'high', delta: '▼ 8', deltaClass: 'down', useCases: ['UC-002'], summary: 'Authentication from two locations 1,160 km apart within 30 minutes (impossible travel).' },
     { entity: 'db-prod-02', type: '호스트', score: 55, grade: '보통', gradeClass: 'med', delta: '▲ 12', deltaClass: 'up', useCases: ['UC-004'], summary: 'Received an inbound SSH session over a path with no traffic in the previous 30 days.' },
     { entity: 'ubuntu-macmini', type: '호스트', score: 34, grade: '낮음', gradeClass: 'low', delta: '▲ 3', deltaClass: 'up', useCases: [], summary: 'Elevated SCA failures but no attack pattern matched.' },
@@ -3365,17 +3365,17 @@ window.LumosMapVectors = {
               <strong class="entity-name mono">${escapeHtml(row.entity)}</strong>
             </div>
           </td>
-          <td style="text-align: center;"><span class="entity-type-badge">${row.type}</span></td>
+          <td style="text-align: center;"><span class="entity-type-badge">${escapeHtml(row.type)}</span></td>
           <td style="text-align: center;"><strong class="entity-score mono ${row.gradeClass}">${row.score}</strong></td>
           <td style="text-align: center;">
-            <span class="entity-grade-pill ${row.gradeClass}">${row.grade}</span>
+            <span class="entity-grade-pill ${row.gradeClass}">${escapeHtml(row.grade)}</span>
           </td>
           <td style="text-align: center;">
             <span class="entity-delta ${row.deltaClass}">${row.delta}</span>
           </td>
           <td>
             <div class="uc-tags-list">
-              ${row.useCases.length > 0 ? row.useCases.map(u => `<span class="uc-tag-chip">${u}</span>`).join('') : '<span class="muted">-</span>'}
+              ${row.useCases.length > 0 ? row.useCases.map(u => `<span class="uc-tag-chip">${escapeHtml(u)}</span>`).join('') : '<span class="muted">-</span>'}
             </div>
           </td>
           <td><span class="entity-summary-text">${escapeHtml(row.summary)}</span></td>
@@ -3423,7 +3423,7 @@ window.LumosMapVectors = {
         const fill = row.gradeClass === 'crit' ? '#EF4444' : row.gradeClass === 'high' ? '#F59E0B' : row.gradeClass === 'med' ? '#06B6D4' : row.gradeClass === 'low' ? '#10B981' : '#64748B';
 
         return `
-          <g class="scatter-bubble-node" data-name="${escapeHtml(row.entity)}" data-score="${row.score}" data-grade="${row.grade}" data-ucs="${row.useCases.join(', ') || '없음'}" style="cursor: pointer;">
+          <g class="scatter-bubble-node" data-name="${escapeHtml(row.entity)}" data-score="${row.score}" data-grade="${row.grade}" data-ucs="${escapeHtml(row.useCases.join(', ') || '없음')}" style="cursor: pointer;">
             <circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" opacity="0.85" stroke="#FFFFFF" stroke-width="1.2"/>
             <text x="${cx}" y="${cy + r + 11}" fill="var(--fg-secondary)" font-size="8.5" font-family="monospace" text-anchor="middle">${row.entity}</text>
           </g>
