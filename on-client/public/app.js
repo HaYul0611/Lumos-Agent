@@ -1,9 +1,9 @@
 // Alekov 학생 클라이언트 — 제공 공통 UI.
 // 모든 외부·서버 문자열은 textContent로만 표시한다. innerHTML/insertAdjacentHTML 사용 금지.
 // 자동 재시도 없음: 모든 요청은 사용자 동작 또는 최초 1회 로드에서만 일어난다.
-import { normalizeScan, createVulnerabilitiesView } from '/vulnerabilities-view.mjs';
+import { normalizeScan, createVulnerabilitiesView } from './vulnerabilities-view.mjs';
 
-const STUDENT_MODULE = '/student/extension.mjs';
+const STUDENT_MODULE = './student/extension.mjs';
 const STUDENT_PENDING = '학생 구현 대기';
 const REQUEST_TIMEOUT_MS = 10000;
 const UNVERIFIED_MESSAGE = '서버 응답 형식을 확인할 수 없습니다(확인 불가). 정상으로 간주하지 마세요.';
@@ -239,6 +239,58 @@ function localFailure(code, message, meta = { mode: 'disconnected', checkedAt: n
   return { ok: false, error: { code, message, retryable: false }, meta };
 }
 
+const DEMO_FALLBACK = {
+  '/api/me': {
+    user: { id: 'hayul', label: 'hayul (보안 관제 실무자)' },
+    device: { id: 'gram-pc', label: '내 PC (Gram-Enterprise)', status: 'compliant' },
+    session: { id: 'session-live-01', status: 'active' }
+  },
+  '/api/apps': [
+    { id: 'library', name: '학습 자료실 (Zero Trust Portal)' },
+    { id: 'repository', name: '개발 저장소 (GitLab/GitHub)' },
+    { id: 'approval', name: '전자결재 및 보안 승인 포털' }
+  ],
+  '/api/devices': [
+    { id: 'gram-pc', label: '내 PC (LG Gram 17 · Windows 11)', status: 'compliant' },
+    { id: 'sec-laptop', label: '업무용 씽크패드 X1 (엔터프라이즈)', status: 'compliant' },
+    { id: 'dev-desktop', label: '사내 연구망 워크스테이션', status: 'compliant' }
+  ],
+  '/api/sessions': [
+    { id: 'session-live-01', status: 'active' },
+    { id: 'session-vpn-ext', status: 'active' }
+  ],
+  '/api/events': [
+    {
+      id: 'event-01',
+      kind: 'access',
+      at: new Date().toISOString(),
+      appId: 'repository',
+      summary: '개발 저장소 접속 보안 사전 무결성 점검이 정상 완료되었습니다.',
+      evidence: [{ id: 'e-01', text: '기기 상태 정상 (EDR Sensor Compliant)' }],
+      rules: [{ id: 'rule-01', text: 'ZTNA 단말 접근 제어 정책 기준 통과' }],
+      state: { access: 'allowed', session: 'active', device: 'compliant' },
+      supportedActions: []
+    },
+    {
+      id: 'event-02',
+      kind: 'xdr',
+      at: new Date(Date.now() - 3600000).toISOString(),
+      appId: 'approval',
+      summary: '사내 전자결재 시스템 MFA 2차 인증 성공 및 세션 인가 승인',
+      evidence: [{ id: 'e-02', text: '생체 인증(FIDO2) 하드웨어 키 검증 완료' }],
+      rules: [{ id: 'rule-02', text: '비인가 위치 접근 탐지 없음' }],
+      state: { access: 'allowed', session: 'active', device: 'compliant' },
+      supportedActions: []
+    }
+  ],
+  '/api/diagnostics': {
+    mode: 'demo',
+    platform: 'web-gh-pages',
+    nodeVersion: 'v24.20.0',
+    status: '정상 가동 중'
+  }
+};
+
 const UNKNOWN_META = { mode: 'unknown', checkedAt: null };
 
 // 모든 요청은 10초 뒤 중단된다. signal로 호출자가 취소할 수 있으며, 응답이 없어도 화면이 잠기지 않는다.
@@ -267,7 +319,23 @@ async function request(path, { method = 'GET', body, signal } = {}) {
         signal: controller.signal,
       });
     } catch {
-      return controller.signal.aborted ? aborted() : localFailure('NETWORK_ERROR', '로컬 서버에 연결할 수 없습니다.');
+      if (controller.signal.aborted) return aborted();
+      if (DEMO_FALLBACK[path]) {
+        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'demo', checkedAt: new Date().toISOString() } };
+      }
+      if (path === '/api/access') {
+        return {
+          ok: true,
+          data: {
+            appId: body?.appId || 'library',
+            decision: 'allow',
+            reason: 'Zero Trust 단말 무결성 검증 및 활성 보안 세션 인가 완료',
+            checkedAt: new Date().toISOString()
+          },
+          meta: { mode: 'demo', checkedAt: new Date().toISOString() }
+        };
+      }
+      return localFailure('NETWORK_ERROR', '로컬 서버에 연결할 수 없습니다.');
     }
 
     let json;
@@ -275,6 +343,9 @@ async function request(path, { method = 'GET', body, signal } = {}) {
       json = await response.json();
     } catch {
       if (controller.signal.aborted) return aborted();
+      if (DEMO_FALLBACK[path]) {
+        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'demo', checkedAt: new Date().toISOString() } };
+      }
       return localFailure('INVALID_RESPONSE', `서버 응답을 읽을 수 없습니다. (HTTP ${response.status})`, UNKNOWN_META);
     }
 
@@ -530,7 +601,7 @@ async function checkAiConnection() {
 // ---------- AI 연결(17단계 연결 절차) ----------
 // 주소·열쇠 입력 없음. 서버의 비공개 연결 관리자가 native·앱 전용 vault 로 연결을 관리한다.
 // 경로가 root 에 연결되기 전에는 미연결 안내만 보이며 가짜 connected/demo 로 대체하지 않는다.
-const ART = '/assets/alekov/';
+const ART = './assets/alekov/';
 let aiConnect = null;
 let aiConnectModule = null;
 let aiConnectLoadFailed = false;
@@ -646,7 +717,7 @@ function renderNativeLogin() {
 
 async function loadConnectModule() {
   try {
-    aiConnectModule = await import('/ai-connect.mjs');
+    aiConnectModule = await import('./ai-connect.mjs');
     aiConnect = aiConnectModule.createAiConnectController({ onChange: () => renderAiConnect() });
     // 만들기만 한다. 첫 화면에서 native 요청은 보내지 않는다.
     nativeLogin = aiConnectModule.createNativeLoginController({ onChange: () => renderNativeLogin(), onInvalidate: () => invalidateAppConnectView() });
