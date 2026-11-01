@@ -295,18 +295,6 @@ const UNKNOWN_META = { mode: 'unknown', checkedAt: null };
 
 // 모든 요청은 10초 뒤 중단된다. signal로 호출자가 취소할 수 있으며, 응답이 없어도 화면이 잠기지 않는다.
 async function request(path, { method = 'GET', body, signal } = {}) {
-  const controller = new AbortController();
-  let timedOut = false;
-  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, REQUEST_TIMEOUT_MS);
-  const onAbort = () => controller.abort();
-  if (signal) {
-    if (signal.aborted) controller.abort();
-    else signal.addEventListener('abort', onAbort, { once: true });
-  }
-  const aborted = () => (timedOut
-    ? localFailure('TIMEOUT', '서버 응답 시간이 초과됐습니다. 필요하면 직접 다시 요청하세요.', UNKNOWN_META)
-    : localFailure('CANCELLED', '요청을 취소했습니다.', UNKNOWN_META));
-
   // Live Server(포트 5500 등 백엔드 미구동 정적 환경) 또는 GitHub Pages 감지하여 404 콘솔 노이즈 원천 차단
   const isStaticHost = typeof window !== 'undefined' && (
     window.location.protocol === 'file:' ||
@@ -330,6 +318,18 @@ async function request(path, { method = 'GET', body, signal } = {}) {
       meta: { mode: 'demo', checkedAt: new Date().toISOString() }
     };
   }
+
+  const controller = new AbortController();
+  let timedOut = false;
+  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, REQUEST_TIMEOUT_MS);
+  const onAbort = () => controller.abort();
+  if (signal) {
+    if (signal.aborted) controller.abort();
+    else signal.addEventListener('abort', onAbort, { once: true });
+  }
+  const aborted = () => (timedOut
+    ? localFailure('TIMEOUT', '서버 응답 시간이 초과됐습니다. 필요하면 직접 다시 요청하세요.', UNKNOWN_META)
+    : localFailure('CANCELLED', '요청을 취소했습니다.', UNKNOWN_META));
 
   try {
     let response;
@@ -376,7 +376,7 @@ async function request(path, { method = 'GET', body, signal } = {}) {
     const meta = normalizeMeta(json && json.meta);
     // 선택 coverage 는 값만 옮긴다. 검증은 loadResource 가 해당 kind 에서만 한다. ok:false 응답의 coverage 는 버린다.
     if (!response.ok && DEMO_FALLBACK[path]) {
-        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'demo', checkedAt: new Date().toISOString() } };
+        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: "demo", checkedAt: new Date().toISOString() } };
       }
       if (json && json.ok === true && response.ok) {
       return { ok: true, data: json.data, meta, ...(Object.hasOwn(json, 'coverage') ? { coverage: json.coverage } : {}) };
