@@ -18,9 +18,9 @@ export function engineMethod(engine, name) {
 }
 
 export function createLocalPcEngine(isDemo = false) {
-  let rawUser = 'hayul';
-  try { rawUser = os.userInfo().username || process.env.USERNAME || 'hayul'; } catch {}
-  const userId = rawUser.toLowerCase().replace(/[^a-z0-9._:-]/g, '_') || 'hayul';
+  let rawUser = 'sec_analyst';
+  try { rawUser = os.userInfo().username || process.env.USERNAME || 'sec_analyst'; } catch {}
+  const userId = rawUser.toLowerCase().replace(/[^a-z0-9._:-]/g, '_') || 'sec_analyst';
   const userLabel = `${rawUser} (내 PC 사용자)`;
 
   let rawHost = 'gram';

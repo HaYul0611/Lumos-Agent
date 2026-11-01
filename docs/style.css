@@ -11787,3 +11787,256 @@ li.event:hover {
 .mobile-table-wrap .table tr:hover td {
   background: rgba(0, 229, 255, 0.08) !important;
 }
+
+/* === STUDENT STATUS COLLECTIONS MODERN CARDS === */
+/* 기기 및 세션 2열 반응형 그리드 */
+.student-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+/* 기기, 세션, 알림, 진단 정보 공통 카드 컨테이너 */
+#student-status .student-collection-card,
+#student-status > section > section {
+  background: var(--surface-card, #131b26);
+  border: 1px solid var(--border, rgba(56, 189, 248, 0.2));
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+#student-status .student-collection-card:hover,
+#student-status > section > section:hover {
+  border-color: var(--accent-border, rgba(56, 189, 248, 0.5));
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+#student-status h4 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.01em;
+}
+
+#student-status .student-collection-device h4::before {
+  content: '💻';
+  font-size: 1.05rem;
+}
+
+#student-status .student-collection-session h4::before {
+  content: '🔑';
+  font-size: 1.05rem;
+}
+
+#student-status .student-collection-notification h4::before {
+  content: '🔔';
+  font-size: 1.05rem;
+}
+
+#student-status .student-collection-diagnostics h4::before {
+  content: '🛠️';
+  font-size: 1.05rem;
+}
+
+/* 기기 및 세션 항목 한 줄 디자인 */
+#student-status .student-collection-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--text, #e2e8f0);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+#student-status .student-collection-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.collection-item-label,
+.collection-item-id {
+  font-weight: 500;
+  color: #f1f5f9;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collection-separator {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+/* 상태 뱃지 (Pill) 스타일 */
+.collection-status-pill {
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.collection-status-pill.pill-success,
+.collection-status-pill.pill-active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.collection-status-pill.pill-success::before,
+.collection-status-pill.pill-active::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.8);
+}
+
+.collection-status-pill.pill-warning,
+.collection-status-pill.pill-inactive {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* 알림 카드 개선 (#student-status article) */
+#student-status article {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  border-left: 4px solid var(--accent, #00e5ff) !important;
+  border-radius: 10px !important;
+  padding: 14px 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  font-size: 0.88rem !important;
+  margin-top: 6px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+
+#student-status article:hover {
+  border-color: var(--accent, #00e5ff) !important;
+  background: rgba(15, 23, 42, 0.9) !important;
+}
+
+#student-status article p {
+  margin: 0 !important;
+  line-height: 1.45 !important;
+}
+
+#student-status article p:first-child {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-weight: 700 !important;
+  color: var(--accent, #00e5ff) !important;
+  background: rgba(0, 229, 255, 0.1) !important;
+  padding: 3px 8px !important;
+  border-radius: 5px !important;
+  width: fit-content !important;
+  font-size: 0.8rem !important;
+  border: 1px solid rgba(0, 229, 255, 0.2) !important;
+}
+
+#student-status article p:nth-child(2) {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-family: ui-monospace, Consolas, monospace !important;
+  font-size: 0.8rem !important;
+  color: #94a3b8 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  padding: 3px 8px !important;
+  border-radius: 5px !important;
+  width: fit-content !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#student-status article p:last-child {
+  color: #f1f5f9 !important;
+  font-size: 0.88rem !important;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1) !important;
+  padding-top: 8px !important;
+  margin-top: 2px !important;
+}
+
+/* 진단 정보 카드 */
+#student-status .student-collection-diagnostics p {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  word-break: break-all;
+}
+
+#student-status .student-collection-diagnostics button {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+#student-status .student-collection-diagnostics button:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+}
+
+/* 모바일 전용 반응형 규칙 강화 */
+@media (max-width: 768px) {
+  .student-collections-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  
+  #student-status .student-collection-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .collection-separator {
+    display: none !important;
+  }
+
+  .collection-status-pill {
+    align-self: flex-start !important;
+  }
+
+  #student-status {
+    padding: 0 4px !important;
+  }
+}
