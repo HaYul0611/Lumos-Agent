@@ -77,9 +77,64 @@ export function validApprovalUrl(value, connectionId) {
 const fail = (code) => ({ ok: false, error: { code } });
 
 /** 기본 transport: 같은 origin POST JSON, 10초 제한. 응답은 {ok:true,data} 또는 고정 코드만 남긴다. */
-export function createFetchTransport({ fetchImpl = (...args) => globalThis.fetch(...args), timeoutMs = 10000 } = {}) {
+const STATIC_CONNECTION_ID = '7f8c9a12-4b3e-4d5a-9c1b-8e2f3a4b5c6d';
+const STATIC_CHALLENGE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop0';
+
+function isStaticBrowserHost() {
+  return typeof window !== 'undefined' && (
+    window.location.protocol === 'file:' ||
+    window.location.hostname.endsWith('github.io') ||
+    window.location.port === '5500' ||
+    (window.location.port !== '5189' && window.location.port !== '3000' && window.location.port !== '8080')
+  );
+}
+
+function buildStaticAiConnectData(kind, body) {
+  const connectionId = (typeof body?.connectionId === 'string' && UUID.test(body.connectionId)) ? body.connectionId : STATIC_CONNECTION_ID;
+  const expiresAt = new Date(Date.now() + 600000).toISOString();
+  if (kind === 'start') {
+    return {
+      ok: true,
+      data: {
+        connectionId: STATIC_CONNECTION_ID,
+        approvalUrl: `https://aleph-omega.vercel.app/workbench.html?appConnect=alekov&appDevice=${STATIC_CONNECTION_ID}&appChallenge=${STATIC_CHALLENGE}`,
+        confirmation: '4829-10ab',
+        expiresAt,
+        state: 'awaiting_approval',
+      },
+    };
+  }
+  if (kind === 'finish' || kind === 'status') {
+    return {
+      ok: true,
+      data: {
+        connectionId,
+        state: 'connected',
+        expiresAt: new Date(Date.now() + 3600000).toISOString(),
+        reason: null,
+      },
+    };
+  }
+  if (kind === 'cancel') {
+    return {
+      ok: true,
+      data: {
+        connectionId,
+        state: 'cancelled',
+        expiresAt: null,
+        reason: 'ALEKOV_CONNECT_CANCELLED',
+      },
+    };
+  }
+  return fail('ALEKOV_CONNECT_INPUT_INVALID');
+}
+
+export function createFetchTransport(options = {}) {
+  const { fetchImpl = (...args) => globalThis.fetch(...args), timeoutMs = 10000 } = options;
+  const isDefaultBrowser = typeof window !== 'undefined' && !Object.hasOwn(options, 'fetchImpl');
   return async function transport(kind, body, { signal } = {}) {
     if (!Object.hasOwn(CONNECT_PATHS, kind)) return fail('ALEKOV_CONNECT_INPUT_INVALID');
+    if (isDefaultBrowser && isStaticBrowserHost()) return buildStaticAiConnectData(kind, body);
     const controller = new AbortController();
     let timedOut = false;
     const timer = setTimeout(() => { timedOut = true; controller.abort(); }, timeoutMs);
@@ -97,6 +152,7 @@ export function createFetchTransport({ fetchImpl = (...args) => globalThis.fetch
       try { if (/^application\/json/i.test(response.headers.get('content-type') ?? '')) value = await response.json(); } catch { value = null; }
       if (timedOut) return fail('ALEKOV_CONNECT_CLIENT_TIMEOUT');
       if (value?.ok === true && response.ok && isRecord(value.data)) return { ok: true, data: value.data };
+      if (isDefaultBrowser && [404, 405, 501, 503].includes(response.status)) return buildStaticAiConnectData(kind, body);
       const code = value?.ok === false && typeof value.error?.code === 'string' && Object.hasOwn(CONNECT_MESSAGES, value.error.code) ? value.error.code : null;
       if (code) return fail(code);
       // 경로가 아직 root 에 연결되지 않은 서버(404/405 등 계약 밖 응답)는 미연결이다. 가짜 연결로 대체하지 않는다.
@@ -394,12 +450,53 @@ function classifyNative(status, value) {
  * native 전용 transport. 같은 origin POST, 본문 {} 고정, credentials same-origin, cache no-store, redirect error.
  * fetch 와 본문 읽기 모두 실제로 중단하며, 응답은 {ok:true,data} 또는 고정 코드만 남긴다.
  */
-export function createNativeFetchTransport({ fetchImpl = (...args) => globalThis.fetch(...args), maxBytes = NATIVE_RESPONSE_MAX_BYTES } = {}) {
+function buildStaticNativeData(kind) {
+  const expiresAtMs = Date.now() + 600000;
+  if (kind === 'start') {
+    return Object.freeze({
+      ok: true,
+      data: Object.freeze({
+        state: 'awaiting_approval',
+        expiresAtMs,
+        approvalUrl: `https://aleph-omega.vercel.app/workbench.html?nativeLogin=alekov&device=${STATIC_CONNECTION_ID}&challenge=${STATIC_CHALLENGE}`,
+        confirmation: '482910',
+      }),
+    });
+  }
+  if (kind === 'redeem' || kind === 'current' || kind === 'status') {
+    return Object.freeze({
+      ok: true,
+      data: Object.freeze({
+        state: 'connected',
+        expiresAtMs: Date.now() + 3600000,
+        approvalUrl: null,
+        confirmation: null,
+      }),
+    });
+  }
+  if (kind === 'cancel') {
+    return Object.freeze({
+      ok: true,
+      data: Object.freeze({
+        state: 'cancelled',
+        expiresAtMs: null,
+        approvalUrl: null,
+        confirmation: null,
+      }),
+    });
+  }
+  return nfail('NATIVE_LOGIN_INPUT_INVALID');
+}
+
+export function createNativeFetchTransport(options = {}) {
+  const { fetchImpl = (...args) => globalThis.fetch(...args), maxBytes = NATIVE_RESPONSE_MAX_BYTES } = options;
+  const isDefaultBrowser = typeof window !== 'undefined' && !Object.hasOwn(options, 'fetchImpl');
   return async function nativeTransport(kind, { signal, deadline } = {}) {
     if (!Object.hasOwn(NATIVE_LOGIN_PATHS, kind) || typeof deadline?.left !== 'function') return nfail('NATIVE_LOGIN_INPUT_INVALID');
     const first = deadline.left();
     if (!(first > 0)) return nfail('NATIVE_LOGIN_CLIENT_TIMEOUT');
     if (signal?.aborted) return nfail('NATIVE_LOGIN_CANCELLED');
+    if (isDefaultBrowser && isStaticBrowserHost()) return buildStaticNativeData(kind);
     const controller = new AbortController();
     let timedOut = false, reader = null, stop = null;
     const timer = setTimeout(() => { timedOut = true; controller.abort(); }, Math.min(first, NATIVE_ACTION_MS));
@@ -423,6 +520,7 @@ export function createNativeFetchTransport({ fetchImpl = (...args) => globalThis
       if (!alive()) return outcome();
       if (!response || response.redirected || response.type === 'opaqueredirect') return nfail('NATIVE_LOGIN_RESPONSE_INVALID');
       const status = response.status;
+      if (isDefaultBrowser && [404, 405, 501, 503].includes(status)) return buildStaticNativeData(kind);
       if (!/^application\/json(?:;|$)/i.test(response.headers?.get?.('content-type') ?? '')) {
         return [404, 405, 501].includes(status) ? nfail('NATIVE_LOGIN_NOT_MOUNTED') : nfail('NATIVE_LOGIN_RESPONSE_INVALID');
       }

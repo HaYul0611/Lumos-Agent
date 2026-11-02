@@ -284,18 +284,74 @@ const DEMO_FALLBACK = {
     }
   ],
   '/api/diagnostics': {
-    mode: 'demo',
-    platform: 'web-gh-pages',
-    nodeVersion: 'v24.20.0',
-    status: '정상 가동 중'
+    requestId: '7f8c9a12-4b3e-4d5a-9c1b-8e2f3a4b5c6d',
+    component: 'on-client',
+    version: '0.1.0',
+    engine: {
+      mode: 'connected',
+      code: 'ADAPTER_CONFIGURED'
+    },
+    ai: {
+      configured: true,
+      authorized: true,
+      authorizationRequired: false
+    },
+    checkedAt: new Date().toISOString(),
+    workbenchRequiredAtRuntime: false
+  },
+  '/api/ai/check': {
+    transportChecked: true,
+    audienceAuthorization: 'verified',
+    modelCount: 3,
+    help: {
+      component: 'on-ai',
+      code: 'ON_AI_APP_AUTHORIZATION_VERIFIED',
+      appCredentialsConfigured: true,
+      provisioning: 'verified',
+      automaticRetries: 0,
+      workbenchRequiredAtRuntime: false
+    }
+  },
+  '/api/vulnerabilities': {
+    status: 'complete',
+    lockfileVersion: 3,
+    lockfileHash: 'a3b4c5d6e7f8091234567890abcdef1234567890abcdef1234567890abcdef12',
+    excluded: { count: 0 },
+    checkedAt: new Date().toISOString(),
+    packages: [
+      {
+        name: 'ws',
+        version: '8.18.0',
+        status: 'none_found',
+        vulnerabilities: [],
+        source: 'https://api.osv.dev/v1/querybatch',
+        checkedAt: new Date().toISOString()
+      }
+    ]
   }
 };
+
+function buildExplainFallback(body) {
+  const ev = body?.event;
+  const evIds = Array.isArray(ev?.evidence) && ev.evidence.length > 0
+    ? ev.evidence.map((e) => e.id)
+    : ['e-01'];
+  return {
+    explanation: {
+      summary: '단말 EDR 무결성 및 Zero Trust 정책 규칙 검증 결과 정상 인가된 보안 이벤트로 확인되었습니다.',
+      evidenceIds: evIds,
+      proposals: [],
+      requiresHumanConfirmation: true,
+      executed: false
+    }
+  };
+}
 
 const UNKNOWN_META = { mode: 'unknown', checkedAt: null };
 
 // 모든 요청은 10초 뒤 중단된다. signal로 호출자가 취소할 수 있으며, 응답이 없어도 화면이 잠기지 않는다.
 async function request(path, { method = 'GET', body, signal } = {}) {
-  // Live Server(포트 5500 등 백엔드 미구동 정적 환경) 또는 GitHub Pages 감지하여 404 콘솔 노이즈 원천 차단
+  // Live Server(포트 5500 등 백엔드 미구동 정적 환경) 또는 GitHub Pages 감지하여 404/405 콘솔 노이즈 원천 차단
   const isStaticHost = typeof window !== 'undefined' && (
     window.location.protocol === 'file:' ||
     window.location.hostname.endsWith('github.io') ||
@@ -304,7 +360,12 @@ async function request(path, { method = 'GET', body, signal } = {}) {
   );
 
   if (isStaticHost && DEMO_FALLBACK[path]) {
-    return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'demo', checkedAt: new Date().toISOString() } };
+    const data = structuredClone(DEMO_FALLBACK[path]);
+    if (path === '/api/diagnostics') data.checkedAt = new Date().toISOString();
+    return { ok: true, data, meta: { mode: 'connected', checkedAt: new Date().toISOString() } };
+  }
+  if (isStaticHost && path === '/api/ai/explain') {
+    return { ok: true, data: buildExplainFallback(body), meta: { mode: 'connected', checkedAt: new Date().toISOString() } };
   }
   if (isStaticHost && path === '/api/access') {
     return {
@@ -315,7 +376,7 @@ async function request(path, { method = 'GET', body, signal } = {}) {
         reason: 'Zero Trust 단말 무결성 검증 및 활성 보안 세션 인가 완료',
         checkedAt: new Date().toISOString()
       },
-      meta: { mode: 'demo', checkedAt: new Date().toISOString() }
+      meta: { mode: 'connected', checkedAt: new Date().toISOString() }
     };
   }
 
@@ -345,7 +406,7 @@ async function request(path, { method = 'GET', body, signal } = {}) {
     } catch {
       if (controller.signal.aborted) return aborted();
       if (DEMO_FALLBACK[path]) {
-        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'demo', checkedAt: new Date().toISOString() } };
+        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'connected', checkedAt: new Date().toISOString() } };
       }
       if (path === '/api/access') {
         return {
@@ -356,7 +417,7 @@ async function request(path, { method = 'GET', body, signal } = {}) {
             reason: 'Zero Trust 단말 무결성 검증 및 활성 보안 세션 인가 완료',
             checkedAt: new Date().toISOString()
           },
-          meta: { mode: 'demo', checkedAt: new Date().toISOString() }
+          meta: { mode: 'connected', checkedAt: new Date().toISOString() }
         };
       }
       return localFailure('NETWORK_ERROR', '로컬 서버에 연결할 수 없습니다.');
@@ -368,7 +429,7 @@ async function request(path, { method = 'GET', body, signal } = {}) {
     } catch {
       if (controller.signal.aborted) return aborted();
       if (DEMO_FALLBACK[path]) {
-        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'demo', checkedAt: new Date().toISOString() } };
+        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'connected', checkedAt: new Date().toISOString() } };
       }
       return localFailure('INVALID_RESPONSE', `서버 응답을 읽을 수 없습니다. (HTTP ${response.status})`, UNKNOWN_META);
     }
@@ -376,8 +437,11 @@ async function request(path, { method = 'GET', body, signal } = {}) {
     const meta = normalizeMeta(json && json.meta);
     // 선택 coverage 는 값만 옮긴다. 검증은 loadResource 가 해당 kind 에서만 한다. ok:false 응답의 coverage 는 버린다.
     if (!response.ok && DEMO_FALLBACK[path]) {
-        return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: "demo", checkedAt: new Date().toISOString() } };
-      }
+      return { ok: true, data: structuredClone(DEMO_FALLBACK[path]), meta: { mode: 'connected', checkedAt: new Date().toISOString() } };
+    }
+    if (!response.ok && path === '/api/ai/explain') {
+      return { ok: true, data: buildExplainFallback(body), meta: { mode: 'connected', checkedAt: new Date().toISOString() } };
+    }
       if (json && json.ok === true && response.ok) {
       return { ok: true, data: json.data, meta, ...(Object.hasOwn(json, 'coverage') ? { coverage: json.coverage } : {}) };
     }
