@@ -537,7 +537,17 @@ function trackError(key, resource) {
 }
 
 // 현재 세대에서 끝난 응답의 mode가 모두 같을 때만 그 mode를 표시한다. 섞이거나 없으면 확인 불가.
+// 계정 연결(nativeLogin) 또는 AI 연결(aiConnect)이 명시적으로 취소·해제된 경우 상단 헤더 배지도 즉시 연결 없음(disconnected)으로 동기화한다.
 function currentMode() {
+  if (nativeLogin && ['cancelled', 'disconnected'].includes(nativeLogin.state?.phase)) {
+    return 'disconnected';
+  }
+  if (aiConnect && aiConnect.state?.phase === 'cancelled' && (!nativeLogin || nativeLogin.state?.phase !== 'connected')) {
+    return 'disconnected';
+  }
+  if (nativeLogin && nativeLogin.state?.phase === 'connected') {
+    return 'connected';
+  }
   const modes = new Set();
   for (const key of ['me', 'apps', 'events', 'devices', 'sessions', 'access']) {
     const resource = state[key];
@@ -755,6 +765,7 @@ function renderAiConnect() {
     s.reason ? el('p', { className: 'muted', text: `상태 코드: ${s.reason}` }) : null,
     appConnectInvalidated && s.phase === 'idle' ? el('p', { testid: 'ai-connect-invalidated', className: 'muted', text: '계정 연결이 바뀌어 이전 AI 앱 승인 표시를 화면에서 지웠습니다. 서버의 앱 권한을 취소한 것은 아닙니다. 필요하면 「AI 연결 시작」을 직접 눌러 다시 진행하세요.' }) : null,
   );
+  renderMode();
 }
 
 // ---------- 계정 연결 확인(native 로그인) ----------
@@ -804,6 +815,7 @@ function renderNativeLogin() {
     view && view.phase === 'connected' ? el('dl', { className: 'kv' }, [el('dt', { text: '연결 확인 기한' }), el('dd', { testid: 'native-login-until', text: until })]) : null,
     view && view.reason ? el('p', { className: 'muted', text: `상태 코드: ${view.reason}` }) : null,
   );
+  renderMode();
 }
 
 async function loadConnectModule() {
@@ -1539,7 +1551,11 @@ async function loadAll() {
 function init() {
   setupNav();
   setupSidebarToggle();
-  $('refresh').addEventListener('click', () => loadAll());
+  $('refresh').addEventListener('click', () => {
+    if (nativeLogin && ['cancelled', 'disconnected'].includes(nativeLogin.state?.phase)) nativeLogin.reset();
+    if (aiConnect && aiConnect.state?.phase === 'cancelled') aiConnect.reset();
+    loadAll();
+  });
   $('diag-load').addEventListener('click', () => loadDiagnostics());
   $('diag-copy').addEventListener('click', () => copyDiagnostics());
   $('vulnerabilities-load').addEventListener('click', () => loadVulnerabilities());

@@ -2622,12 +2622,12 @@ window.LumosMapVectors = {
       } else {
         tbody.innerHTML = pageSlice.map(s => `
           <tr>
-            <td>
+            <td style="text-align: center; vertical-align: middle;">
               <span class="gis-shield-icon ${s.status === 'crit' ? 'crit' : 'pass'}">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </span>
             </td>
-            <td><span class="mono">${s.region}</span></td>
+            <td style="text-align: center; vertical-align: middle;"><span class="mono">${s.region}</span></td>
             <td>
               <div class="gis-site-title">${escapeHtml(s.name)}</div>
               <div class="gis-site-org mono muted">${escapeHtml(s.org)}</div>
@@ -2761,7 +2761,16 @@ window.LumosMapVectors = {
     caseInput?.addEventListener('keydown', (e) => { if (e.key === 'Enter') doCaseSearch(); });
     caseInput?.addEventListener('input', (e) => renderCasesTable(e.target.value.trim()));
 
-    // Page size selector (10, 20, 50)
+    // Page size selector dropdown (10, 20, 30, 50개씩 보기) + legacy button fallback
+    const pageSizeSelect = $('gis-page-size-select');
+    if (pageSizeSelect) {
+      gisSitePageSize = Number(pageSizeSelect.value) || 10;
+      pageSizeSelect.addEventListener('change', (e) => {
+        gisSitePageSize = Number(e.target.value) || 10;
+        gisSitePage = 1;
+        renderSitesTable();
+      });
+    }
     qsa('.gis-page-sizes .btn-size').forEach(btn => {
       btn.addEventListener('click', () => {
         qsa('.gis-page-sizes .btn-size').forEach(b => b.classList.remove('active'));

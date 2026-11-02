@@ -12192,3 +12192,274 @@ li.event:hover {
     padding: 2px 5px !important;
   }
 }
+
+/* === GIS MINI HUB: CENTER SHIELD SVG & PAGE SIZE SELECT DROPDOWN === */
+#gis-sites-table th:nth-child(1),
+#gis-sites-table td:nth-child(1),
+#gis-sites-table th:nth-child(2),
+#gis-sites-table td:nth-child(2),
+#gis-sites-table th:nth-child(5),
+#gis-sites-table td:nth-child(5) {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+#gis-sites-table td:nth-child(1) .gis-shield-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 auto !important;
+  vertical-align: middle !important;
+}
+
+#gis-sites-table td:nth-child(1) .gis-shield-icon svg {
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.gis-page-sizes {
+  display: inline-flex;
+  align-items: center;
+}
+
+.gis-page-size-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(9, 23, 42, 0.95);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300E5FF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
+  background-size: 12px 12px;
+  color: #E2E8F0;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 6px;
+  padding: 5px 28px 5px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gis-page-size-select:hover,
+.gis-page-size-select:focus {
+  border-color: #00E5FF;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.25);
+}
+
+.gis-page-size-select option {
+  background-color: #081324;
+  color: #F1F5F9;
+}
+
+/* === SIDEBAR SVG ICON PERFECT CENTERING === */
+.sidebar #nav [role="tab"],
+.layout:not(.sidebar-collapsed) #nav [role="tab"],
+.layout.sidebar-collapsed #nav [role="tab"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 2px auto !important;
+}
+
+.sidebar #nav [role="tab"] .nav-tab-icon-wrap,
+.layout:not(.sidebar-collapsed) .nav-tab-icon-wrap,
+.layout.sidebar-collapsed .nav-tab-icon-wrap {
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.sidebar #nav [role="tab"] .nav-tab-icon {
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+/* === CRITICAL MOBILE LAYOUT & TEXT READABILITY FIX (<= 768px & <= 480px) === */
+@media (max-width: 768px) {
+  /* 1. .sidebar가 position:fixed로 빠지면서 <main>이 1번 컬럼(54px 폭)에 갇혀 글자가 세로 1글자씩 깨지던 근본 원인 해결 */
+  .layout,
+  .layout.sidebar-collapsed,
+  .layout:not(.sidebar-collapsed) {
+    display: grid !important;
+    grid-template-columns: 50px minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: clip !important;
+  }
+
+  .sidebar,
+  .layout:not(.sidebar-collapsed) .sidebar,
+  .layout.sidebar-collapsed .sidebar {
+    position: sticky !important;
+    top: 48px !important;
+    left: 0 !important;
+    grid-column: 1 !important;
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    height: calc(100vh - 48px) !important;
+    padding: 8px 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    z-index: 40 !important;
+  }
+
+  main,
+  #main-content {
+    grid-column: 2 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 12px 10px 44px 10px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* 2. 한글 단어 단위 자연스러운 줄바꿈 보장 (글자 단위 세로 쪼개짐 방지) */
+  main h1, main h2, main h3, main h4,
+  main p, main span, main strong, main dt, main dd,
+  main label, main button, main li,
+  .kpi-label, .kpi-sub, .soc-title, .soc-subtitle,
+  .card-title, .panel-title, .view-header-row h2 {
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* 3. 뷰 헤더 및 카드 상단 툴바 모바일 줄바꿈 정돈 */
+  .view-header-row,
+  #view-topology .view-header-row,
+  .section-header,
+  .card-header,
+  .panel-header,
+  .cases-header-row,
+  .vuln-header-row,
+  .compliance-header,
+  .ueba-section-header,
+  .gis-header-bar,
+  .topology-toolbar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  /* 4. 지점망 GIS 상단 5개 통계 바 -> 모바일 2열 배치 (침입 탐지 경보 가시성 극대화) */
+  .gis-stats-bar-top {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .gis-stats-bar-top .gis-stat-pill:last-child {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* 5. 지점 관제 미니 허브: 모바일에서는 화면 밖으로 잘리지 않도록 전체 폭 카드로 자연스럽게 전환 */
+  .gis-mobile-hub {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    margin-top: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-hub-body {
+    max-height: none !important;
+    padding: 10px !important;
+  }
+
+  .mobile-table-wrap {
+    max-height: 360px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .gis-table {
+    min-width: 500px !important;
+  }
+
+  .mobile-table-footer {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+
+  /* 6. 사건·케이스 / 취약점 / UEBA / 토폴로지 인스펙터 모바일 그리드 최적화 */
+  .cases-kpi-grid,
+  .vuln-stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .cases-severity-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .inspector-gauges-row {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .inspector-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* 7. 정의 목록(dl.kv / dl.identity) 모바일 정돈 */
+  dl.kv,
+  dl.identity {
+    grid-template-columns: minmax(76px, auto) 1fr !important;
+    gap: 6px 10px !important;
+  }
+
+  dl.kv dd,
+  dl.identity dd {
+    word-break: break-all !important;
+  }
+
+  /* 8. 테이블 래퍼 가로 터치 스크롤 보장 */
+  .table-wrap,
+  .ueba-table-wrap,
+  .cases-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cases-severity-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .inspector-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .mobile-table-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .mobile-table-footer .gis-pagination,
+  .mobile-table-footer .gis-page-sizes {
+    justify-content: center !important;
+  }
+
+  .gis-page-size-select {
+    width: 100% !important;
+  }
+}
