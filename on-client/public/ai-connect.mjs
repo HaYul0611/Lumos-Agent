@@ -77,8 +77,38 @@ export function validApprovalUrl(value, connectionId) {
 const fail = (code) => ({ ok: false, error: { code } });
 
 /** 기본 transport: 같은 origin POST JSON, 10초 제한. 응답은 {ok:true,data} 또는 고정 코드만 남긴다. */
-const STATIC_CONNECTION_ID = '7f8c9a12-4b3e-4d5a-9c1b-8e2f3a4b5c6d';
-const STATIC_CHALLENGE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop0';
+function generateUuidV4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+function generateNativeChallenge() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  const ends = 'AEIMQUYcgkosw048';
+  let s = '';
+  for (let i = 0; i < 42; i++) s += chars[(Math.random() * chars.length) | 0];
+  s += ends[(Math.random() * ends.length) | 0];
+  return s;
+}
+
+function generateAiChallenge() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  let s = '';
+  for (let i = 0; i < 43; i++) s += chars[(Math.random() * chars.length) | 0];
+  return s;
+}
+
+function generateSixDigits() {
+  return String(Math.floor(100000 + Math.random() * 900000));
+}
+
+function generateHex4_4() {
+  const hex = () => Math.floor(0x1000 + Math.random() * 0xefff).toString(16).toLowerCase().padStart(4, '0');
+  return hex() + '-' + hex();
+}
 
 function isStaticBrowserHost() {
   return typeof window !== 'undefined' && (
@@ -89,43 +119,115 @@ function isStaticBrowserHost() {
   );
 }
 
+// Module-level shared static state
+const staticState = {
+  native: {
+    state: 'disconnected',
+    expiresAtMs: null,
+    approvalUrl: null,
+    confirmation: null,
+    device: null,
+  },
+  ai: {
+    state: 'idle',
+    connectionId: null,
+    approvalUrl: null,
+    confirmation: null,
+    expiresAt: null,
+  }
+};
+
+export function isStaticNativeConnected() {
+  return staticState.native.state === 'connected';
+}
+
 function buildStaticAiConnectData(kind, body) {
-  const connectionId = (typeof body?.connectionId === 'string' && UUID.test(body.connectionId)) ? body.connectionId : STATIC_CONNECTION_ID;
-  const expiresAt = new Date(Date.now() + 600000).toISOString();
+  // 계정 연결(Native Login)이 확인(connected)되지 않은 경우 AI 연결 시작 불가!
+  if (staticState.native.state !== 'connected') {
+    return fail('ALEKOV_CONNECT_CONTEXT_UNVERIFIED');
+  }
+
   if (kind === 'start') {
+    const connectionId = generateUuidV4();
+    const challenge = generateAiChallenge();
+    const confirmation = generateHex4_4();
+    const expiresAt = new Date(Date.now() + 600000).toISOString();
+    const approvalUrl = `https://aleph-omega.vercel.app/workbench.html?appConnect=alekov&appDevice=${connectionId}&appChallenge=${challenge}`;
+    staticState.ai = { state: 'awaiting_approval', connectionId, confirmation, approvalUrl, expiresAt };
     return {
       ok: true,
       data: {
-        connectionId: STATIC_CONNECTION_ID,
-        approvalUrl: `https://aleph-omega.vercel.app/workbench.html?appConnect=alekov&appDevice=${STATIC_CONNECTION_ID}&appChallenge=${STATIC_CHALLENGE}`,
-        confirmation: '4829-10ab',
+        connectionId,
+        approvalUrl,
+        confirmation,
         expiresAt,
         state: 'awaiting_approval',
       },
     };
   }
-  if (kind === 'finish' || kind === 'status') {
+
+  if (kind === 'finish') {
+    const connectionId = body?.connectionId || staticState.ai.connectionId || generateUuidV4();
+    staticState.ai.state = 'connected';
+    staticState.ai.expiresAt = new Date(Date.now() + 3600000).toISOString();
     return {
       ok: true,
       data: {
         connectionId,
         state: 'connected',
-        expiresAt: new Date(Date.now() + 3600000).toISOString(),
+        expiresAt: staticState.ai.expiresAt,
         reason: null,
       },
     };
   }
-  if (kind === 'cancel') {
+
+  if (kind === 'status') {
+    if (staticState.ai.state === 'connected') {
+      return {
+        ok: true,
+        data: {
+          connectionId: staticState.ai.connectionId || body?.connectionId,
+          state: 'connected',
+          expiresAt: staticState.ai.expiresAt || new Date(Date.now() + 3600000).toISOString(),
+          reason: null,
+        },
+      };
+    }
+    if (staticState.ai.state === 'awaiting_approval') {
+      return {
+        ok: true,
+        data: {
+          connectionId: staticState.ai.connectionId || body?.connectionId,
+          state: 'awaiting_approval',
+          expiresAt: staticState.ai.expiresAt,
+          reason: null,
+        },
+      };
+    }
     return {
       ok: true,
       data: {
-        connectionId,
+        connectionId: staticState.ai.connectionId || body?.connectionId || generateUuidV4(),
+        state: staticState.ai.state || 'idle',
+        expiresAt: null,
+        reason: null,
+      },
+    };
+  }
+
+  if (kind === 'cancel') {
+    staticState.ai.state = 'cancelled';
+    return {
+      ok: true,
+      data: {
+        connectionId: body?.connectionId || staticState.ai.connectionId,
         state: 'cancelled',
         expiresAt: null,
         reason: 'ALEKOV_CONNECT_CANCELLED',
       },
     };
   }
+
   return fail('ALEKOV_CONNECT_INPUT_INVALID');
 }
 
@@ -451,30 +553,106 @@ function classifyNative(status, value) {
  * fetch 와 본문 읽기 모두 실제로 중단하며, 응답은 {ok:true,data} 또는 고정 코드만 남긴다.
  */
 function buildStaticNativeData(kind) {
-  const expiresAtMs = Date.now() + 600000;
   if (kind === 'start') {
+    const device = generateUuidV4();
+    const challenge = generateNativeChallenge();
+    const confirmation = generateSixDigits();
+    const expiresAtMs = Date.now() + 600000;
+    const approvalUrl = `https://aleph-omega.vercel.app/workbench.html?nativeLogin=alekov&device=${device}&challenge=${challenge}`;
+    staticState.native = { state: 'awaiting_approval', expiresAtMs, approvalUrl, confirmation, device };
     return Object.freeze({
       ok: true,
       data: Object.freeze({
         state: 'awaiting_approval',
         expiresAtMs,
-        approvalUrl: `https://aleph-omega.vercel.app/workbench.html?nativeLogin=alekov&device=${STATIC_CONNECTION_ID}&challenge=${STATIC_CHALLENGE}`,
-        confirmation: '482910',
+        approvalUrl,
+        confirmation,
       }),
     });
   }
-  if (kind === 'redeem' || kind === 'current' || kind === 'status') {
+
+  if (kind === 'redeem') {
+    if (staticState.native.state === 'awaiting_approval') {
+      staticState.native.state = 'connected';
+      staticState.native.expiresAtMs = Date.now() + 3600000;
+      staticState.native.approvalUrl = null;
+      staticState.native.confirmation = null;
+      return Object.freeze({
+        ok: true,
+        data: Object.freeze({
+          state: 'connected',
+          expiresAtMs: staticState.native.expiresAtMs,
+          approvalUrl: null,
+          confirmation: null,
+        }),
+      });
+    }
+    return nfail('NATIVE_LOGIN_UNVERIFIED');
+  }
+
+  if (kind === 'current') {
+    if (staticState.native.state === 'connected') {
+      return Object.freeze({
+        ok: true,
+        data: Object.freeze({
+          state: 'connected',
+          expiresAtMs: staticState.native.expiresAtMs,
+          approvalUrl: null,
+          confirmation: null,
+        }),
+      });
+    }
+    return nfail('NATIVE_LOGIN_UNVERIFIED');
+  }
+
+  if (kind === 'status') {
+    if (staticState.native.state === 'connected') {
+      return Object.freeze({
+        ok: true,
+        data: Object.freeze({
+          state: 'connected',
+          expiresAtMs: staticState.native.expiresAtMs,
+          approvalUrl: null,
+          confirmation: null,
+        }),
+      });
+    }
+    if (staticState.native.state === 'awaiting_approval') {
+      return Object.freeze({
+        ok: true,
+        data: Object.freeze({
+          state: 'awaiting_approval',
+          expiresAtMs: staticState.native.expiresAtMs,
+          approvalUrl: staticState.native.approvalUrl,
+          confirmation: staticState.native.confirmation,
+        }),
+      });
+    }
+    if (staticState.native.state === 'cancelled') {
+      return Object.freeze({
+        ok: true,
+        data: Object.freeze({
+          state: 'cancelled',
+          expiresAtMs: null,
+          approvalUrl: null,
+          confirmation: null,
+        }),
+      });
+    }
     return Object.freeze({
       ok: true,
       data: Object.freeze({
-        state: 'connected',
-        expiresAtMs: Date.now() + 3600000,
+        state: 'disconnected',
+        expiresAtMs: null,
         approvalUrl: null,
         confirmation: null,
       }),
     });
   }
+
   if (kind === 'cancel') {
+    staticState.native = { state: 'cancelled', expiresAtMs: null, approvalUrl: null, confirmation: null, device: null };
+    staticState.ai = { state: 'idle', connectionId: null, approvalUrl: null, confirmation: null, expiresAt: null };
     return Object.freeze({
       ok: true,
       data: Object.freeze({
@@ -485,6 +663,7 @@ function buildStaticNativeData(kind) {
       }),
     });
   }
+
   return nfail('NATIVE_LOGIN_INPUT_INVALID');
 }
 

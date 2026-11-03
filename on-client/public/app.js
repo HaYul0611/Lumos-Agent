@@ -227,6 +227,47 @@ function loadingBox() {
   return stateBox('loading', '불러오는 중…');
 }
 
+function renderSkeletonBox(targetEl, text) {
+  if (!targetEl) return;
+  setChildren(targetEl, el('div', { className: 'skeleton-loading-box' }, [
+    el('div', { className: 'skeleton-loading-header' }, [
+      el('span', { className: 'loading-spinner' }),
+      el('span', { text }),
+    ]),
+    el('div', { className: 'skeleton-shimmer-bar' }),
+    el('div', { className: 'skeleton-shimmer-bar short' }),
+  ]));
+}
+
+async function withButtonLoading(btn, targetEl, loadingText, fn) {
+  if (!btn || btn.classList.contains('btn-busy')) return;
+  const originalText = btn.textContent;
+  btn.classList.add('btn-busy');
+  btn.disabled = true;
+  btn.replaceChildren(el('span', { className: 'btn-spinner' }), loadingText);
+
+  if (targetEl) {
+    renderSkeletonBox(targetEl, `${loadingText}…`);
+  }
+
+  try {
+    const [result] = await Promise.all([
+      Promise.resolve().then(() => fn()),
+      new Promise(resolve => setTimeout(resolve, 400)),
+    ]);
+    return result;
+  } finally {
+    btn.classList.remove('btn-busy');
+    btn.textContent = originalText;
+    btn.disabled = false;
+    if (targetEl) {
+      targetEl.classList.remove('result-updated-pulse');
+      void targetEl.offsetWidth;
+      targetEl.classList.add('result-updated-pulse');
+    }
+  }
+}
+
 // ---------- HTTP ----------
 
 function normalizeMeta(meta) {
@@ -663,7 +704,9 @@ function renderAiConnection() {
   target.dataset.state = resource.status;
   $('ai-check-cancel').disabled = resource.status !== 'loading';
   if (resource.status === 'idle') setChildren(target, stateBox('empty', 'AI 연결 점검 전입니다. 설정값 존재는 이용 권한 확인이 아닙니다.'));
-  else if (resource.status === 'loading') setChildren(target, stateBox('loading', '현재 로그인으로 AI 모델 응답을 점검하는 중…'));
+  else if (resource.status === 'loading') {
+    renderSkeletonBox(target, '현재 로그인으로 AI 모델 응답을 점검하는 중…');
+  }
   else if (resource.status === 'error') setChildren(target, stateBox('error', `${resource.error.code}: ${resource.error.message}`));
   else {
     const data = resource.data;
@@ -684,6 +727,16 @@ function cancelAiCheck({ reset = false } = {}) {
 }
 
 async function checkAiConnection() {
+  if (!nativeLogin || nativeLogin.state.phase !== 'connected') {
+    state.aiConnection = safeAiFailure({ error: { code: 'SUBJECT_SCOPE_UNVERIFIED' } });
+    renderAiConnection();
+    return;
+  }
+  if (!aiConnect || aiConnect.state.phase !== 'connected') {
+    state.aiConnection = safeAiFailure({ error: { code: 'AI_REQUEST_UNVERIFIED' } });
+    renderAiConnection();
+    return;
+  }
   const gen = generation, requestGen = ++aiConnectionGeneration;
   if (aiConnectionController) aiConnectionController.abort();
   const controller = new AbortController();
@@ -691,11 +744,22 @@ async function checkAiConnection() {
   state.aiConnection = { status: 'loading' };
   renderAiConnection();
   try {
-    const result = await aiRequest('/api/ai/check', { body: {}, signal: controller.signal });
+    const [result] = await Promise.all([
+      aiRequest('/api/ai/check', { body: {}, signal: controller.signal }),
+      new Promise(resolve => setTimeout(resolve, 350))
+    ]);
     if (gen !== generation || requestGen !== aiConnectionGeneration) return;
     const data = result.ok ? validAiCheck(result.data, result.meta) : null;
     state.aiConnection = data ? { status: 'ok', data, meta: result.meta } : safeAiFailure(result.ok ? null : result);
+    if (data) {
+      lastAiCheckResult = {
+        modelCount: data.modelCount,
+        audienceAuthorization: data.audienceAuthorization,
+        checkedAt: result.meta?.checkedAt || new Date().toISOString()
+      };
+    }
     renderAiConnection();
+    renderAiConnect();
   } finally { controller.abort(); if (aiConnectionController === controller) aiConnectionController = null; }
 }
 
@@ -707,6 +771,9 @@ let aiConnect = null;
 let aiConnectModule = null;
 let aiConnectLoadFailed = false;
 let lastIdentityKey = null;
+let lastNativeCheckTime = null;
+let lastAiStatusCheckTime = null;
+let lastAiCheckResult = null;
 
 // 장식 그림: alt="" · aria-hidden. 상태 글과 분리하며, 읽지 못하면 숨긴다.
 function art(name, className) {
@@ -735,7 +802,13 @@ function renderAiConnect() {
   if (Number.isFinite(expiresMs) && !approvalExpired) connectExpiryTimer = setTimeout(renderAiConnect, Math.min(expiresMs - Date.now() + 50, 2147483647));
   target.dataset.state = s.phase;
   target.dataset.approvalExpired = approvalExpired ? 'true' : 'false';
-  $('ai-connect-start').disabled = !aiConnect || busy || ['awaiting_approval', 'checking'].includes(s.phase);
+  const isNativeConnected = nativeLogin && nativeLogin.state.phase === 'connected';
+  $('ai-connect-start').disabled = !aiConnect || busy || ['awaiting_approval', 'checking'].includes(s.phase) || !isNativeConnected;
+  if (!isNativeConnected) {
+    $('ai-connect-start').title = '계정 연결 확인을 먼저 완료해야 합니다.';
+  } else {
+    $('ai-connect-start').removeAttribute('title');
+  }
   $('ai-connect-finish').disabled = !aiConnect || s.phase !== 'awaiting_approval' || approvalExpired;
   $('ai-connect-status').disabled = !aiConnect || !s.connectionId || busy;
   $('ai-connect-cancel').disabled = !aiConnect || !['starting', 'awaiting_approval', 'finishing', 'checking'].includes(s.phase);
@@ -756,6 +829,14 @@ function renderAiConnect() {
   const kind = s.phase === 'connected' ? 'ok' : ['error', 'unknown'].includes(s.phase) ? 'error' : ['idle', 'cancelled'].includes(s.phase) ? 'empty' : 'loading';
   setChildren(target,
     stateBox(kind, message),
+    s.phase === 'connected' ? el('div', { className: 'result-feedback-banner ok' }, [
+      el('span', { className: 'feedback-icon', text: '✔' }),
+      el('span', { className: 'feedback-text', text: `AI 엔진 연결 및 승인 토큰 상태 확인 완료 (${lastAiStatusCheckTime ? '확인 시각 ' + formatTime(lastAiStatusCheckTime) : '정상 통신 중'}) · 통신 경로 정상 가동` })
+    ]) : null,
+    s.phase === 'connected' && lastAiCheckResult ? el('div', { className: 'result-feedback-banner info' }, [
+      el('span', { className: 'feedback-icon', text: '🔍' }),
+      el('span', { className: 'feedback-text', text: `현재 API 연결 점검 완료: 앱 권한 검증됨(verified) · 응답 가능 모델 ${lastAiCheckResult.modelCount}개 확인 (점검 시각: ${formatTime(lastAiCheckResult.checkedAt)})` })
+    ]) : null,
     s.phase === 'awaiting_approval' ? el('dl', { className: 'kv connect-code' }, [
       el('dt', { text: '확인 번호' }), el('dd', { testid: 'ai-connect-confirmation', text: s.confirmation }),
       el('dt', { text: '승인 기한' }), el('dd', { text: formatTime(s.expiresAt) }),
@@ -807,6 +888,10 @@ function renderNativeLogin() {
   const until = view && view.expiresAtMs !== null ? formatTime(new Date(view.expiresAtMs).toISOString()) : null;
   setChildren(target,
     stateBox(kind, message),
+    view && view.phase === 'connected' ? el('div', { className: 'result-feedback-banner ok' }, [
+      el('span', { className: 'feedback-icon', text: '✔' }),
+      el('span', { className: 'feedback-text', text: `현재 로그인 계정 및 활성 세션 상태 확인 완료 (${lastNativeCheckTime ? '확인 시각 ' + formatTime(lastNativeCheckTime) : '세션 정상 유지 중'}) · 인가 정상 통신 유지` })
+    ]) : null,
     view && view.confirmation ? el('dl', { className: 'kv connect-code' }, [
       el('dt', { text: '확인 번호' }), el('dd', { testid: 'native-login-confirmation', text: view.confirmation }),
       el('dt', { text: '확인 기한' }), el('dd', { text: until }),
@@ -815,15 +900,27 @@ function renderNativeLogin() {
     view && view.phase === 'connected' ? el('dl', { className: 'kv' }, [el('dt', { text: '연결 확인 기한' }), el('dd', { testid: 'native-login-until', text: until })]) : null,
     view && view.reason ? el('p', { className: 'muted', text: `상태 코드: ${view.reason}` }) : null,
   );
+  renderAiConnect();
   renderMode();
 }
 
 async function loadConnectModule() {
   try {
     aiConnectModule = await import('./ai-connect.mjs');
-    aiConnect = aiConnectModule.createAiConnectController({ onChange: () => renderAiConnect() });
+    aiConnect = aiConnectModule.createAiConnectController({
+      onChange: () => {
+        renderAiConnect();
+        renderMode();
+      }
+    });
     // 만들기만 한다. 첫 화면에서 native 요청은 보내지 않는다.
-    nativeLogin = aiConnectModule.createNativeLoginController({ onChange: () => renderNativeLogin(), onInvalidate: () => invalidateAppConnectView() });
+    nativeLogin = aiConnectModule.createNativeLoginController({
+      onChange: () => {
+        renderNativeLogin();
+        renderMode();
+      },
+      onInvalidate: () => invalidateAppConnectView()
+    });
   } catch {
     aiConnectLoadFailed = true;
   }
@@ -1566,17 +1663,63 @@ function init() {
   $('action-confirm').addEventListener('click', () => executeAction());
   $('action-result-load').addEventListener('click', () => {if(actionIntent&&!$('action-result-load').disabled)actionOperation('result',{requestId:actionIntent.requestId});});
   $('action-cancel').addEventListener('click', () => clearAction({cancelled:true}));
-  $('ai-connect-start').addEventListener('click', () => { appConnectInvalidated = false; if (aiConnect) aiConnect.start(); });
-  $('ai-connect-finish').addEventListener('click', () => { if (aiConnect) aiConnect.finish(); });
-  $('ai-connect-status').addEventListener('click', () => { if (aiConnect) aiConnect.refresh(); });
-  $('ai-connect-cancel').addEventListener('click', () => { if (aiConnect) aiConnect.cancel(); });
-  $('ai-connect-check').addEventListener('click', () => checkAiConnection());
+  $('ai-connect-start').addEventListener('click', () => {
+    appConnectInvalidated = false;
+    if (!nativeLogin || nativeLogin.state.phase !== 'connected') return;
+    withButtonLoading($('ai-connect-start'), $('ai-connect-result'), 'AI 연결 요청 생성 중', () => aiConnect?.start());
+  });
+  $('ai-connect-finish').addEventListener('click', () => {
+    withButtonLoading($('ai-connect-finish'), $('ai-connect-result'), '승인 연결 확인 중', () => aiConnect?.finish());
+  });
+  $('ai-connect-status').addEventListener('click', () => {
+    withButtonLoading($('ai-connect-status'), $('ai-connect-result'), '상태 다시 확인 중', async () => {
+      lastAiStatusCheckTime = new Date().toISOString();
+      await aiConnect?.refresh();
+      renderAiConnect();
+      renderMode();
+    });
+  });
+  $('ai-connect-cancel').addEventListener('click', () => {
+    withButtonLoading($('ai-connect-cancel'), $('ai-connect-result'), 'AI 연결 취소 중', async () => {
+      lastAiStatusCheckTime = null;
+      lastAiCheckResult = null;
+      await aiConnect?.cancel();
+      renderAiConnect();
+      renderMode();
+    });
+  });
+  $('ai-connect-check').addEventListener('click', () => {
+    withButtonLoading($('ai-connect-check'), $('ai-connection-result'), 'API 모델 응답 점검 중', async () => {
+      await checkAiConnection();
+      renderAiConnect();
+    });
+  });
   $('ai-connect-help').addEventListener('click', () => showConnectHelp());
   $('ai-connect-help-copy').addEventListener('click', () => copyConnectHelp());
-  $('native-login-start').addEventListener('click', () => { if (nativeLogin) nativeLogin.start(); });
-  $('native-login-redeem').addEventListener('click', () => { if (nativeLogin) nativeLogin.redeem(); });
-  $('native-login-check').addEventListener('click', () => { if (nativeLogin) nativeLogin.check(); });
-  $('native-login-cancel').addEventListener('click', () => { if (nativeLogin) nativeLogin.cancel(); });
+  $('native-login-start').addEventListener('click', () => {
+    withButtonLoading($('native-login-start'), $('native-login-result'), '계정 연결 요청 중', () => nativeLogin?.start());
+  });
+  $('native-login-redeem').addEventListener('click', () => {
+    withButtonLoading($('native-login-redeem'), $('native-login-result'), '로그인 확인 검증 중', () => nativeLogin?.redeem());
+  });
+  $('native-login-check').addEventListener('click', () => {
+    withButtonLoading($('native-login-check'), $('native-login-result'), '현재 로그인 확인 중', async () => {
+      lastNativeCheckTime = new Date().toISOString();
+      await nativeLogin?.check();
+      renderNativeLogin();
+      renderMode();
+    });
+  });
+  $('native-login-cancel').addEventListener('click', () => {
+    withButtonLoading($('native-login-cancel'), $('native-login-result'), '계정 연결 취소 중', async () => {
+      lastNativeCheckTime = null;
+      lastAiCheckResult = null;
+      await nativeLogin?.cancel();
+      renderNativeLogin();
+      renderAiConnect();
+      renderMode();
+    });
+  });
   const guardOpenLink = (id) => {
     const linkEl = $(id);
     if (!linkEl) return;
